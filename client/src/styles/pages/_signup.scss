@@ -71,9 +71,29 @@
             }
         }
         &--button-container {
-            margin-top: 4rem;
+            margin-top: 3rem;
             text-align: center;
         }
+    }
+    &__alreadyExists {
+        margin-top: 1.7rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        span {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+        &--link {
+            text-decoration: none;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #0d4648;
+        }
+
     }
 }
 

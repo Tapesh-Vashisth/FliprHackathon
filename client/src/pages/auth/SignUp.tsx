@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
     const {
@@ -12,6 +13,15 @@ const SignUp = () => {
         console.log(data);
     };
 
+    const arrow = (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="1.2rem"
+            viewBox="0 0 448 512"
+        >
+            <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+        </svg>
+    );
     return (
         <div className="page-signup">
             <div className="page-signup__form">
@@ -31,10 +41,7 @@ const SignUp = () => {
                             })}
                         />
                         {errors.name && (
-                            <p
-                                role="alert"
-                                className="errorMessage"
-                            >
+                            <p role="alert" className="errorMessage">
                                 {errors.name?.message?.toString()}
                             </p>
                         )}
@@ -54,10 +61,7 @@ const SignUp = () => {
                             })}
                         />
                         {errors.email && (
-                            <p
-                                role="alert"
-                                className="errorMessage"
-                            >
+                            <p role="alert" className="errorMessage">
                                 {errors.email?.message?.toString()}
                             </p>
                         )}
@@ -79,10 +83,7 @@ const SignUp = () => {
                             })}
                         />
                         {errors.password && (
-                            <p
-                                className="errorMessage"
-                                role="alert"
-                            >
+                            <p className="errorMessage" role="alert">
                                 {errors.password?.message?.toString()}
                             </p>
                         )}
@@ -93,6 +94,16 @@ const SignUp = () => {
                         </button>
                     </div>
                 </form>
+                <div className="page-signup__alreadyExists">
+                    <span>Account Already Exists</span>
+                    {arrow}
+                    <Link
+                        to={"/auth/login"}
+                        className="page-signup__alreadyExists--link"
+                    >
+                        LoginHere
+                    </Link>
+                </div>
             </div>
         </div>
     );

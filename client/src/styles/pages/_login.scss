@@ -80,6 +80,25 @@
             text-align: center;
         }
     }
+    &__dontExists {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        span {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+        &--link {
+            text-decoration: none;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #0d4648;
+        }
+    }
 }
 
 @media (max-width: 1100px) {
