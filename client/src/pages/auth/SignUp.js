@@ -1,7 +1,7 @@
 import React from "react";
 const SignUp = () => {
     return (
-        <div className="signup page-signup">
+        <div className="page-signup">
             <div className="page-signup__form">
                 <form className="page-signup__form--mainform">
                     <h1 className="page-signup__form--heading">SignUp</h1>

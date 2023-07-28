@@ -2,9 +2,9 @@ import React from "react";
 
 function Error404() {
     return (
-        <div className="body bg-purple error-404">
-            <div className="stars space">
-                <div className="central-body space__central-body">
+        <div className="berror-404">
+            <div className="space">
+                <div className="space__central-body">
                     <img
                         className="image-404"
                         src="http://salehriaz.com/404Page/img/404.svg"

@@ -1,10 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;700;800;900&display=swap");
 
 .page-signup {
-    background-image: url("../../images/Signup_backGround.png");
+    &::before {
+        content: "";
+        z-index: -1;
+        background-image: url("../../images/Signup_backGround.png");
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        background-size: cover;
+        animation-name: kenburns-bottom;
+        animation-duration: 25s;
+        animation-iteration-count: infinite;
+    }
+
+    position: relative;
     width: 100vw;
     height: 100vh;
-    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
