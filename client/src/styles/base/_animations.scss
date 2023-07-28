@@ -1,0 +1,202 @@
+// 404 Error
+@-moz-keyframes rocket-movement {
+    100% {
+        -moz-transform: translate(1200px, -600px);
+    }
+}
+
+@-webkit-keyframes rocket-movement {
+    100% {
+        -webkit-transform: translate(1200px, -600px);
+    }
+}
+
+@keyframes rocket-movement {
+    100% {
+        transform: translate(1200px, -600px);
+    }
+}
+
+@-moz-keyframes spin-earth {
+    100% {
+        -moz-transform: rotate(-360deg);
+        transition: transform 20s;
+    }
+}
+
+@-webkit-keyframes spin-earth {
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transition: transform 20s;
+    }
+}
+
+@keyframes spin-earth {
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+        transition: transform 20s;
+    }
+}
+
+@-moz-keyframes move-astronaut {
+    100% {
+        -moz-transform: translate(-160px, -160px);
+    }
+}
+
+@-webkit-keyframes move-astronaut {
+    100% {
+        -webkit-transform: translate(-160px, -160px);
+    }
+}
+
+@keyframes move-astronaut {
+    100% {
+        -webkit-transform: translate(-160px, -160px);
+        transform: translate(-160px, -160px);
+    }
+}
+
+@-moz-keyframes rotate-astronaut {
+    100% {
+        -moz-transform: rotate(-720deg);
+    }
+}
+
+@-webkit-keyframes rotate-astronaut {
+    100% {
+        -webkit-transform: rotate(-720deg);
+    }
+}
+
+@keyframes rotate-astronaut {
+    100% {
+        -webkit-transform: rotate(-720deg);
+        transform: rotate(-720deg);
+    }
+}
+
+@-moz-keyframes glow-star {
+    40% {
+        -moz-opacity: 0.3;
+    }
+    90%,
+    100% {
+        -moz-opacity: 1;
+        -moz-transform: scale(1.2);
+    }
+}
+
+@-webkit-keyframes glow-star {
+    40% {
+        -webkit-opacity: 0.3;
+    }
+    90%,
+    100% {
+        -webkit-opacity: 1;
+        -webkit-transform: scale(1.2);
+    }
+}
+
+@keyframes glow-star {
+    40% {
+        -webkit-opacity: 0.3;
+        opacity: 0.3;
+    }
+    90%,
+    100% {
+        -webkit-opacity: 1;
+        opacity: 1;
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+        border-radius: 999999px;
+    }
+}
+
+
+// Loader
+@keyframes shake {
+    0% {
+        transform: translateY(-1%);
+    }
+    100% {
+        transform: translateY(3%);
+    }
+}
+
+@keyframes line {
+    0% {
+        stroke-dashoffset: 22;
+    }
+
+    25% {
+        stroke-dashoffset: 22;
+    }
+
+    50% {
+        stroke-dashoffset: 0;
+    }
+
+    51% {
+        stroke-dashoffset: 0;
+    }
+
+    80% {
+        stroke-dashoffset: -22;
+    }
+
+    100% {
+        stroke-dashoffset: -22;
+    }
+}
+
+
+//signup form background image
+@-webkit-keyframes kenburns-bottom {
+    0% {
+      -webkit-transform: scale(1) translateY(0);
+              transform: scale(1) translateY(0);
+      -webkit-transform-origin: 50% 84%;
+              transform-origin: 50% 84%;
+            }
+                    
+    50% {
+        -webkit-transform: scale(1.25) translateY(15px);
+        transform: scale(1.25) translateY(15px);
+        -webkit-transform-origin: bottom;
+        transform-origin: bottom;
+    }
+
+    100% {
+        -webkit-transform: scale(1) translateY(0);
+                transform: scale(1) translateY(0);
+        -webkit-transform-origin: 50% 84%;
+                transform-origin: 50% 84%;    
+    }
+}
+
+@keyframes kenburns-bottom {
+    0% {
+        -webkit-transform: scale(1) translateY(0);
+                transform: scale(1) translateY(0);
+        -webkit-transform-origin: 50% 84%;
+                transform-origin: 50% 84%;
+    }
+
+    
+    50% {
+        -webkit-transform: scale(1.25) translateY(15px);
+        transform: scale(1.25) translateY(15px);
+        -webkit-transform-origin: bottom;
+        transform-origin: bottom;
+    }
+
+
+    100% {
+        -webkit-transform: scale(1) translateY(0);
+                transform: scale(1) translateY(0);
+        -webkit-transform-origin: 50% 84%;
+                transform-origin: 50% 84%;
+    }
+}
