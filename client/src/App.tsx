@@ -12,6 +12,13 @@ function App() {
         
 
         <Route 
+          path='/loader' 
+          element = {
+            <PageLoader />
+          } 
+        />
+
+        <Route 
           path='*' 
           element = {
             <React.Suspense fallback = {<PageLoader />} >

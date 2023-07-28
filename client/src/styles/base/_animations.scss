@@ -1,3 +1,4 @@
+// 404 Error 
 @-moz-keyframes rocket-movement {
     100% {
         -moz-transform: translate(1200px, -600px);
@@ -110,5 +111,42 @@
         -webkit-transform: scale(1.2);
         transform: scale(1.2);
         border-radius: 999999px;
+    }
+}
+
+
+// Loader 
+@keyframes shake {
+    0% {
+        transform: translateY(-1%);
+    }
+    100% {
+        transform: translateY(3%);
+    }
+}
+
+@keyframes line {
+    0% {
+        stroke-dashoffset: 22;
+    }
+
+    25% {
+        stroke-dashoffset: 22;
+    }
+
+    50% {
+        stroke-dashoffset: 0;
+    }
+
+    51% {
+        stroke-dashoffset: 0;
+    }
+
+    80% {
+        stroke-dashoffset: -22;
+    }
+
+    100% {
+        stroke-dashoffset: -22;
     }
 }
