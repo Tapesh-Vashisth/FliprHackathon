@@ -59,8 +59,8 @@ function PageLoader() {
                             />
                         </g>
                     </svg>
-                    <p style = {{textAlign: "center", fontSize: 30}}>
-                        Loading...    
+                    <p className="page-loader__paragraph" style = {{textAlign: "center", fontSize: 26}}>
+                        Loading....    
                     </p>
                 </div>
             </div>

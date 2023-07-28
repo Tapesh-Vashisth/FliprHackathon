@@ -1,12 +1,13 @@
 import React from "react";
-import SignupImage from "../../../public/images/Signup.png";
+import SignupImage from "../../../public/images/Signup_backGround.png";
 const SingUp = () => {
     return (
-        <div className="signup__container">
-            <div className="signup__container--left">
-                <img src={SignupImage} alt="signupImage" />
+        <div className="signup page-signup">
+            <div className="signup__form">
+                <form>
+                    
+                </form>
             </div>
-            <div className="signup__container--right"></div>
         </div>
     );
 };
