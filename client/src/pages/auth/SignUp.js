@@ -1,14 +1,15 @@
 import React from "react";
-import SignupImage from "../../../public/images/Signup_backGround.png";
-const SingUp = () => {
+
+
+const SignUp = () => {
     return (
         <div className="signup page-signup">
             <div className="signup__form">
                 <form>
-                    
+                    hello
                 </form>
             </div>
         </div>
     );
 };
-export default SingUp;
+export default SignUp;
