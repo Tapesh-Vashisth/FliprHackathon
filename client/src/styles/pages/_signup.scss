@@ -23,7 +23,7 @@
     overflow: hidden;
     &__form {
         width: 50%;
-        height: 70%;
+        height: 75%;
         position: relative;
         background-image: linear-gradient(
             to bottom right,
@@ -39,7 +39,7 @@
         &--heading {
             font-size: 26px;
             font-family: "Montserrat", sans-serif;
-            font-weight: 300;
+            font-weight: 400;
             text-align: center;
             margin-top: 3rem;
             color: $color-primary-extra-dark;
@@ -50,10 +50,11 @@
             flex-direction: column;
             width: 60%;
             gap: 0.5rem;
-            margin: 2rem auto;
+            margin: 0rem auto;
+            padding: 1rem 0rem;
             &--label {
                 font-family: "Montserrat", sans-serif;
-                font-weight: 300;
+                font-weight: 500;
                 font-size: 1.2rem;
             }
             &--input {
@@ -70,8 +71,14 @@
             }
         }
         &--button-container {
-            margin-top: 3rem;
+            margin-top: 4rem;
             text-align: center;
+        }
+        &--errorPara {
+            color: red;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            font-size: 14px;
         }
     }
 }
