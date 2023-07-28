@@ -7,9 +7,27 @@ const SignUp = () => {
                     <h1 className="page-signup__form--heading">SignUp</h1>
                     <div className="page-signup__form--input_group">
                         <label className="page-signup__form--input_group--label">
-                            Name
+                            Name*
                         </label>
                         <input className="page-signup__form--input_group--input" />
+                    </div>
+                    <div className="page-signup__form--input_group">
+                        <label className="page-signup__form--input_group--label">
+                            Email*
+                        </label>
+                        <input className="page-signup__form--input_group--input" />
+                    </div>
+                    <div className="page-signup__form--input_group">
+                        <label className="page-signup__form--input_group--label">
+                            Password*
+                        </label>
+                        <input
+                            className="page-signup__form--input_group--input"
+                            type="password"
+                        />
+                    </div>
+                    <div className="page-signup__form--button-container">
+                        <button className="button-primary">SignMe Up</button>
                     </div>
                 </form>
             </div>
