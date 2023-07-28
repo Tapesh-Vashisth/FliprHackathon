@@ -4,11 +4,14 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 
+import placeRouter from "./routes/placeRoutes";
+import userRouter from "./routes/userRoutes";
+import addPlace from "./controllers/placesControllers/addPlace";
+
 dotenv.config();
 
-const app: Express = express();
+const app = express();
 
-// middleware
 app.use(express.json({limit: '50mb'}));
 app.use(cors({
     origin:["http://localhost:3000"],
@@ -17,11 +20,10 @@ app.use(cors({
 }))
 app.use(cookieParser());
 
-
-// main
+app.use('/api/user', userRouter)
+app.post('/api/search', addPlace)
 
 const port = process.env.PORT || 5500;
-
 
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@database.vxrvuo9.mongodb.net/`).then(() => {
     console.log("database connected");
