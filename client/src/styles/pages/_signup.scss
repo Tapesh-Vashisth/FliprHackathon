@@ -14,13 +14,13 @@
         animation-duration: 25s;
         animation-iteration-count: infinite;
     }
-
     position: relative;
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     &__form {
         width: 50%;
         height: 70%;
@@ -41,8 +41,9 @@
             font-family: "Montserrat", sans-serif;
             font-weight: 300;
             text-align: center;
-            margin-top: 0.6rem;
+            margin-top: 3rem;
             color: $color-primary-extra-dark;
+            margin-bottom: 4rem;
         }
         &--input_group {
             display: flex;
@@ -56,13 +57,52 @@
                 font-size: 1.2rem;
             }
             &--input {
-                padding: 0.5rem 0.3rem;
+                font-family: "Montserrat", sans-serif;
+                font-weight: 400;
+                color: #0d4648;
+                padding: 1.2rem 1rem;
                 border: 1px solid rgba(112, 128, 144, 0.489);
                 outline: none;
+                border-radius: 7px;
             }
             &--input:active {
                 border: 1px solid rgba(112, 128, 144, 0.489);
             }
         }
+        &--button-container {
+            margin-top: 3rem;
+            text-align: center;
+        }
+    }
+}
+
+@media (max-width: 1100px) {
+    .page-signup__form {
+        width: 70%;
+    }
+}
+
+@media (max-width: 900px) {
+    .page-signup__form {
+        width: 80%;
+    }
+}
+
+@media (max-width: 650px) {
+    .page-signup__form {
+        width: 90%;
+    }
+}
+@media (max-width: 520px) {
+    .page-signup__form--input_group {
+        width: 80%;
+    }
+}
+@media (max-width: 340px) {
+    .page-signup__form--input_group {
+        width: 85%;
+    }
+    .page-signup__form {
+        width: 93%;
     }
 }
