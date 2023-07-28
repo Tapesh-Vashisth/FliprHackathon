@@ -3,10 +3,10 @@ import React from "react";
 function PageLoader() {
     return (
         <>
-            <div className="loader page-loader">
+            <div className="page-loader">
                 <div>
                     <svg
-                        className="car page-loader__car"
+                        className="page-loader__car"
                         width="102"
                         height="40"
                         xmlns="http://www.w3.org/2000/svg"
