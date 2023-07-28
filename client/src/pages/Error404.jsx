@@ -2,7 +2,7 @@ import React from "react";
 
 function Error404() {
     return (
-        <div className="berror-404">
+        <div className="error-404">
             <div className="space">
                 <div className="space__central-body">
                     <img
