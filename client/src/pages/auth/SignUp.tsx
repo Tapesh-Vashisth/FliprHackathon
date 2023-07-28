@@ -33,7 +33,7 @@ const SignUp = () => {
                         {errors.name && (
                             <p
                                 role="alert"
-                                className="page-signup__form--errorPara"
+                                className="errorMessage"
                             >
                                 {errors.name?.message?.toString()}
                             </p>
@@ -56,7 +56,7 @@ const SignUp = () => {
                         {errors.email && (
                             <p
                                 role="alert"
-                                className="page-signup__form--errorPara"
+                                className="errorMessage"
                             >
                                 {errors.email?.message?.toString()}
                             </p>
@@ -80,7 +80,7 @@ const SignUp = () => {
                         />
                         {errors.password && (
                             <p
-                                className="page-signup__form--errorPara"
+                                className="errorMessage"
                                 role="alert"
                             >
                                 {errors.password?.message?.toString()}
