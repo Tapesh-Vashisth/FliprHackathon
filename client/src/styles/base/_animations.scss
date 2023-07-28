@@ -1,4 +1,4 @@
-// 404 Error 
+// 404 Error
 @-moz-keyframes rocket-movement {
     100% {
         -moz-transform: translate(1200px, -600px);
@@ -114,8 +114,7 @@
     }
 }
 
-
-// Loader 
+// Loader
 @keyframes shake {
     0% {
         transform: translateY(-1%);
@@ -148,5 +147,36 @@
 
     100% {
         stroke-dashoffset: -22;
+    }
+}
+
+//signup form background image
+
+@-webkit-keyframes kenburns-top {
+    0% {
+        -webkit-transform: scale(1) translateY(0);
+        transform: scale(1) translateY(0);
+        -webkit-transform-origin: 50% 16%;
+        transform-origin: 50% 16%;
+    }
+    100% {
+        -webkit-transform: scale(1.25) translateY(-15px);
+        transform: scale(1.25) translateY(-15px);
+        -webkit-transform-origin: top;
+        transform-origin: top;
+    }
+}
+@keyframes kenburns-top {
+    0% {
+        -webkit-transform: scale(1) translateY(0);
+        transform: scale(1) translateY(0);
+        -webkit-transform-origin: 50% 16%;
+        transform-origin: 50% 16%;
+    }
+    100% {
+        -webkit-transform: scale(1.25) translateY(-15px);
+        transform: scale(1.25) translateY(-15px);
+        -webkit-transform-origin: top;
+        transform-origin: top;
     }
 }
