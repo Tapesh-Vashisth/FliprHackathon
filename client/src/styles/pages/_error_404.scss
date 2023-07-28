@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Dosis:300,400,500");
 
-
 .error-404 {
     width: 100%;
     min-height: 100vh;
@@ -30,6 +29,7 @@
                 position: relative;
                 z-index: 100;
                 pointer-events: none;
+                width: 250px;
             }
 
             .btn-go-home {
@@ -158,6 +158,9 @@
 
     .space__central-body {
         padding-top: 25%;
-        display: none;
+    }
+
+    .space__central-body .image-404 {
+        width: 180px;
     }
 }

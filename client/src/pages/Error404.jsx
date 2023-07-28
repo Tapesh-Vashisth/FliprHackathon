@@ -8,7 +8,6 @@ function Error404() {
                     <img
                         className="image-404"
                         src="http://salehriaz.com/404Page/img/404.svg"
-                        width="300px"
                         alt=""
                     />
                     <a
