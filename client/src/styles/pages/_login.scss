@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;700;800;900&display=swap");
+
+.page-login {
+    &::before {
+        content: "";
+        z-index: -1;
+        background-image: url("../../images/Login_backGround.jpg");
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        background-size: cover;
+        animation-name: kenburns-bottom;
+        animation-duration: 25s;
+        animation-iteration-count: infinite;
+    }
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    &__form {
+        width: 50%;
+        height: 70%;
+        position: relative;
+        background-image: linear-gradient(
+            to bottom right,
+            rgba(0, 143, 107, 0.9),
+            rgba(0, 143, 107, 0.4)
+        );
+        background: rgba(255, 255, 255, 0.29);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(11.2px);
+        -webkit-backdrop-filter: blur(11.2px);
+        border: 1px solid rgba(255, 255, 255, 1);
+        &--mainform {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            gap: 2rem;
+        }
+        &--heading {
+            font-size: 26px;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 300;
+            text-align: center;
+            // margin-top: 3rem;
+            color: $color-primary-extra-dark;
+        }
+        &--input_group {
+            display: flex;
+            flex-direction: column;
+            width: 60%;
+            gap: 0.5rem;
+            margin: 0rem auto;
+            &--label {
+                font-family: "Montserrat", sans-serif;
+                font-weight: 300;
+                font-size: 1.2rem;
+            }
+            &--input {
+                font-family: "Montserrat", sans-serif;
+                font-weight: 400;
+                color: #0d4648;
+                padding: 1.2rem 1rem;
+                border: 1px solid rgba(112, 128, 144, 0.489);
+                outline: none;
+                border-radius: 7px;
+            }
+            &--input:active {
+                border: 1px solid rgba(112, 128, 144, 0.489);
+            }
+        }
+        &--button-container {
+            margin-top: 0rem;
+            text-align: center;
+        }
+    }
+}
+
+@media (max-width: 1100px) {
+    .page-login__form {
+        width: 70%;
+    }
+}
+
+@media (max-width: 900px) {
+    .page-login__form {
+        width: 80%;
+    }
+}
+
+@media (max-width: 650px) {
+    .page-login__form {
+        width: 90%;
+    }
+}
+@media (max-width: 520px) {
+    .page-login__form--input_group {
+        width: 80%;
+    }
+}
+@media (max-width: 340px) {
+    .page-login__form--input_group {
+        width: 85%;
+    }
+    .page-login__form {
+        width: 93%;
+    }
+}
