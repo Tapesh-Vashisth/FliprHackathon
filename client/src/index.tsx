@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import App from './App';
 import './styles/main.scss';
+import './styles/index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PageLoader from './components/Loaders/PageLoader';
 import 'react-toastify/dist/ReactToastify.css';
