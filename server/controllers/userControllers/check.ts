@@ -3,7 +3,7 @@ import User from "../../models/User";
 
 const check = async (req: any, res: Response) => {
     console.log("check");
-    const user = await User.findOne({email: req.email}).exec();
+    const user = await User.findById(req._id)
     
     if (!user) 
         return res

@@ -7,18 +7,16 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 require("dotenv").config();
 const verifyJWT = (req, res, next) => {
     console.log("verifyJwt");
-    const authHeader = req.headers.authorization || req.headers.Authorization;
-    if (!(authHeader === null || authHeader === void 0 ? void 0 : authHeader.startsWith('Bearer')))
-        return res
-            .status(401)
-            .send();
-    const token = authHeader.split(' ')[1];
-    jsonwebtoken_1.default.verify(token, String(process.env.ACCESS_TOKEN_SECRET), (err, decoded) => {
-        if (err)
-            return res
-                .status(401)
-                .send();
-        req.uuid = decoded.uuid;
+    // accessing the token from the headers
+    let token = req.cookies.JWT_HTTPONLY_Cookie;
+    console.log(token);
+    jsonwebtoken_1.default.verify(token, String(process.env.JWT_SECRET_KEY), (err, user) => {
+        if (err) {
+            res
+                .status(400)
+                .json({ status: false, token: "Cannot verify token!" });
+        }
+        req._id = user._id;
         next();
     });
 };
