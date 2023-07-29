@@ -16,15 +16,15 @@ const crypto_1 = require("crypto");
 const Otp_1 = __importDefault(require("../../models/Otp"));
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const User_1 = __importDefault(require("../../models/User"));
-const uuid = (0, crypto_1.randomUUID)().substring(0, 6);
-const html = `
+const sendVerifyEmailOtp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const uuid = (0, crypto_1.randomUUID)().substring(0, 6);
+    console.log('send Verify Email Otp');
+    const html = `
     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}></div>
     <h1>Verify your email</h1>
     <p>Kindly use this OTP to verify your email : ` + uuid.substring(0, 6) + ` </p>
     <p>Kindly ignore this message if this was not you.</p>
-`;
-const sendVerifyEmailOtp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('send Verify Email Otp');
+    `;
     const { email } = req.body;
     let user;
     try {

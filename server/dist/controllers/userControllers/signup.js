@@ -27,7 +27,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     catch (err) {
         return res
             .status(500)
-            .json({ message: "Internal error occurred!" });
+            .json({ message: "Internal error occurred!, user finding" });
     }
     if (existingUser) {
         return res
@@ -42,7 +42,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     catch (err) {
         return res
             .status(500)
-            .json({ message: "Internal error occurred!" });
+            .json({ message: "Internal error occurred!, otp not found in db" });
     }
     if (!otpmodel) {
         return res
@@ -56,11 +56,10 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             .json({ message: "Wrong otp entered!" });
     }
     const user = new User_1.default({
-        uuid: uuid,
         name,
         email,
         password: hashedPassword,
-        emailVerified: true,
+        verified: true,
     });
     try {
         yield user.save();
@@ -68,7 +67,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     catch (err) {
         return res
             .status(500)
-            .json({ message: "Internal error occurred!" });
+            .json({ message: "Internal error occurred, saving!" });
     }
     return res
         .status(201)

@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../../api/axiosInstance";
+import Spinner from 'react-bootstrap/Spinner';
 
 const Login = () => {
     const {
@@ -9,8 +11,20 @@ const Login = () => {
         handleSubmit,
     } = useForm();
 
-    const onSubmit = (data: any) => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+
+    const onSubmit = async (data: any) => {
         console.log(data);
+        setLoading(true);
+        try {
+            const response = await axiosInstance.post("/user/login", {email: data.email, password: data.password});
+            setLoading(false);
+            navigate("/", {replace: true});
+        } catch (err: any) {
+            setLoading(false);
+            console.log(err);
+        }
     };
 
     const arrow = (
@@ -70,7 +84,15 @@ const Login = () => {
                     </div>
                     <div className="page-signup__form--button-container">
                         <button className="button-primary" type="submit">
-                            LogMe In
+                            {
+                                loading 
+                                ?
+                                <Spinner animation="border" role="status" variant="primary">
+                                    <span className="visually-hidden">Loading...</span>
+                                </Spinner>
+                                :
+                                "LogMe In"
+                            }
                         </button>
                     </div>
                     <div className="page-login__dontExists">

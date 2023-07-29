@@ -2,11 +2,17 @@ import { createAsyncThunk, createSlice, isAnyOf, PayloadAction } from "@reduxjs/
 import axiosInstance from "../api/axiosInstance";
 
 interface initialState {
-    alerts: []
+    name: string,
+    email: string,
+    image: string,
+    isLoggedIn: boolean
 }
 
 const initialState: initialState = {
-    alerts: []
+    name: "",
+    email: "",
+    image: "",
+    isLoggedIn: false
 }
 
 const userSlice = createSlice({

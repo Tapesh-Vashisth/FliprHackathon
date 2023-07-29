@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import axiosInstance from "../../api/axiosInstance";
 import OtpInput from "../../components/OtpInput";
-
+import Spinner from 'react-bootstrap/Spinner';
 
 const SignUp = () => {
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
-
-    const clickShowModalHandler = () => {
-        setShowModal(false);
-    };
+    const navigate = useNavigate();
 
     const {
         register,
@@ -27,9 +24,7 @@ const SignUp = () => {
         setLoading(true);
         try { 
             const response = await axiosInstance.post("/user/sendotp", {email: data.email});
-            if (response.status === 200) {
-                setShowModal(true);
-            }
+            setShowModal(true);
             setLoading(false);
         } catch (err: any) {
             console.log(err);
@@ -41,10 +36,12 @@ const SignUp = () => {
     const onFinalSubmit = async (otp: string) => {
         setShowModal(false);
         setLoading(true);
+
         try {
             const res = await axiosInstance.post("/user/signup", {name: watch("name"), email: watch("email"), password: watch("password"), otp: otp})
             console.log(res);
             setLoading(false);
+            navigate("/auth/login", {replace: true});
         } catch (err: any) {
             console.log(err);
             setLoading(false);
@@ -128,7 +125,15 @@ const SignUp = () => {
                     </div>
                     <div className="page-signup__form--button-container">
                         <button className="button-primary" type="submit">
-                            SignMe Up
+                            {
+                                loading
+                                ?
+                                <Spinner animation="border" role="status" variant="primary">
+                                    <span className="visually-hidden">Loading...</span>
+                                </Spinner>
+                                :
+                                "SignMe Up"
+                            }
                         </button>
                     </div>
                 </form>
@@ -145,7 +150,7 @@ const SignUp = () => {
             </div>
             {showModal && (
                 <OtpInput 
-                    clickShowModalHandler = {(otp: string) => {
+                    clickShowModalHandler = {(otp: any) => {
                         onFinalSubmit(otp);
                         setShowModal(false);
                     }} 

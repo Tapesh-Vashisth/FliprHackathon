@@ -8,7 +8,8 @@ const Schema = mongoose_1.default.Schema;
 const otpSchema = new Schema({
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     otp: {
         type: String,
