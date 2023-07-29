@@ -16,11 +16,10 @@
 @import "./pages/error_404";
 @import "./pages/signup";
 @import "./pages/login";
-
-
+@import "./pages/profile";
 
 // accoordian.module.css
-.inputAcc{
+.inputAcc {
     padding: 0.5rem;
     margin: 1rem 0rem;
     width: 100%;
@@ -53,9 +52,10 @@
     width: 100%;
     max-width: 600px;
     border-radius: 12px;
-    background-color: #F9F9F9;
+    background-color: #f9f9f9;
     align-items: center;
-    box-shadow: 0px 5px 4px -1px rgb(0 0 0 / 20%), 0px 4px 4px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0px 5px 4px -1px rgb(0 0 0 / 20%),
+        0px 4px 4px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
     margin: 1rem;
 }
 
@@ -66,7 +66,8 @@
     margin: 1rem 0;
     text-align: center;
     border-radius: 4px;
-    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+        0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
 }
 
 .accountdetails input {
@@ -79,7 +80,6 @@
 .accordianBox {
     width: 100%;
     max-width: 400px;
-
 }
 
 .buttonHolder {
@@ -94,15 +94,15 @@
 .buttonHolder button {
     padding: 0.5rem;
     margin-top: 1rem;
-    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+        0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
     width: 80%;
     border-radius: 25px;
-    color: #F9FCFB;
+    color: #f9fcfb;
     font-size: 1rem;
     letter-spacing: 1px;
     cursor: pointer;
 }
-
 
 .cancel {
     align-self: flex-end;
@@ -121,48 +121,47 @@
 
 .update:hover {
     background-color: #28cb7c;
-
 }
 
 .update {
-    background-color: #21BF73;
+    background-color: #21bf73;
     border: 1px solid #1aa75c;
 }
 
 .updatedisabled {
     padding: 0.5rem;
     margin-top: 1rem;
-    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+        0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
     width: 80%;
     border-radius: 25px;
-    color: #F9FCFB;
+    color: #f9fcfb;
     font-size: 1rem;
     letter-spacing: 1px;
     cursor: pointer;
-    background-color: #21BF73;
+    background-color: #21bf73;
     border: 1px solid #1aa75c;
     opacity: 0.5;
 }
 
 .delete {
-    background-color: #FD5E53;
+    background-color: #fd5e53;
     border: 1px solid #d3362b;
 }
-.navbarBack{
+.navbarBack {
     width: 100%;
-     background: #1d1d1d;
-     height:75px;
+    background: #1d1d1d;
+    height: 75px;
 }
 
-
-@media (max-width:520px) {
-    .navbarBack{
-         height:100px;
+@media (max-width: 520px) {
+    .navbarBack {
+        height: 100px;
     }
 }
 
 .deletedisabled {
-    background-color: #FD5E53;
+    background-color: #fd5e53;
     border: 1px solid #d3362b;
     opacity: 0.5;
 }
