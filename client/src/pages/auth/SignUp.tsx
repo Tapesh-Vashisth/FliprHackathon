@@ -24,9 +24,7 @@ const SignUp = () => {
         setLoading(true);
         try { 
             const response = await axiosInstance.post("/user/sendotp", {email: data.email});
-            if (response.status === 200) {
-                setShowModal(true);
-            }
+            setShowModal(true);
             setLoading(false);
         } catch (err: any) {
             console.log(err);
@@ -39,11 +37,11 @@ const SignUp = () => {
         setShowModal(false);
         setLoading(true);
 
-        console.log(watch("name"), watch("email"), watch("password"), otp);
         try {
             const res = await axiosInstance.post("/user/signup", {name: watch("name"), email: watch("email"), password: watch("password"), otp: otp})
             console.log(res);
             setLoading(false);
+            navigate("/auth/login", {replace: true});
         } catch (err: any) {
             console.log(err);
             setLoading(false);

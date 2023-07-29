@@ -1,5 +1,5 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, {useEffect} from "react";
+import { Routes, Route, useNavigation, useNavigate } from "react-router-dom";
 import PageLoader from "./components/Loaders/PageLoader";
 import Notification from "./components/notification/Notification";
 const Error404 = React.lazy(() => import("./pages/Error404"));
@@ -8,6 +8,12 @@ const Signup = React.lazy(() => import("./pages/auth/SignUp"));
 
 
 function App() {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      
+    }, []);
+
     return (
         <>  
             <Notification />
