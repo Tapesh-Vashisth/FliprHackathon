@@ -7,7 +7,7 @@ import axiosInstance from "./api/axiosInstance";
 import AuthProtected from "./components/AuthProtected";
 import { useAppDispatch } from "./app/hooks";
 import { userActions } from "./features/userSlice";
-import { ToastContainer, toast } from 'react-toastify'
+
 const Error404 = React.lazy(() => import("./pages/Error404"));
 const Login = React.lazy(() => import("./pages/auth/Login"));
 const Signup = React.lazy(() => import("./pages/auth/SignUp"));
@@ -18,64 +18,50 @@ function App() {
     const dispatch = useAppDispatch();
 
     const getUserData = async () => {
-      setScreenLoad(true);
-      try {
-        const response = await axiosInstance.get("/user/check");
-        console.log(response);
-        dispatch(userActions.setState(response.data));
-        setScreenLoad(false);
-      } catch (err: any) {
-        console.log(err);
-        setScreenLoad(false);
-        toast.error('Login Again! User session Expired!',{
-          position: 'top-right'
-        })
-      }
-    }
+        setScreenLoad(true);
+        try {
+            const response = await axiosInstance.get("/user/check");
+            console.log(response);
+            dispatch(userActions.setState(response.data));
+            setScreenLoad(false);
+        } catch (err: any) {
+            console.log(err);
+            setScreenLoad(false);
+            toast.error("Login Again! User session Expired!", {
+                position: "top-right",
+            });
+        }
+    };
 
     useEffect(() => {
-      getUserData();
+        getUserData();
     }, []);
 
-    return (
-        screenLoad
-        ?
+    return screenLoad ? (
         <PageLoader />
-        :
-        <>  
-            <ToastContainer style={{ fontSize: '20px' }} />
+    ) : (
+        <>
+            <ToastContainer style={{ fontSize: "20px" }} />
             <Routes>
-                <Route 
-                  path="/loader" 
-                  element={<PageLoader />} 
-                />
-                <Route
-                  path="/auth"
-                  element={<AuthProtected />}  
-                >
+                <Route path="/loader" element={<PageLoader />} />
+                <Route path="/auth" element={<AuthProtected />}>
+                    <Route
+                        path="login"
+                        element={
+                            <React.Suspense fallback={<PageLoader />}>
+                                <Login />
+                            </React.Suspense>
+                        }
+                    />
 
-                  <Route
-                    path="login"
-                    element={
-                      <React.Suspense
-                        fallback = {<PageLoader />}
-                      >
-                        <Login />
-                      </React.Suspense>
-                    }
-                  />
-
-                  <Route
-                    path="signup"
-                    element={
-                      <React.Suspense
-                        fallback = {<PageLoader />}
-                      >
-                        <Signup />
-                      </React.Suspense>
-                    }
-                  />
-                  
+                    <Route
+                        path="signup"
+                        element={
+                            <React.Suspense fallback={<PageLoader />}>
+                                <Signup />
+                            </React.Suspense>
+                        }
+                    />
                 </Route>
 
                 <Route
