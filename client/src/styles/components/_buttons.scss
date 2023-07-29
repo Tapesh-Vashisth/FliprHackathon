@@ -1,0 +1,18 @@
+.button-primary {
+    padding: 1rem 2rem;
+    background-color: transparent;
+    animation: color-change-2x 2s linear infinite alternate both;
+    border: none;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    border-radius: 7px;
+}
+.button-primary:hover{
+    color: $color-primary-extra-dark;
+    border: 1px solid $color-primary-extra-dark;
+    animation: none;
+    font-weight: 600;
+    background-color: none;
+    cursor: pointer;
+}
