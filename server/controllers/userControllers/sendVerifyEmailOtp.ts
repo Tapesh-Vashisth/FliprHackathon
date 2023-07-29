@@ -79,7 +79,7 @@ const sendVerifyEmailOtp = async (req: Request, res: Response) => {
     let mailOptions = {
         from: "travel.planner.pro.noreply@gmail.com",
         to: email,
-        subject: "Verify your account",
+        subject: "Verify your Travel Planner Pro account",
         html: html
     }
 
