@@ -1,4 +1,5 @@
 import Container from "react-bootstrap/Container";
+import { ToastContainer, toast } from "react-toastify";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -7,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Header = () => {
     return (
         <>
+            <ToastContainer style={{ fontSize: "20px" }} />
             {["lg"].map((expand) => (
                 <Navbar
                     key={expand}
