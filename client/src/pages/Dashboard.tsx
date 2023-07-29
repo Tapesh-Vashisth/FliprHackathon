@@ -101,55 +101,72 @@ function Dashboard(props: any) {
                         Profile
                     </button>
                 </div>
-                <div className="user-profile__lower">
-                    <div className="user-profile__lower--details">
-                        <div className="user-profile__lower--options">
-                            <h1>Profile</h1>
+                {profile && (
+                    <div className="user-profile__lower">
+                        <div className="user-profile__lower--details">
+                            <div className="user-profile__lower--options">
+                                <h1>Profile</h1>
+                            </div>
+                            <div className="user-profile__lower--edit-button">
+                                {!editProfile && (
+                                    <button onClick={handleEditProfile}>
+                                        {editPencil} Edit Profile
+                                    </button>
+                                )}
+                                {discardChanges && (
+                                    <button onClick={handleDiscardChanges}>
+                                        Discard Changes
+                                    </button>
+                                )}
+                            </div>
+                            <form className="user-profile__lower--form">
+                                <div className="user-profile__lower--inputGroup">
+                                    <label>Name</label>
+                                    <input disabled={!editProfile} />
+                                </div>
+                                <div className="user-profile__lower--inputGroup">
+                                    <label>Email</label>
+                                    <input
+                                        disabled={true}
+                                        title="Cannot Edit Email"
+                                    />
+                                </div>
+                                <div className="user-profile__lower--inputGroup">
+                                    <label>Current Password</label>
+                                    <input disabled={!editProfile} />
+                                </div>
+                                <div className="user-profile__lower--inputGroup">
+                                    <label>New Password</label>
+                                    <input disabled={!editProfile} />
+                                </div>
+                                <div className="user-profile__lower--inputGroup">
+                                    <label>Confirm New Password</label>
+                                    <input disabled={!editProfile} />
+                                </div>
+                                <div className="user-profile__lower--button">
+                                    <button disabled={!editProfile}>
+                                        Update Info
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                        <div className="user-profile__lower--edit-button">
-                            {!editProfile && (
-                                <button onClick={handleEditProfile}>
-                                    {editPencil} Edit Profile
-                                </button>
-                            )}
-                            {discardChanges && (
-                                <button onClick={handleDiscardChanges}>
-                                    Discard Changes
-                                </button>
-                            )}
-                        </div>
-                        <form className="user-profile__lower--form">
-                            <div className="user-profile__lower--inputGroup">
-                                <label>Name</label>
-                                <input disabled={!editProfile} />
-                            </div>
-                            <div className="user-profile__lower--inputGroup">
-                                <label>Email</label>
-                                <input
-                                    disabled={true}
-                                    title="Cannot Edit Email"
-                                />
-                            </div>
-                            <div className="user-profile__lower--inputGroup">
-                                <label>Current Password</label>
-                                <input disabled={!editProfile} />
-                            </div>
-                            <div className="user-profile__lower--inputGroup">
-                                <label>New Password</label>
-                                <input disabled={!editProfile} />
-                            </div>
-                            <div className="user-profile__lower--inputGroup">
-                                <label>Confirm New Password</label>
-                                <input disabled={!editProfile} />
-                            </div>
-                            <div className="user-profile__lower--button">
-                                <button disabled={!editProfile}>
-                                    Update Info
-                                </button>
-                            </div>
-                        </form>
                     </div>
-                </div>
+                )}
+                {favorites && (
+                    <div className="user-profile__favourites">
+                        <div className="user-profile__favourites--details">
+                            <div className="user-profile__favourites--heading">
+                                <h1>Favourites</h1>
+                            </div>
+                            <div className="user-profile__favourites--places">
+                                <div className="user-profile__favourites--places--card">
+                                    <div></div>
+                                </div>
+                                <div className="user-profile__favourites--places--card"></div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     );
