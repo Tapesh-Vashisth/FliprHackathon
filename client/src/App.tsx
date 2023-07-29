@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { ToastContainer, toast } from 'react-toastify'
 import { Routes, Route, useNavigation, useNavigate } from "react-router-dom";
 import PageLoader from "./components/Loaders/PageLoader";
 import Notification from "./components/notification/Notification";
@@ -9,7 +10,6 @@ import { userActions } from "./features/userSlice";
 const Error404 = React.lazy(() => import("./pages/Error404"));
 const Login = React.lazy(() => import("./pages/auth/Login"));
 const Signup = React.lazy(() => import("./pages/auth/SignUp"));
-import { ToastContainer, toast } from 'react-toastify'
 
 function App() {
     const [screenLoad, setScreenLoad] = useState(false);
