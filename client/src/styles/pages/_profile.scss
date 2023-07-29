@@ -4,12 +4,15 @@
     margin: 0 auto;
     &__upper {
         min-height: 15rem;
-        background-color: $color-primary;
+        background-color: #0c5153;
         padding-top: 1.5rem;
         padding-left: 3rem;
         display: flex;
         align-items: center;
         gap: 2rem;
+        h1 {
+            color: white !important;
+        }
         &--profile-image {
             height: 8.5rem;
             width: 8.5rem;
