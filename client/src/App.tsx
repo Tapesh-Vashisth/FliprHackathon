@@ -7,7 +7,6 @@ import axiosInstance from "./api/axiosInstance";
 import AuthProtected from "./components/AuthProtected";
 import { useAppDispatch } from "./app/hooks";
 import { userActions } from "./features/userSlice";
-
 const Error404 = React.lazy(() => import("./pages/Error404"));
 const Login = React.lazy(() => import("./pages/auth/Login"));
 const Signup = React.lazy(() => import("./pages/auth/SignUp"));

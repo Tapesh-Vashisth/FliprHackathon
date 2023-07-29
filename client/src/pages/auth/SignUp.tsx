@@ -56,9 +56,15 @@ const SignUp = () => {
             console.log(res);
             setLoading(false);
             navigate("/auth/login", {replace: true});
+            toast.success('OTP verification successful! Please Login to Continue!',{
+                position: 'top-right'
+            })
         } catch (err: any) {
             console.log(err);
             setLoading(false);
+            toast.success(err.response.data,{
+                position: 'top-right'
+            })
         } 
     }
 
