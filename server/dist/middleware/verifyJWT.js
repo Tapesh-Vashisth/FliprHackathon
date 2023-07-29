@@ -11,7 +11,7 @@ const verifyJWT = (req, res, next) => {
     let token = req.cookies.JWT_HTTPONLY_Cookie;
     console.log(token);
     // jwt verify function, validates the user's token
-    jsonwebtoken_1.default.verify(token, String(process.env.ACCESS_TOKEN_SECRET), (err, decoded) => {
+    jsonwebtoken_1.default.verify(token, String(process.env.JWT_SECRET_KEY), (err, decoded) => {
         if (err)
             return res.status(401).send(); //invalid token
         req.uuid = decoded.uuid;

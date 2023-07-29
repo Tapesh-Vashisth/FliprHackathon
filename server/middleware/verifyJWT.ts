@@ -11,7 +11,7 @@ const verifyJWT = (req: any, res: Response, next: NextFunction) => {
     // jwt verify function, validates the user's token
     jwt.verify(
         token,
-        String(process.env.ACCESS_TOKEN_SECRET),
+        String(process.env.JWT_SECRET_KEY),
         (err: any, decoded: any) => {
             if (err) return res.status(401).send(); //invalid token
             req.uuid = decoded.uuid;
