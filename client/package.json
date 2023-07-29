@@ -15,6 +15,7 @@
     "@types/react": "^18.2.17",
     "@types/react-bootstrap": "^0.32.32",
     "@types/react-dom": "^18.2.7",
+    "@types/react-toastify": "^4.1.0",
     "@types/redux-logger": "^3.0.9",
     "axios": "^1.2.2",
     "bootstrap": "^5.3.1",
