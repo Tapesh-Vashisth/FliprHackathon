@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../components/Header/Header";
-
 function Error404() {
     return (
         <div className="error-404">
