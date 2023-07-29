@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
@@ -6,6 +6,11 @@ import axiosInstance from "../../api/axiosInstance";
 
 
 const SignUp = () => {
+    const [showModal, setShowModal] = useState(true);
+
+    const clickShowModalHandler = () => {
+        setShowModal(false);
+    };
     const {
         register,
         formState: { errors },
@@ -22,7 +27,6 @@ const SignUp = () => {
             console.log(err);
         }
     };
-
     const arrow = (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -115,6 +119,49 @@ const SignUp = () => {
                     </Link>
                 </div>
             </div>
+            {showModal && (
+                <div
+                    className="page-signup__modal"
+                    onClick={clickShowModalHandler}
+                >
+                    <div className="page-signup__modal--form">
+                        <form className="page-signup__modal--form--mainform">
+                            <h1 className="page-signup__modal--form--heading">
+                                Verify OTP
+                            </h1>
+                            <p className="page-signup__modal--form--smalltimer">
+                                12:00
+                            </p>
+                            <div className="page-signup__modal--form--otpfields">
+                                <input
+                                    className="page-signup__modal--form--otpinput"
+                                    maxLength={1}
+                                />
+                                <input
+                                    className="page-signup__modal--form--otpinput"
+                                    maxLength={1}
+                                />
+                                <input
+                                    className="page-signup__modal--form--otpinput"
+                                    maxLength={1}
+                                />
+                                <input
+                                    className="page-signup__modal--form--otpinput"
+                                    maxLength={1}
+                                />
+                            </div>
+                            <div className="page-signup__modal--form--buttondiv">
+                                <button
+                                    className="button-primary"
+                                    onClick={clickShowModalHandler}
+                                >
+                                    Verify
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
