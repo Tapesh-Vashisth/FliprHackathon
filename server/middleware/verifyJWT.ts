@@ -5,10 +5,8 @@ require("dotenv").config()
 const verifyJWT = (req: any, res: Response, next: NextFunction) => {
     console.log("verifyJwt");
     // accessing the token from the headers
-    const authHeader = req.headers.authorization || req.headers.Authorization;
-    if (!authHeader?.startsWith('Bearer')) 
-        return res.status(401).send();
-    const token = authHeader.split(' ')[1];
+    let token = req.cookies.JWT_HTTPONLY_Cookie;
+    console.log(token);
 
     // jwt verify function, validates the user's token
     jwt.verify(

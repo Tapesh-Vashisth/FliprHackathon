@@ -44,7 +44,7 @@ function App() {
 
                 <Route
                   path="/auth"
-                  element={<AuthProtected />}  
+                  // element={<AuthProtected />}  
                 >
 
                   <Route
