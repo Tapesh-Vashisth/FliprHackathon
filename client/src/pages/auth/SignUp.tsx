@@ -1,22 +1,56 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../app/hooks";
+import axiosInstance from "../../api/axiosInstance";
+import OtpInput from "../../components/OtpInput";
+
 
 const SignUp = () => {
-    const [showModal, setShowModal] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const clickShowModalHandler = () => {
         setShowModal(false);
     };
+
     const {
         register,
         formState: { errors },
         handleSubmit,
+        watch
     } = useForm();
 
-    const onSubmit = (data: any) => {
-        console.log(data);
+    const dispatch = useAppDispatch();
+
+    const onSubmit = async (data: any) => {
+        setLoading(true);
+        try { 
+            const response = await axiosInstance.post("/user/sendotp", {email: data.email});
+            if (response.status === 200) {
+                setShowModal(true);
+            }
+            setLoading(false);
+        } catch (err: any) {
+            console.log(err);
+            setLoading(false);
+        }
     };
+
+
+    const onFinalSubmit = async (otp: string) => {
+        setShowModal(false);
+        setLoading(true);
+        try {
+            const res = await axiosInstance.post("/user/signup", {name: watch("name"), email: watch("email"), password: watch("password"), otp: otp})
+            console.log(res);
+            setLoading(false);
+        } catch (err: any) {
+            console.log(err);
+            setLoading(false);
+        } 
+    }
+
     const arrow = (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -110,52 +144,12 @@ const SignUp = () => {
                 </div>
             </div>
             {showModal && (
-                <div className="page-signup__modal">
-                    <div className="page-signup__modal--form">
-                        <form className="page-signup__modal--form--mainform">
-                            <h1 className="page-signup__modal--form--heading">
-                                Verify OTP
-                            </h1>
-                            <p className="page-signup__modal--form--smalltimer">
-                                12:00
-                            </p>
-                            <div className="page-signup__modal--form--otpfields">
-                                <input
-                                    className="page-signup__modal--form--otpinput"
-                                    maxLength={1}
-                                />
-                                <input
-                                    className="page-signup__modal--form--otpinput"
-                                    maxLength={1}
-                                />
-                                <input
-                                    className="page-signup__modal--form--otpinput"
-                                    maxLength={1}
-                                />
-                                <input
-                                    className="page-signup__modal--form--otpinput"
-                                    maxLength={1}
-                                />
-                                <input
-                                    className="page-signup__modal--form--otpinput"
-                                    maxLength={1}
-                                />
-                                <input
-                                    className="page-signup__modal--form--otpinput"
-                                    maxLength={1}
-                                />
-                            </div>
-                            <div className="page-signup__modal--form--buttondiv">
-                                <button
-                                    className="button-primary"
-                                    onClick={clickShowModalHandler}
-                                >
-                                    Submit
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <OtpInput 
+                    clickShowModalHandler = {(otp: string) => {
+                        onFinalSubmit(otp);
+                        setShowModal(false);
+                    }} 
+                />
             )}
         </div>
     );
