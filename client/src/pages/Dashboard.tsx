@@ -1,25 +1,35 @@
-import React from "react";
-import { createApi } from "unsplash-js";
+import React, {useEffect} from "react";
 import { useState } from "react";
-import Header from "../../components/Header/Header";
-import ACCESS_KEYS from "../../helper/config";
-function Account() {
-    const [Itenery, setItenery] = useState(true);
+import Header from "../components/Header/Header";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../app/hooks";
+import ProfileImageUpdate from "../components/UpdateImage";
+
+function Dashboard(props: any) {
+    const user = useAppSelector((state) => state.user);
+
+
+    const [Itenery, setItenery] = useState(false);
     const [favorites, setFavourites] = useState(false);
     const [profile, setProfile] = useState(false);
     const [editProfile, setEditProfile] = useState(false);
     const [discardChanges, setDiscardChanges] = useState(false);
+    const navigate = useNavigate();
+
     const handleItenaryClick = () => {
+        navigate("/dashboard/itinerary")
         setItenery(true);
-        setProfile(false);
         setFavourites(false);
+        setProfile(false);
     };
     const handleFavoritesClick = () => {
+        navigate("/dashboard/favorites")
         setFavourites(true);
         setProfile(false);
         setItenery(false);
     };
     const handleProfileClick = () => {
+        navigate("/dashboard")
         setProfile(true);
         setFavourites(false);
         setItenery(false);
@@ -32,6 +42,7 @@ function Account() {
         setDiscardChanges(false);
         setEditProfile(false);
     };
+    
     const editPencil = (
         <svg viewBox="0 0 24 24" fill="" width="24" height="24">
             <path
@@ -40,6 +51,7 @@ function Account() {
             ></path>
         </svg>
     );
+
     const IteneryStyles = Itenery
         ? "user-profile__middle--active"
         : "user-profile__middle--button";
@@ -49,19 +61,25 @@ function Account() {
     const FavoriteStyles = favorites
         ? "user-profile__middle--active"
         : "user-profile__middle--button";
+
+    useEffect(() => {
+        console.log(props.type);
+        if (props.type === "profile") {
+            handleProfileClick();
+        } else if (props.type === "itinerary") {
+            handleItenaryClick();
+        } else {
+            handleFavoritesClick();
+        }
+    }, [])
+
     return (
         <>
             <Header />
             <div className="user-profile">
                 <div className="user-profile__upper">
-                    <label
-                        className="user-profile__upper--profile-image"
-                        htmlFor="profileImage"
-                    >
-                        S
-                        <input type="file" id="profileImage" />
-                    </label>
-                    <h1>Saipranith</h1>
+                    <ProfileImageUpdate />
+                    <h1>{user.name}</h1>
                 </div>
                 <div className="user-profile__middle">
                     <button
@@ -154,4 +172,4 @@ function Account() {
     );
 }
 
-export default Account;
+export default Dashboard;
