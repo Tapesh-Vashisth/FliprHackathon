@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import axiosInstance from "../../api/axiosInstance";
 import OtpInput from "../../components/OtpInput";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
 
 const SignUp = () => {
     const [showModal, setShowModal] = useState(false);
@@ -15,15 +16,17 @@ const SignUp = () => {
         register,
         formState: { errors },
         handleSubmit,
-        watch
+        watch,
     } = useForm();
 
     const dispatch = useAppDispatch();
 
     const onSubmit = async (data: any) => {
         setLoading(true);
-        try { 
-            const response = await axiosInstance.post("/user/sendotp", {email: data.email});
+        try {
+            const response = await axiosInstance.post("/user/sendotp", {
+                email: data.email,
+            });
             setShowModal(true);
             setLoading(false);
         } catch (err: any) {
@@ -32,21 +35,25 @@ const SignUp = () => {
         }
     };
 
-
     const onFinalSubmit = async (otp: string) => {
         setShowModal(false);
         setLoading(true);
 
         try {
-            const res = await axiosInstance.post("/user/signup", {name: watch("name"), email: watch("email"), password: watch("password"), otp: otp})
+            const res = await axiosInstance.post("/user/signup", {
+                name: watch("name"),
+                email: watch("email"),
+                password: watch("password"),
+                otp: otp,
+            });
             console.log(res);
             setLoading(false);
-            navigate("/auth/login", {replace: true});
+            navigate("/auth/login", { replace: true });
         } catch (err: any) {
             console.log(err);
             setLoading(false);
-        } 
-    }
+        }
+    };
 
     const arrow = (
         <svg
@@ -125,15 +132,15 @@ const SignUp = () => {
                     </div>
                     <div className="page-signup__form--button-container">
                         <button className="button-primary" type="submit">
-                            {
-                                loading
-                                ?
-                                <Spinner animation="border" role="status" variant="primary">
-                                    <span className="visually-hidden">Loading...</span>
-                                </Spinner>
-                                :
+                            {loading ? (
+                                <div>
+                                    <Spinner animation="border" variant="light">
+                                        {" "}
+                                    </Spinner>
+                                </div>
+                            ) : (
                                 "SignMe Up"
-                            }
+                            )}
                         </button>
                     </div>
                 </form>
@@ -149,11 +156,12 @@ const SignUp = () => {
                 </div>
             </div>
             {showModal && (
-                <OtpInput 
-                    clickShowModalHandler = {(otp: any) => {
+                <OtpInput
+                    clickShowModalHandler={(otp: any) => {
                         onFinalSubmit(otp);
                         setShowModal(false);
-                    }} 
+                    }}
+                    userEmail={watch("email")}
                 />
             )}
         </div>

@@ -14,6 +14,7 @@ const logout_1 = __importDefault(require("../controllers/userControllers/logout"
 const updateImage_1 = __importDefault(require("../controllers/userControllers/updateImage"));
 const editAccountDetails_1 = __importDefault(require("../controllers/userControllers/editAccountDetails"));
 const deleteAccount_1 = __importDefault(require("../controllers/userControllers/deleteAccount"));
+const check_1 = __importDefault(require("../controllers/userControllers/check"));
 const router = express_1.default.Router();
 router.post('/signup', signup_1.default);
 router.post('/login', login_1.default);
@@ -21,6 +22,7 @@ router.post('/passwordotp', sendResetPasswordOtp_1.default);
 router.post('/sendotp', sendVerifyEmailOtp_1.default);
 router.post('/resetpassword', resetPassword_1.default);
 router.use(verifyJWT_1.default);
+router.get('/check', check_1.default);
 router.get('/logout', logout_1.default);
 router.post('/updateimage', updateImage_1.default);
 router.put('/editaccount', editAccountDetails_1.default);

@@ -74,6 +74,9 @@
         &--button-container {
             margin-top: 3rem;
             text-align: center;
+            button {
+                width: 10rem;
+            }
         }
     }
     &__alreadyExists {
