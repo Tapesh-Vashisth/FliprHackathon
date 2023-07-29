@@ -9,8 +9,13 @@ const Login = () => {
         handleSubmit,
     } = useForm();
 
-    const onSubmit = (data: any) => {
+    const onSubmit = async (data: any) => {
         console.log(data);
+        try {
+
+        } catch (err: any) {
+            console.log(err);
+        }
     };
 
     const arrow = (

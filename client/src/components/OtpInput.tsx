@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import Otp from "react-otp-input";
 
-function OtpInput(clickShowModalHandler: any) {
+function OtpInput(props: any) {
     const [otp, setOtp] = useState("");
     
     const onSubmit = (e: any) => {
         e.preventDefault();
-        console.log(otp);
-
-
+        props.clickShowModalHandler(otp);
     }
 
     return (
