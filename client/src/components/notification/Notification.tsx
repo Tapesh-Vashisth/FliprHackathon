@@ -8,7 +8,7 @@ function Notification() {
   return (
     notifications.alerts.length > 0
     ?
-    <div style = {{position: "absolute", width: "40%", height: 200, backgroundColor: "red", top: 0, right: 0}}>
+    <div style = {{position: "absolute", width: "40%", height: 200, backgroundColor: "red", top: 0, right: 0, zIndex: 500}}>
         
     </div>
     :
