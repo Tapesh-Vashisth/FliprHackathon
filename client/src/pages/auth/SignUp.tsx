@@ -110,10 +110,7 @@ const SignUp = () => {
                 </div>
             </div>
             {showModal && (
-                <div
-                    className="page-signup__modal"
-                    onClick={clickShowModalHandler}
-                >
+                <div className="page-signup__modal">
                     <div className="page-signup__modal--form">
                         <form className="page-signup__modal--form--mainform">
                             <h1 className="page-signup__modal--form--heading">
@@ -139,13 +136,21 @@ const SignUp = () => {
                                     className="page-signup__modal--form--otpinput"
                                     maxLength={1}
                                 />
+                                <input
+                                    className="page-signup__modal--form--otpinput"
+                                    maxLength={1}
+                                />
+                                <input
+                                    className="page-signup__modal--form--otpinput"
+                                    maxLength={1}
+                                />
                             </div>
                             <div className="page-signup__modal--form--buttondiv">
                                 <button
                                     className="button-primary"
                                     onClick={clickShowModalHandler}
                                 >
-                                    Verify
+                                    Submit
                                 </button>
                             </div>
                         </form>
