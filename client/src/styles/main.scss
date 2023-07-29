@@ -10,6 +10,8 @@
 @import "./components/buttons";
 @import "./components/pageLoader";
 
+@import "./layout/header.scss";
+
 @import "./pages/error_404";
 @import "./pages/signup";
 @import "./pages/login";
