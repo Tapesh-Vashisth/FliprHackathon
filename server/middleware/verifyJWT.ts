@@ -24,6 +24,7 @@ const verifyJWT = (req: any, res: Response, next: NextFunction) => {
                     .status(401)
                     .send();
             req.uuid = decoded.uuid;
+            console.log("verified!!")
             next();
         }
     );
