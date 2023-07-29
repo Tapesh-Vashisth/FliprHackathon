@@ -8,6 +8,7 @@ import OtpInput from "../../components/OtpInput";
 
 const SignUp = () => {
     const [showModal, setShowModal] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const clickShowModalHandler = () => {
         setShowModal(false);
@@ -23,23 +24,30 @@ const SignUp = () => {
     const dispatch = useAppDispatch();
 
     const onSubmit = async (data: any) => {
-        try {
+        setLoading(true);
+        try { 
             const response = await axiosInstance.post("/user/sendotp", {email: data.email});
             if (response.status === 200) {
                 setShowModal(true);
             }
+            setLoading(false);
         } catch (err: any) {
             console.log(err);
+            setLoading(false);
         }
     };
 
 
     const onFinalSubmit = async (otp: string) => {
+        setShowModal(false);
+        setLoading(true);
         try {
             const res = await axiosInstance.post("/user/signup", {name: watch("name"), email: watch("email"), password: watch("password"), otp: otp})
             console.log(res);
+            setLoading(false);
         } catch (err: any) {
             console.log(err);
+            setLoading(false);
         } 
     }
 
