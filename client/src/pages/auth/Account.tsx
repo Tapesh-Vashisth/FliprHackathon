@@ -1,6 +1,35 @@
 import React from "react";
+import { useState } from "react";
 import Header from "../../components/Header/Header";
 function Account() {
+    const [Itenery, setItenery] = useState(true);
+    const [favorites, setFavourites] = useState(false);
+    const [profile, setProfile] = useState(false);
+    const [editProfile, setEditProfile] = useState(false);
+    const [discardChanges, setDiscardChanges] = useState(false);
+    const handleItenaryClick = () => {
+        setItenery(true);
+        setProfile(false);
+        setFavourites(false);
+    };
+    const handleFavoritesClick = () => {
+        setFavourites(true);
+        setProfile(false);
+        setItenery(false);
+    };
+    const handleProfileClick = () => {
+        setProfile(true);
+        setFavourites(false);
+        setItenery(false);
+    };
+    const handleEditProfile = () => {
+        setEditProfile(true);
+        setDiscardChanges(true);
+    };
+    const handleDiscardChanges = () => {
+        setDiscardChanges(false);
+        setEditProfile(false);
+    };
     const editPencil = (
         <svg viewBox="0 0 24 24" fill="" width="24" height="24">
             <path
@@ -9,6 +38,15 @@ function Account() {
             ></path>
         </svg>
     );
+    const IteneryStyles = Itenery
+        ? "user-profile__middle--active"
+        : "user-profile__middle--button";
+    const ProfileStyles = profile
+        ? "user-profile__middle--activelast"
+        : "user-profile__middle--button";
+    const FavoriteStyles = favorites
+        ? "user-profile__middle--active"
+        : "user-profile__middle--button";
     return (
         <>
             <Header />
@@ -24,13 +62,22 @@ function Account() {
                     <h1>Saipranith</h1>
                 </div>
                 <div className="user-profile__middle">
-                    <button className="user-profile__middle--button">
+                    <button
+                        className={IteneryStyles}
+                        onClick={handleItenaryClick}
+                    >
                         Itenery
                     </button>
-                    <button className="user-profile__middle--button">
+                    <button
+                        className={FavoriteStyles}
+                        onClick={handleFavoritesClick}
+                    >
                         Favorites
                     </button>
-                    <button className="user-profile__middle--button">
+                    <button
+                        className={ProfileStyles}
+                        onClick={handleProfileClick}
+                    >
                         Profile
                     </button>
                 </div>
@@ -38,28 +85,49 @@ function Account() {
                     <div className="user-profile__lower--details">
                         <div className="user-profile__lower--options">
                             <h1>Profile</h1>
-                            {/* <button>{editPencil} Edit Profile</button> */}
                         </div>
-                        <div className="user-profile__lower--inputGroup">
-                            <label>Name</label>
-                            <input />
+                        <div className="user-profile__lower--edit-button">
+                            {!editProfile && (
+                                <button onClick={handleEditProfile}>
+                                    {editPencil} Edit Profile
+                                </button>
+                            )}
+                            {discardChanges && (
+                                <button onClick={handleDiscardChanges}>
+                                    Discard Changes
+                                </button>
+                            )}
                         </div>
-                        <div className="user-profile__lower--inputGroup">
-                            <label>Email</label>
-                            <input />
-                        </div>
-                        <div className="user-profile__lower--inputGroup">
-                            <label>Current Password</label>
-                            <input />
-                        </div>
-                        <div className="user-profile__lower--inputGroup">
-                            <label>New Password</label>
-                            <input />
-                        </div>
-                        <div className="user-profile__lower--inputGroup">
-                            <label>Confirm New Password</label>
-                            <input />
-                        </div>
+                        <form className="user-profile__lower--form">
+                            <div className="user-profile__lower--inputGroup">
+                                <label>Name</label>
+                                <input disabled={!editProfile} />
+                            </div>
+                            <div className="user-profile__lower--inputGroup">
+                                <label>Email</label>
+                                <input
+                                    disabled={true}
+                                    title="Cannot Edit Email"
+                                />
+                            </div>
+                            <div className="user-profile__lower--inputGroup">
+                                <label>Current Password</label>
+                                <input disabled={!editProfile} />
+                            </div>
+                            <div className="user-profile__lower--inputGroup">
+                                <label>New Password</label>
+                                <input disabled={!editProfile} />
+                            </div>
+                            <div className="user-profile__lower--inputGroup">
+                                <label>Confirm New Password</label>
+                                <input disabled={!editProfile} />
+                            </div>
+                            <div className="user-profile__lower--button">
+                                <button disabled={!editProfile}>
+                                    Update Info
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

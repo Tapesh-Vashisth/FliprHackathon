@@ -40,9 +40,27 @@
             font-size: 1.2rem;
             font-weight: 500;
             border-right: 1px solid $color-primary-dark;
+            background-color: transparent;
         }
         &--button:last-child {
             border-right: none;
+        }
+        &--active {
+            border: none;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: $color-primary-light;
+            border-right: 1px solid $color-primary-light;
+            background-color: transparent;
+        }
+        &--activelast {
+            border: none;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: $color-primary-light;
+            background-color: transparent;
         }
     }
     &__lower {
@@ -52,7 +70,7 @@
         &--options {
             display: flex;
             justify-content: center;
-            border: 1px solid slategray;
+            border-bottom: 1px solid slategray;
             h1 {
                 font-size: 18px;
                 font-weight: 500;
@@ -66,7 +84,20 @@
                 border: 1px solid slategray;
             }
         }
-        &--details{
+        &--edit-button {
+            display: flex;
+            justify-content: end;
+            button {
+                display: inline-block;
+                border: none;
+                padding: 1rem;
+                border-left: 1px solid slategray;
+                border-bottom: 1px solid slategray;
+                font-size: 14px;
+                font-weight: 500;
+            }
+        }
+        &--details {
             padding-bottom: 4rem;
         }
         &--inputGroup {
@@ -77,7 +108,7 @@
             margin-top: 2rem;
             label {
                 font-size: 14px;
-                font-weight: 400;
+                font-weight: 500;
                 margin-bottom: 0.3rem;
             }
             input {
@@ -89,6 +120,20 @@
             input:focus {
                 outline-width: 0;
                 border: 1px solid slategray;
+            }
+        }
+        &--button {
+            text-align: center;
+            margin-top: 4rem;
+            button {
+                padding: 1rem 2.5rem;
+                border: 1px solid slategray;
+                font-size: 14px;
+                font-weight: 500;
+            }
+            button:disabled {
+                border: 1px solid rgba(0, 0, 0, 0.499);
+                color: slategray;
             }
         }
     }
