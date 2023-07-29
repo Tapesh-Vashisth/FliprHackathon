@@ -137,4 +137,33 @@
             }
         }
     }
+    &__favourites {
+        width: 100%;
+        margin: 2rem auto;
+        border: 1px solid slategray;
+        min-height: 50vh;
+        &--details {
+            padding-bottom: 4rem;
+        }
+        &--heading {
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid slategray;
+            h1 {
+                font-size: 18px;
+                font-weight: 500;
+            }
+        }
+        &--places {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 1rem;
+            &--card {
+                min-height: 20rem;
+                border: 1px solid red;
+                margin-top: 2rem;
+            }
+        }
+    }
 }
