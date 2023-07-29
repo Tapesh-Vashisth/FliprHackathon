@@ -2,8 +2,13 @@ import React, {useEffect} from "react";
 import { useState } from "react";
 import Header from "../components/Header/Header";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../app/hooks";
+import ProfileImageUpdate from "../components/UpdateImage";
 
 function Dashboard(props: any) {
+    const user = useAppSelector((state) => state.user);
+
+
     const [Itenery, setItenery] = useState(false);
     const [favorites, setFavourites] = useState(false);
     const [profile, setProfile] = useState(false);
@@ -46,6 +51,7 @@ function Dashboard(props: any) {
             ></path>
         </svg>
     );
+
     const IteneryStyles = Itenery
         ? "user-profile__middle--active"
         : "user-profile__middle--button";
@@ -72,14 +78,8 @@ function Dashboard(props: any) {
             <Header />
             <div className="user-profile">
                 <div className="user-profile__upper">
-                    <label
-                        className="user-profile__upper--profile-image"
-                        htmlFor="profileImage"
-                    >
-                        S
-                        <input type="file" id="profileImage" />
-                    </label>
-                    <h1>Saipranith</h1>
+                    <ProfileImageUpdate />
+                    <h1>{user.name}</h1>
                 </div>
                 <div className="user-profile__middle">
                     <button

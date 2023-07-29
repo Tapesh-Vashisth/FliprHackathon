@@ -33,8 +33,9 @@ const userSchema = new Schema({
         ref: "Place",
         required: false
     },
-    itinerary: [{
-            type: mongoose_1.default.Schema.Types.ObjectId
+    itinarary: [{
+            type: mongoose_1.default.Schema.Types.ObjectId,
+            ref: "itinarary"
         }]
 });
 exports.default = mongoose_1.default.model('User', userSchema);
