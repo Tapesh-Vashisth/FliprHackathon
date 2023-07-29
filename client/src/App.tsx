@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from "react";
-import { ToastContainer, toast } from 'react-toastify'
+import React, { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { Routes, Route, useNavigation, useNavigate } from "react-router-dom";
 import PageLoader from "./components/Loaders/PageLoader";
-import Notification from "./components/notification/Notification";
 import axiosInstance from "./api/axiosInstance";
 import AuthProtected from "./components/AuthProtected";
 import { useAppDispatch } from "./app/hooks";
@@ -15,7 +14,6 @@ function App() {
     const [screenLoad, setScreenLoad] = useState(false);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-
     const getUserData = async () => {
         setScreenLoad(true);
         try {
@@ -26,9 +24,6 @@ function App() {
         } catch (err: any) {
             console.log(err);
             setScreenLoad(false);
-            toast.error("Login Again! User session Expired!", {
-                position: "top-right",
-            });
         }
     };
 
