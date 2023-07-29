@@ -3,26 +3,26 @@ import jwt from "jsonwebtoken"
 require("dotenv").config()
 
 const verifyJWT = (req: any, res: Response, next: NextFunction) => {
-    console.log("verifyJwt");
-    const authHeader = req.headers.authorization || req.headers.Authorization;
-
-    if (!authHeader?.startsWith('Bearer')) {
-        console.log("no token found")
+    const cookies = req.headers.cookie
+    const token = req.cookies.JWT_HTTPONLY_Cookie
+    
+    if (!token) {
+        console.log("no token found!")
         return res
-            .status(401)
-            .send();
+            .status(400)
+            .json({ status: false })
     }
     
-    const token = authHeader.split(' ')[1];
-
     jwt.verify(
-        token,
+        token!,
         String(process.env.ACCESS_TOKEN_SECRET),
         (err: any, decoded: any) => {
-            if (err) 
+            if (err) {
+                console.log("err in jwt verify")
                 return res
                     .status(401)
                     .send();
+            }
             req.email = decoded.email;
             console.log("verified!!")
             next();
