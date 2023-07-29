@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axiosInstance";
 import Spinner from "react-bootstrap/Spinner";
 import { ToastContainer, toast } from "react-toastify";
+import { useAppDispatch } from "../../app/hooks";
+import { userActions } from "../../features/userSlice";
 
 const Login = () => {
     const {
@@ -12,6 +14,7 @@ const Login = () => {
         handleSubmit,
     } = useForm();
 
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
@@ -24,6 +27,8 @@ const Login = () => {
                 password: data.password,
             });
             setLoading(false);
+            
+            dispatch(userActions.setState({...response.data}));
             navigate("/", { replace: true });
             toast.success("Logged in successfully!", {
                 position: "top-right",
