@@ -56,6 +56,9 @@ function OtpInput(props: any) {
                     <p className="otp-input__form__mainform__smalltimer">
                         {timer >= 10 ? `00 : ${timer}` : `00:0${timer}`}
                     </p>
+                    <p className="otp-input__form__mainform__warning">
+                        Please Check Spam Folder Also
+                    </p>
                     <div className="otp-input__form__mainform__otp">
                         <Otp
                             value={otp}

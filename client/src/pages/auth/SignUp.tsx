@@ -5,8 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import axiosInstance from "../../api/axiosInstance";
 import OtpInput from "../../components/OtpInput";
-import Spinner from 'react-bootstrap/Spinner';
-import { ToastContainer,toast } from 'react-toastify';
+import Spinner from "react-bootstrap/Spinner";
+import { ToastContainer, toast } from "react-toastify";
 
 const SignUp = () => {
     const [showModal, setShowModal] = useState(false);
@@ -30,14 +30,14 @@ const SignUp = () => {
             });
             setShowModal(true);
             setLoading(false);
-            toast.success('OTP Sent to your Email Successfully!',{
-                position: "top-right"
-            })
+            toast.success("OTP Sent to your Email Successfully!", {
+                position: "top-right",
+            });
         } catch (err: any) {
             console.log(err);
-            toast.error(err.response.data,{
-                position: "top-right"
-            })
+            toast.error(err.response.data, {
+                position: "top-right",
+            });
             setLoading(false);
         }
     };
@@ -55,18 +55,21 @@ const SignUp = () => {
             });
             console.log(res);
             setLoading(false);
-            navigate("/auth/login", {replace: true});
-            toast.success('OTP verification successful! Please Login to Continue!',{
-                position: 'top-right'
-            })
+            navigate("/auth/login", { replace: true });
+            toast.success(
+                "OTP verification successful! Please Login to Continue!",
+                {
+                    position: "top-right",
+                }
+            );
         } catch (err: any) {
             console.log(err);
             setLoading(false);
-            toast.success(err.response.data,{
-                position: 'top-right'
-            })
-        } 
-    }
+            toast.success(err.response.data, {
+                position: "top-right",
+            });
+        }
+    };
 
     const arrow = (
         <svg
@@ -80,7 +83,6 @@ const SignUp = () => {
 
     return (
         <div className="page-signup">
-            <ToastContainer style={{ fontSize: '20px' }} />
             <div className="page-signup__form">
                 <form
                     className="page-signup__form--mainform"
