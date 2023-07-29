@@ -4,30 +4,20 @@ require("dotenv").config()
 
 const verifyJWT = (req: any, res: Response, next: NextFunction) => {
     console.log("verifyJwt");
-    const authHeader = req.headers.authorization || req.headers.Authorization;
+    // accessing the token from the headers
+    let token = req.cookies.JWT_HTTPONLY_Cookie;
+    console.log(token);
 
-    if (!authHeader?.startsWith('Bearer')) {
-        console.log("no token found")
-        return res
-            .status(401)
-            .send();
-    }
-    
-    const token = authHeader.split(' ')[1];
-
+    // jwt verify function, validates the user's token
     jwt.verify(
         token,
-        String(process.env.ACCESS_TOKEN_SECRET),
+        String(process.env.JWT_SECRET_KEY),
         (err: any, decoded: any) => {
-            if (err) 
-                return res
-                    .status(401)
-                    .send();
-            req.email = decoded.email;
-            console.log("verified!!")
+            if (err) return res.status(401).send(); //invalid token
+            req._id = decoded.id;
             next();
         }
-    );
+    )
 }
 
 export default verifyJWT;
