@@ -17,7 +17,7 @@ const check = async (req: any, res: Response) => {
         .json({
             name: user.name, 
             email: user.email, 
-            image: user.image
+            image: user.image.length > 0 ? user.image : null
         });
 }
 
