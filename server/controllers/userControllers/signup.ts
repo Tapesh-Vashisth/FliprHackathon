@@ -50,7 +50,6 @@ const signup = async (req: Request, res: Response) => {
     }
 
     const user = new User({
-        uuid: uuid,
         name,
         email,
         password: hashedPassword,
