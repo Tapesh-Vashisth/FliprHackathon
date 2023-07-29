@@ -16,7 +16,7 @@ const signup = async (req: Request, res: Response) => {
     } catch (err) {
         return res
             .status(500)
-            .json({ message: "Internal error occurred!" })
+            .json({ message: "Internal error occurred!, user finding" })
     }
 
     if (existingUser) {
@@ -33,7 +33,7 @@ const signup = async (req: Request, res: Response) => {
     } catch (err) {
         return res
             .status(500)
-            .json({ message: "Internal error occurred!" })
+            .json({ message: "Internal error occurred!, otp not found in db" })
     }
 
     if (!otpmodel) {
@@ -62,7 +62,7 @@ const signup = async (req: Request, res: Response) => {
     } catch (err) {
         return res
             .status(500)
-            .json({ message: "Internal error occurred!" })
+            .json({ message: "Internal error occurred, saving!" })
     }
 
     return res
