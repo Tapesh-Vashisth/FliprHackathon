@@ -10,13 +10,11 @@ const verifyJWT = (req, res, next) => {
     // accessing the token from the headers
     let token = req.cookies.JWT_HTTPONLY_Cookie;
     console.log(token);
-    jsonwebtoken_1.default.verify(token, String(process.env.JWT_SECRET_KEY), (err, user) => {
-        if (err) {
-            res
-                .status(400)
-                .json({ status: false, token: "Cannot verify token!" });
-        }
-        req._id = user._id;
+    // jwt verify function, validates the user's token
+    jsonwebtoken_1.default.verify(token, String(process.env.JWT_SECRET_KEY), (err, decoded) => {
+        if (err)
+            return res.status(401).send(); //invalid token
+        req._id = decoded._id;
         next();
     });
 };

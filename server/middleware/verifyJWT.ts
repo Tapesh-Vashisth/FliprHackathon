@@ -8,16 +8,16 @@ const verifyJWT = (req: any, res: Response, next: NextFunction) => {
     let token = req.cookies.JWT_HTTPONLY_Cookie;
     console.log(token);
 
-    jwt.verify(token!, String(process.env.JWT_SECRET_KEY), (err: any, user: any) => {
-        if (err) {
-            res
-            .status(400)
-            .json({ status: false, token: "Cannot verify token!" })
+    // jwt verify function, validates the user's token
+    jwt.verify(
+        token,
+        String(process.env.JWT_SECRET_KEY),
+        (err: any, decoded: any) => {
+            if (err) return res.status(401).send(); //invalid token
+            req._id = decoded._id;
+            next();
         }
-
-        req._id = user._id
-        next()
-    })
+    )
 }
 
 export default verifyJWT;
