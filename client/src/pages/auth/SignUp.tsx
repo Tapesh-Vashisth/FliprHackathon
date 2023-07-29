@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import axiosInstance from "../../api/axiosInstance";
@@ -16,15 +17,17 @@ const SignUp = () => {
         register,
         formState: { errors },
         handleSubmit,
-        watch
+        watch,
     } = useForm();
 
     const dispatch = useAppDispatch();
 
     const onSubmit = async (data: any) => {
         setLoading(true);
-        try { 
-            const response = await axiosInstance.post("/user/sendotp", {email: data.email});
+        try {
+            const response = await axiosInstance.post("/user/sendotp", {
+                email: data.email,
+            });
             setShowModal(true);
             setLoading(false);
             toast.success('OTP Sent to your Email Successfully!',{
@@ -44,20 +47,19 @@ const SignUp = () => {
         setLoading(true);
 
         try {
-            const res = await axiosInstance.post("/user/signup", {name: watch("name"), email: watch("email"), password: watch("password"), otp: otp})
+            const res = await axiosInstance.post("/user/signup", {
+                name: watch("name"),
+                email: watch("email"),
+                password: watch("password"),
+                otp: otp,
+            });
             console.log(res);
             setLoading(false);
             navigate("/auth/login", {replace: true});
-            toast.success('OTP is verified! Please Login to Continue!',{
-                position: "top-right"
-            })
         } catch (err: any) {
             console.log(err);
             setLoading(false);
-            toast.error('OTP is wrong! Please Try Again!',{
-                position: "top-right"
-            })
-        }
+        } 
     }
 
     const arrow = (
@@ -139,15 +141,15 @@ const SignUp = () => {
                     </div>
                     <div className="page-signup__form--button-container">
                         <button className="button-primary" type="submit">
-                            {
-                                loading
-                                ?
-                                <Spinner animation="border" role="status" variant="primary">
-                                    <span className="visually-hidden">Loading...</span>
-                                </Spinner>
-                                :
+                            {loading ? (
+                                <div>
+                                    <Spinner animation="border" variant="light">
+                                        {" "}
+                                    </Spinner>
+                                </div>
+                            ) : (
                                 "SignMe Up"
-                            }
+                            )}
                         </button>
                     </div>
                 </form>
@@ -163,11 +165,12 @@ const SignUp = () => {
                 </div>
             </div>
             {showModal && (
-                <OtpInput 
-                    clickShowModalHandler = {(otp: any) => {
+                <OtpInput
+                    clickShowModalHandler={(otp: any) => {
                         onFinalSubmit(otp);
                         setShowModal(false);
-                    }} 
+                    }}
+                    userEmail={watch("email")}
                 />
             )}
         </div>
