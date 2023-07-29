@@ -1,6 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../app/hooks";
+import axiosInstance from "../../api/axiosInstance";
+
 
 const SignUp = () => {
     const {
@@ -9,8 +12,15 @@ const SignUp = () => {
         handleSubmit,
     } = useForm();
 
-    const onSubmit = (data: any) => {
-        console.log(data);
+    const dispatch = useAppDispatch();
+
+    const onSubmit = async (data: any) => {
+        try {
+            const response = await axiosInstance.post("/user/signup", );
+            return response.data;
+        } catch (err: any) {
+            console.log(err);
+        }
     };
 
     const arrow = (
