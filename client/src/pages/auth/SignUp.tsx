@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../app/hooks";
 import axiosInstance from "../../api/axiosInstance";
 import OtpInput from "../../components/OtpInput";
 import Spinner from 'react-bootstrap/Spinner';
+import { ToastContainer,toast } from 'react-toastify';
 
 const SignUp = () => {
     const [showModal, setShowModal] = useState(false);
@@ -26,12 +27,17 @@ const SignUp = () => {
             const response = await axiosInstance.post("/user/sendotp", {email: data.email});
             setShowModal(true);
             setLoading(false);
+            toast.success('OTP Sent to your Email Successfully!',{
+                position: "top-right"
+            })
         } catch (err: any) {
             console.log(err);
+            toast.error(err.response.data,{
+                position: "top-right"
+            })
             setLoading(false);
         }
     };
-
 
     const onFinalSubmit = async (otp: string) => {
         setShowModal(false);
@@ -42,10 +48,16 @@ const SignUp = () => {
             console.log(res);
             setLoading(false);
             navigate("/auth/login", {replace: true});
+            toast.success('OTP is verified! Please Login to Continue!',{
+                position: "top-right"
+            })
         } catch (err: any) {
             console.log(err);
             setLoading(false);
-        } 
+            toast.error('OTP is wrong! Please Try Again!',{
+                position: "top-right"
+            })
+        }
     }
 
     const arrow = (
@@ -57,8 +69,10 @@ const SignUp = () => {
             <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
         </svg>
     );
+
     return (
         <div className="page-signup">
+            <ToastContainer style={{ fontSize: '20px' }} />
             <div className="page-signup__form">
                 <form
                     className="page-signup__form--mainform"
