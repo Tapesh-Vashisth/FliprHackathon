@@ -7,7 +7,7 @@ import { randomUUID } from "crypto";
 const signup = async (req: Request, res: Response) => {
     console.log("signup")
 
-    const { name, email, password, otp, image } = req.body
+    const { name, email, password, otp } = req.body
     const uuid: String = randomUUID();
 
     let existingUser: any
@@ -55,7 +55,6 @@ const signup = async (req: Request, res: Response) => {
         email,
         password: hashedPassword,
         emailVerified: true,
-        image: image
     })
 
     try {

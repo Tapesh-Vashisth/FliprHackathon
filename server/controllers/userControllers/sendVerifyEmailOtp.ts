@@ -71,15 +71,15 @@ const sendVerifyEmailOtp = async (req: Request, res: Response) => {
     let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user: "stockhub.pvt.ltd@gmail.com",
+            user: "travel.planner.pro.noreply@gmail.com",
             pass: String(process.env.NODEMAILER)
         }
     })
 
     let mailOptions = {
-        from: "stockhub.pvt.ltd@gmail.com",
+        from: "travel.planner.pro.noreply@gmail.com",
         to: email,
-        subject: "Verify your account",
+        subject: "Verify your Travel Planner Pro account",
         html: html
     }
 
