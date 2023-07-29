@@ -1,5 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;700;800;900&family=Roboto:wght@100;400;500;700;900&display=swap");
 .header {
-    padding: 1rem 1rem !important;
+    padding: 2rem 4rem !important;
     &__toggler {
         border: none !important;
     }
@@ -7,8 +8,34 @@
     &__toggler:active {
         outline: 10px solid #f8f9fa !important;
     }
-    &__dropdown{
-        background-color: transparent !important;
-        border: none !important;
+    &__brand {
+        font-size: 20px;
+        font-weight: 500;
+        color: #0c5153;
+        font-family: 'Roboto', sans-serif;
+    }
+    &__navLink {
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 500;
+        font-family: 'Roboto', sans-serif;
+    }
+    &__dropdown {
+        text-align: center !important;
+        background-color: #f8f9fa !important;
+        border: none;
+        align-self: center;
+        padding: 1.3rem 1.3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        aspect-ratio: 3/2;
+        border-radius: 100%;
+        border: 1px solid rgba(75, 86, 97, 0.721);
+    }
+    &__dropdown::after {
+        content: none;
     }
 }

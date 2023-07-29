@@ -9,19 +9,6 @@ function Account() {
     const [profile, setProfile] = useState(false);
     const [editProfile, setEditProfile] = useState(false);
     const [discardChanges, setDiscardChanges] = useState(false);
-    const unsplash = createApi({
-        accessKey: ACCESS_KEYS.UNSPLASH_ACCESS,
-    });
-    unsplash.photos.get({ photoId: "foo" }).then((result) => {
-        if (result.errors) {
-            // handle error here
-            console.log("error occurred: ", result.errors[0]);
-        } else {
-            // handle success here
-            const photo = result.response;
-            console.log(photo);
-        }
-    });
     const handleItenaryClick = () => {
         setItenery(true);
         setProfile(false);
