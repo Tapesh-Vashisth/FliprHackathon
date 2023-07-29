@@ -54,7 +54,7 @@ const signup = async (req: Request, res: Response) => {
         name,
         email,
         password: hashedPassword,
-        emailVerified: true,
+        verified: true,
     })
 
     try {
