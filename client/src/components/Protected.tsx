@@ -11,7 +11,7 @@ function Protected() {
 
     useEffect(() => {
         setLoading(true);
-        if (!user.isLoggedIn) {
+        if (user.isLoggedIn === false) {
             navigate("/auth/login");
         }
 

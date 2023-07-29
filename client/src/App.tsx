@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import PageLoader from "./components/Loaders/PageLoader";
 import axiosInstance from "./api/axiosInstance";
-import { useAppDispatch } from "./app/hooks";
+import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { userActions } from "./features/userSlice";
 import Navigation from "./components/Navigation";
 
 
 function App() {
-    const [screenLoad, setScreenLoad] = useState(false);
+    const [screenLoad, setScreenLoad] = useState(true);
     const dispatch = useAppDispatch();
     const getUserData = async () => {
         setScreenLoad(true);
