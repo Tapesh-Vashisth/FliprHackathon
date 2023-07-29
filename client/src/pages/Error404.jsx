@@ -1,8 +1,10 @@
 import React from "react";
+import Header from "../components/Header/Header";
 
 function Error404() {
     return (
         <div className="error-404">
+            <Header />
             <div className="space">
                 <div className="space__central-body">
                     <img

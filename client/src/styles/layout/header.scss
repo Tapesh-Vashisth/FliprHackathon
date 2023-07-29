@@ -1,0 +1,11 @@
+.header {
+    padding: 1rem 1rem !important;
+
+    &__toggler {
+        border: none !important;
+    }
+    &__toggler:focus,
+    &__toggler:active {
+        outline: 10px solid #f8f9fa !important;
+    }
+}

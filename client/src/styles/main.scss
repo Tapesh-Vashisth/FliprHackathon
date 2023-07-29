@@ -11,6 +11,8 @@
 @import "./components/pageLoader";
 @import "./components/otpInput";
 
+@import "./layout/header.scss";
+
 @import "./pages/error_404";
 @import "./pages/signup";
 @import "./pages/login";
