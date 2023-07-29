@@ -19,7 +19,7 @@ const login = async (req: any, res: Response, next: NextFunction) => {
         return res
         .status(404)
         .json({ 
-            message: "User does not exist. You should sign up instead." 
+                message: "User does not exist. You should sign up instead." 
             })
     }
     
@@ -43,7 +43,7 @@ const login = async (req: any, res: Response, next: NextFunction) => {
     })
 
     return res
-        .status(201)
+        .status(200)
         .json(existingUser)
 }
 
