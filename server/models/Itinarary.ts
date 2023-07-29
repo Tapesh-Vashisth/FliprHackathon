@@ -2,7 +2,7 @@ export {}
 import mongoose from "mongoose"
 
 const Schema = mongoose.Schema
-const itinerarySchema = new Schema({
+const itinararySchema = new Schema({
     name: {
         type: String,
         required: true
@@ -17,4 +17,4 @@ const itinerarySchema = new Schema({
     }]
 })
 
-export default mongoose.model('Itinerary', itinerarySchema)
+export default mongoose.model('itinarary', itinararySchema)

@@ -1,9 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axiosInstance";
-import Spinner from 'react-bootstrap/Spinner';
-import { ToastContainer,toast } from 'react-toastify';
+import Spinner from "react-bootstrap/Spinner";
+import { ToastContainer, toast } from "react-toastify";
+import { useAppDispatch } from "../../app/hooks";
+import { userActions } from "../../features/userSlice";
 
 const Login = () => {
     const {
@@ -12,6 +14,7 @@ const Login = () => {
         handleSubmit,
     } = useForm();
 
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
@@ -19,18 +22,23 @@ const Login = () => {
         console.log(data);
         setLoading(true);
         try {
-            const response = await axiosInstance.post("/user/login", {email: data.email, password: data.password});
+            const response = await axiosInstance.post("/user/login", {
+                email: data.email,
+                password: data.password,
+            });
             setLoading(false);
-            navigate("/", {replace: true});
-            toast.success('Logged in successfully!',{
-                position: 'top-right'
-            })
+            
+            dispatch(userActions.setState({...response.data}));
+            navigate("/", { replace: true });
+            toast.success("Logged in successfully!", {
+                position: "top-right",
+            });
         } catch (err: any) {
             setLoading(false);
             console.log(err);
-            toast.error(err.response.data,{
-                position: 'top-right'
-            })
+            toast.error(err.response.data, {
+                position: "top-right",
+            });
         }
     };
 
@@ -42,11 +50,10 @@ const Login = () => {
         >
             <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
         </svg>
-    )
-    
+    );
+
     return (
         <div className="page-login">
-            <ToastContainer style={{ fontSize: '20px' }} />
             <div className="page-login__form">
                 <form
                     className="page-login__form--mainform"
@@ -93,15 +100,19 @@ const Login = () => {
                     </div>
                     <div className="page-signup__form--button-container">
                         <button className="button-primary" type="submit">
-                            {
-                                loading 
-                                ?
-                                <Spinner animation="border" role="status" variant="primary">
-                                    <span className="visually-hidden">Loading...</span>
+                            {loading ? (
+                                <Spinner
+                                    animation="border"
+                                    role="status"
+                                    variant="primary"
+                                >
+                                    <span className="visually-hidden">
+                                        Loading...
+                                    </span>
                                 </Spinner>
-                                :
+                            ) : (
                                 "LogMe In"
-                            }
+                            )}
                         </button>
                     </div>
                     <div className="page-login__dontExists">

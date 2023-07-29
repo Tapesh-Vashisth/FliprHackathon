@@ -30,8 +30,9 @@ const userSchema = new Schema({
         ref: "Place",
         required: false
     },
-    itinerary: [{
-        type: mongoose.Schema.Types.ObjectId
+    itinarary: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "itinarary"
     }]
 })
 

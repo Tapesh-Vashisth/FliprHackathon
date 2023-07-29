@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify'
 import { Routes, Route, useNavigation, useNavigate } from "react-router-dom";
 import PageLoader from "./components/Loaders/PageLoader";
-import Notification from "./components/notification/Notification";
 import axiosInstance from "./api/axiosInstance";
-import AuthProtected from "./components/AuthProtected";
-import { useAppDispatch } from "./app/hooks";
+import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { userActions } from "./features/userSlice";
 import MyMap from "./components/Map/my-map";
 const Error404 = React.lazy(() => import("./pages/Error404"));

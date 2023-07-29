@@ -1,101 +1,138 @@
-// import { useState } from "react";
-// import SimpleAccordion from "../../components/Acoordian";
-// import styles from "../../styles/Account.module.css"
-// import HighlightOffTwoToneIcon from '@mui/icons-material/HighlightOffTwoTone';
-// import React from "react";
-// import { useNavigate } from "react-router-dom";
-// import ProfileImageUpdate from "../../components/ProfileImageUpdate";
-// import { useAppDispatch, useAppSelector } from "../../app/hooks";
-// import DeleteModal from "../../components/DeleteModal";
-// // import { appActions } from "../features/appSlice";
-// // import { userActions } from "../features/user/userSlice";
-// import PageLoader from "../../components/Loaders/PageLoader";
-// import instance from "../../api/axiosInstance";
-// import VisibilityIcon from '@mui/icons-material/Visibility';
-// import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import React from "react";
+import { useState } from "react";
+import Header from "../../components/Header/Header";
+function Account() {
+    const [Itenery, setItenery] = useState(true);
+    const [favorites, setFavourites] = useState(false);
+    const [profile, setProfile] = useState(false);
+    const [editProfile, setEditProfile] = useState(false);
+    const [discardChanges, setDiscardChanges] = useState(false);
+    const handleItenaryClick = () => {
+        setItenery(true);
+        setProfile(false);
+        setFavourites(false);
+    };
+    const handleFavoritesClick = () => {
+        setFavourites(true);
+        setProfile(false);
+        setItenery(false);
+    };
+    const handleProfileClick = () => {
+        setProfile(true);
+        setFavourites(false);
+        setItenery(false);
+    };
+    const handleEditProfile = () => {
+        setEditProfile(true);
+        setDiscardChanges(true);
+    };
+    const handleDiscardChanges = () => {
+        setDiscardChanges(false);
+        setEditProfile(false);
+    };
+    const editPencil = (
+        <svg viewBox="0 0 24 24" fill="" width="24" height="24">
+            <path
+                fill-rule="evenodd"
+                d="M18.8525,7.543 L17.7515,8.644 L15.3565,6.248 L16.4575,5.147 C16.5555,5.05 16.6835,5.001 16.8105,5.001 C16.9385,5.001 17.0665,5.05 17.1645,5.147 L18.8525,6.835 C19.0475,7.03 19.0475,7.348 18.8525,7.543 L18.8525,7.543 Z M8.1895,18.206 C8.1185,18.276 8.0275,18.324 7.9295,18.344 L5.1275,18.873 L5.6575,16.07 C5.6755,15.972 5.7225,15.882 5.7945,15.811 L14.6495,6.955 L17.0445,9.351 L8.1895,18.206 Z M19.5595,6.128 L17.8715,4.44 C17.2865,3.856 16.3355,3.856 15.7505,4.44 L5.0875,15.103 C4.8735,15.317 4.7295,15.588 4.6745,15.886 L4.0085,19.407 C3.9775,19.569 4.0295,19.736 4.1465,19.854 C4.2415,19.948 4.3685,20 4.4995,20 C4.5305,20 4.5615,19.997 4.5925,19.991 L8.1165,19.326 C8.4145,19.269 8.6855,19.125 8.8965,18.912 L19.5595,8.25 C20.1445,7.665 20.1445,6.713 19.5595,6.128 L19.5595,6.128 Z"
+            ></path>
+        </svg>
+    );
+    const IteneryStyles = Itenery
+        ? "user-profile__middle--active"
+        : "user-profile__middle--button";
+    const ProfileStyles = profile
+        ? "user-profile__middle--activelast"
+        : "user-profile__middle--button";
+    const FavoriteStyles = favorites
+        ? "user-profile__middle--active"
+        : "user-profile__middle--button";
+    return (
+        <>
+            <Header />
+            <div className="user-profile">
+                <div className="user-profile__upper">
+                    <label
+                        className="user-profile__upper--profile-image"
+                        htmlFor="profileImage"
+                    >
+                        S
+                        <input type="file" id="profileImage" />
+                    </label>
+                    <h1>Saipranith</h1>
+                </div>
+                <div className="user-profile__middle">
+                    <button
+                        className={IteneryStyles}
+                        onClick={handleItenaryClick}
+                    >
+                        Itenery
+                    </button>
+                    <button
+                        className={FavoriteStyles}
+                        onClick={handleFavoritesClick}
+                    >
+                        Favorites
+                    </button>
+                    <button
+                        className={ProfileStyles}
+                        onClick={handleProfileClick}
+                    >
+                        Profile
+                    </button>
+                </div>
+                <div className="user-profile__lower">
+                    <div className="user-profile__lower--details">
+                        <div className="user-profile__lower--options">
+                            <h1>Profile</h1>
+                        </div>
+                        <div className="user-profile__lower--edit-button">
+                            {!editProfile && (
+                                <button onClick={handleEditProfile}>
+                                    {editPencil} Edit Profile
+                                </button>
+                            )}
+                            {discardChanges && (
+                                <button onClick={handleDiscardChanges}>
+                                    Discard Changes
+                                </button>
+                            )}
+                        </div>
+                        <form className="user-profile__lower--form">
+                            <div className="user-profile__lower--inputGroup">
+                                <label>Name</label>
+                                <input disabled={!editProfile} />
+                            </div>
+                            <div className="user-profile__lower--inputGroup">
+                                <label>Email</label>
+                                <input
+                                    disabled={true}
+                                    title="Cannot Edit Email"
+                                />
+                            </div>
+                            <div className="user-profile__lower--inputGroup">
+                                <label>Current Password</label>
+                                <input disabled={!editProfile} />
+                            </div>
+                            <div className="user-profile__lower--inputGroup">
+                                <label>New Password</label>
+                                <input disabled={!editProfile} />
+                            </div>
+                            <div className="user-profile__lower--inputGroup">
+                                <label>Confirm New Password</label>
+                                <input disabled={!editProfile} />
+                            </div>
+                            <div className="user-profile__lower--button">
+                                <button disabled={!editProfile}>
+                                    Update Info
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+}
 
-// const Account = () => {
-//     const dispatch = useAppDispatch();
-//     const user = useAppSelector((state) => state.user);
-//     // const app = useAppSelector((state) => state.app);
-//     const [update, setUpdate] = useState<boolean>(false);
-//     const [del, setDel] = useState<boolean>(false);
-//     const [name, setName] = useState<string>(user.name);
-//     const [currentPassword, setCurrentPassword] = useState<string>("");
-//     const [newPassword, setNewPassword] = useState<string>("");
-//     const [confirmPassword, setConfirmPassword] = useState<string>("");
-//     // const { setShow, setAlert } = appActions;
-//     const [visible, setVisible] = useState<boolean>(false);
-export {}
-
-//     const navigate = useNavigate();
-//     const cancelHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-//         navigate("/");
-//     }
-
-//     const updateHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-//         let nowname: string = name;
-//         setUpdate(true);
-//         const res = instance.put("/users/editaccount", {
-//             name: name,
-//             email: user.email,
-//             password: currentPassword,
-//             newPassword: newPassword
-//         }).then((data: any) => {
-//             // dispatch(appActions.setSuccess({ show: true, message: "Details Updated!" }))
-//             // dispatch(userActions.setName(nowname));
-//             setUpdate(false);
-//         })
-//             .catch((err: any) => {
-//                 if (err.message === "Network Error") {
-//                     // dispatch(appActions.setAlert({ show: true, message: "Network error/Server Down!" }));
-//                 } else {
-//                     // dispatch(appActions.setAlert({ show: true, message: err.response.data.message }));
-//                 }
-//                 setUpdate(false);
-//             })
-//     }
-
-//     const deciderDisable = (name === "" || currentPassword === "" || newPassword !== confirmPassword)
-
-//     return (
-//         (user.loading) ? <PageLoader /> :
-//             <>
-//                 <div className={styles.navbarBack} ></div>
-//                 <div>
-//                     <div className={styles.accBackdrop} style={{ padding: "120px 0px 90px 0px" }}>
-//                         <div className={styles.accContainer} >
-//                             <button  className={styles.cancel} onClick={cancelHandler} >< HighlightOffTwoToneIcon fontSize="large" sx={{ color: "#000;", borderRadius: "50%", backgroundColor: "white" }} /></button>
-//                             <div className={styles.accountdetails}>
-//                                 <ProfileImageUpdate />
-//                             </div>
-//                             <div className={styles.accountdetails} >
-//                                 <h3>Account Details</h3>
-//                                 <input type="text" value={name} onChange={(e) => { setName(e.target.value) }} />
-//                                 <input type="text" value={user.email} readOnly />
-//                                 <div style={{ position: "relative" }}>
-//                                     <input className={styles.inputAcc} type={visible ? "text" : 'password'} placeholder="Enter Password to Save Changes" value={currentPassword} onChange={(e) => { setCurrentPassword(e.target.value) }} />
-//                                     {
-//                                         visible ?
-//                                             <VisibilityOffIcon style={{ position: "absolute", right: "8px", top: "50%", transform: "translateY(-50%)", cursor: "pointer" }} onClick={() => { setVisible(false) }} />
-//                                             :
-//                                             <VisibilityIcon style={{ position: "absolute", right: "8px", top: "50%", transform: "translateY(-50%)", cursor: "pointer" }} onClick={() => { setVisible(true) }} />
-//                                     }
-//                                 </div>
-//                             </div>
-//                             <div className={styles.accordianBox}>
-//                                 <SimpleAccordion currentPassword={currentPassword} newPassword={newPassword} confirmPassword={confirmPassword} setCurrentPassword={setCurrentPassword} setNewPassword={setNewPassword} setConfirmPassword={setConfirmPassword} />
-//                             </div>
-//                             <div className={styles.buttonHolder}>
-//                                 <button className={deciderDisable || update ? styles.updatedisabled : styles.update} onClick={updateHandler} disabled={deciderDisable ? true : false}>Update Settings</button>
-//                                 <DeleteModal />
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </>
-//     );
-
-// };
-
-// export default Account;
+export default Account;
