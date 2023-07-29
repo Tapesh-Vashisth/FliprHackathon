@@ -1,17 +1,18 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Routes, Route, useNavigation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify'
 import Protected from "../components/Protected";
 import Account from "../pages/auth/Account";
 import AuthProtected from "../components/AuthProtected";
 import PageLoader from './Loaders/PageLoader';
+import { useAppSelector } from '../app/hooks';
 const Error404 = React.lazy(() => import("../pages/Error404"));
 const Login = React.lazy(() => import("../pages/auth/Login"));
 const Signup = React.lazy(() => import("../pages/auth/SignUp"));
 const Home = React.lazy(() => import('../pages/Home'));
 
 function Navigation() {
-  return (
+    return (
     <>
         <ToastContainer style={{ fontSize: "20px" }} />
         <Routes>

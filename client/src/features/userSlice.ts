@@ -11,7 +11,7 @@ interface initialState {
 const initialState: initialState = {
     name: "",
     email: "",
-    image: "",
+    image: null,
     isLoggedIn: false
 }
 

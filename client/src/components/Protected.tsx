@@ -16,7 +16,7 @@ function Protected() {
         }
 
         setLoading(false);
-    }, []);
+    }, [user]);
 
     return loading ? <PageLoader /> : <Outlet />;
 }
