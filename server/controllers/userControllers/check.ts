@@ -3,8 +3,8 @@ import User from "../../models/User";
 
 const check = async (req: any, res: Response) => {
     console.log("check");
+    console.log(req._id);
     const user = await User.findById(req._id)
-    
     if (!user) 
         return res
             .status(404)
@@ -17,7 +17,7 @@ const check = async (req: any, res: Response) => {
         .json({
             name: user.name, 
             email: user.email, 
-            image: user.image.length > 0 ? user.image : null
+            image: user.image && user.image.length > 0 ? user.image : null
         });
 }
 

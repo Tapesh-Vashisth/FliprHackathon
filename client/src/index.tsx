@@ -6,7 +6,7 @@ import App from './App';
 import './styles/main.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PageLoader from './components/Loaders/PageLoader';
-
+import 'react-toastify/dist/ReactToastify.css';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
