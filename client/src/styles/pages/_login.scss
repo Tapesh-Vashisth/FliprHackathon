@@ -14,6 +14,7 @@
         animation-duration: 25s;
         animation-iteration-count: infinite;
     }
+
     position: relative;
     width: 100vw;
     height: 100vh;
@@ -23,7 +24,10 @@
     overflow: hidden;
     &__form {
         width: 50%;
-        height: 70%;
+        padding: 4rem 0px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         position: relative;
         background-image: linear-gradient(
             to bottom right,
