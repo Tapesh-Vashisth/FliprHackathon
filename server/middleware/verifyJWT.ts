@@ -23,7 +23,7 @@ const verifyJWT = (req: any, res: Response, next: NextFunction) => {
                 return res
                     .status(401)
                     .send();
-            req.uuid = decoded.uuid;
+            req.email = decoded.email;
             console.log("verified!!")
             next();
         }
