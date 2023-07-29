@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import axiosInstance from "../../api/axiosInstance";
 
 const Login = () => {
     const {
@@ -12,7 +13,7 @@ const Login = () => {
     const onSubmit = async (data: any) => {
         console.log(data);
         try {
-
+            const response = await axiosInstance.post("/user/login", {});
         } catch (err: any) {
             console.log(err);
         }
