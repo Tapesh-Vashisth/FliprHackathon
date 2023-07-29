@@ -6,20 +6,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 require("dotenv").config();
 const verifyJWT = (req, res, next) => {
-    console.log("verifyJwt");
-    const authHeader = req.headers.authorization || req.headers.Authorization;
-    if (!(authHeader === null || authHeader === void 0 ? void 0 : authHeader.startsWith('Bearer'))) {
-        console.log("no token found");
+    const cookies = req.headers.cookie;
+    const token = req.cookies.JWT_HTTPONLY_Cookie;
+    if (!token) {
+        console.log("no token found!");
         return res
-            .status(401)
-            .send();
+            .status(400)
+            .json({ status: false });
     }
-    const token = authHeader.split(' ')[1];
     jsonwebtoken_1.default.verify(token, String(process.env.ACCESS_TOKEN_SECRET), (err, decoded) => {
-        if (err)
+        if (err) {
+            console.log("err in jwt verify");
             return res
                 .status(401)
                 .send();
+        }
         req.email = decoded.email;
         console.log("verified!!");
         next();

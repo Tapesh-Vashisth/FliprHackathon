@@ -3,6 +3,7 @@ import { Routes, Route, useNavigation, useNavigate } from "react-router-dom";
 import PageLoader from "./components/Loaders/PageLoader";
 import Notification from "./components/notification/Notification";
 import axiosInstance from "./api/axiosInstance";
+import AuthProtected from "./components/AuthProtected";
 const Error404 = React.lazy(() => import("./pages/Error404"));
 const Login = React.lazy(() => import("./pages/auth/Login"));
 const Signup = React.lazy(() => import("./pages/auth/SignUp"));
@@ -42,7 +43,8 @@ function App() {
                 />
 
                 <Route
-                  path="/auth"  
+                  path="/auth"
+                  element={<AuthProtected />}  
                 >
 
                   <Route
