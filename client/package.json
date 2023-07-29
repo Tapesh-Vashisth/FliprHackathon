@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.1",
     "@mui/material": "^5.14.2",
     "@reduxjs/toolkit": "^1.9.5",
@@ -15,6 +17,7 @@
     "@types/react": "^18.2.17",
     "@types/react-bootstrap": "^0.32.32",
     "@types/react-dom": "^18.2.7",
+    "@types/react-toastify": "^4.1.0",
     "@types/redux-logger": "^3.0.9",
     "axios": "^1.2.2",
     "bootstrap": "^5.3.1",
