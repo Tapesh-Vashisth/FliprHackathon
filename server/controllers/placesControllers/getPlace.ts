@@ -14,12 +14,15 @@ export const getPlace = async (req: Request, res: Response) => {
     }
 
     response.place = (placeSearch.data.results);
+    console.log(response.place)
 
     for (let i=0; i<response.place.length; i++) {
         let { lon, lat, city, place_id, name } = response.place[i]
-        console.log(response.place[i])
         if (!response.place[i].name || name.length <= 0) {
-            name = response.place[i].properties.formatted
+            console.log(response.place[i].name)
+            try {
+                name = response.place[i].properties.formatted
+            } catch (err) {}
         }
 
         let new_place = new Place({
