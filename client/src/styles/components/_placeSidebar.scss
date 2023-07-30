@@ -70,7 +70,7 @@
     &__reviews {
         width: 95%;
         margin: 2rem auto;
-        &--write{
+        &--write {
             display: flex;
             width: 100%;
             justify-content: space-between;
@@ -79,18 +79,34 @@
             font-size: 20px;
             font-family: "Montserrat", sans-serif;
             padding: 2rem;
-            border:1px solid gray;
+            border: 1px solid gray;
             border-bottom: none;
         }
-        textarea{
+        textarea {
             width: 100%;
             padding: 2rem;
         }
-        &--button{
-            button{
+        &--button {
+            button {
                 margin-top: 1rem;
                 width: 100%;
                 padding: 1.5rem;
+            }
+        }
+    }
+    &__othersReviews {
+        &--reviewCard {
+            width: 95%;
+            margin: 0 auto;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            border: 1px solid slategray;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            p {
+                font-size: 14px;
+                font-family: "Montserrat", sans-serif;
             }
         }
     }

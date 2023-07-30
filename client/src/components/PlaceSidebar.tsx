@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import axiosInstance from "../api/axiosInstance";
 import config from "../helper/config";
+import Moment from "react-moment";
 import CircularProgress from "@mui/material/CircularProgress";
 import weatherApi from "../api/weatherApi";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -44,26 +45,34 @@ function PlaceSidebar(props: any) {
         console.log(review, rating);
 
         try {
-            const response = await axiosInstance.post("/place/addreview", {username: user.name, place_id: props.data.place_id, rating: rating, reviewBody: review, email: user.email})
+            const response = await axiosInstance.post("/place/addreview", {
+                username: user.name,
+                place_id: props.data.place_id,
+                rating: rating,
+                reviewBody: review,
+                email: user.email,
+            });
             toast.success("Review submitted successfully");
         } catch (err: any) {
-            toast.error(err.response.data.message, {position: "top-right"});
+            toast.error(err.response.data.message, { position: "top-right" });
         }
-    }
+    };
 
     const getReviews = async () => {
         try {
-            const response = await axiosInstance.get("/place/reviews/" + props.data.place_id);
+            const response = await axiosInstance.get(
+                "/place/reviews/" + props.data.place_id
+            );
             console.log(response.data);
-            
+
             let len = response.data.length;
             let totalRating = 0;
             let holdReview = response.data.filter((x: any) => {
                 totalRating += x.rating;
-                return x.email === user.email
+                return x.email === user.email;
             });
 
-            setAverageRating(totalRating/len);            
+            setAverageRating(totalRating / len);
 
             if (holdReview.length > 0) {
                 setIsReviewed(true);
@@ -75,14 +84,14 @@ function PlaceSidebar(props: any) {
 
             setLoading(false);
         } catch (err: any) {
-            toast.error(err.response.data.message, {position: "top-right"});
+            toast.error(err.response.data.message, { position: "top-right" });
             setLoading(false);
         }
-    }
+    };
 
     const editReviewHandler = (e: any) => {
         e.preventDefault();
-    }
+    };
 
     useEffect(() => {
         setLoading(true);
@@ -219,7 +228,10 @@ function PlaceSidebar(props: any) {
 
                             {
                                 <div className="placesidebar__rate-experience">
-                                    <span>{isReviewed ? "Edit" : "Rate"} Your Experience</span>
+                                    <span>
+                                        {isReviewed ? "Edit" : "Rate"} Your
+                                        Experience
+                                    </span>
                                     <Rating
                                         name="simple-controlled"
                                         value={rating}
@@ -230,7 +242,14 @@ function PlaceSidebar(props: any) {
                                     />
                                 </div>
                             }
-                            <form className="placesidebar__reviews" onSubmit={isReviewed ? editReviewHandler : addReviewHandler}>
+                            <form
+                                className="placesidebar__reviews"
+                                onSubmit={
+                                    isReviewed
+                                        ? editReviewHandler
+                                        : addReviewHandler
+                                }
+                            >
                                 <p className="placesidebar__reviews--heading">
                                     {isReviewed ? "Edit" : "Add"} Review
                                 </p>
@@ -238,12 +257,35 @@ function PlaceSidebar(props: any) {
                                     rows={5}
                                     placeholder="write your review"
                                     value={review}
-                                    onChange={(e: any) => setReview(e.target.value)}
+                                    onChange={(e: any) =>
+                                        setReview(e.target.value)
+                                    }
                                 ></textarea>
                                 <div className="placesidebar__reviews--button">
-                                    <button>{isReviewed ? "Edit Review And Rating" : "Submit Review And Rating"}</button>
+                                    <button>
+                                        {isReviewed
+                                            ? "Edit Review And Rating"
+                                            : "Submit Review And Rating"}
+                                    </button>
                                 </div>
                             </form>
+                            <div className="placesidebar__othersReviews">
+                                {reviews.map((review: any, index) => {
+                                    return review.email !== user.email ? (
+                                        <div className="placesidebar__othersReviews--reviewCard">
+                                            <p>
+                                                <Moment fromNow>
+                                                    {review.createdAt}
+                                                </Moment>
+                                            </p>
+                                            <p>
+                                                {review.username}:{" "}
+                                                <span>{review.reviewBody}</span>
+                                            </p>
+                                        </div>
+                                    ) : null;
+                                })}
+                            </div>
                         </>
                     </div>
                 )}
