@@ -36,7 +36,7 @@ const Login = () => {
         } catch (err: any) {
             setLoading(false);
             console.log(err);
-            toast.error(err.response.data, {
+            toast.error(err.response.data.message, {
                 position: "top-right",
             });
         }

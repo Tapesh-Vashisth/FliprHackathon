@@ -15,10 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const User_1 = __importDefault(require("../../models/User"));
 const updateImage = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('update image');
-    const { image, email } = req.body;
+    const { image } = req.body;
     let user;
     try {
-        user = yield User_1.default.findOne({ email: email }).exec();
+        user = yield User_1.default.findById(req._id).exec();
     }
     catch (err) {
         return res

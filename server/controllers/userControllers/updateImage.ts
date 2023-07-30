@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import User from "../../models/User";
 
-const updateImage = async (req: Request, res: Response) => {
+const updateImage = async (req: any, res: Response) => {
     console.log('update image')
 
-    const { image, email } = req.body
+    const { image } = req.body
 
     let user: any
     try {
-        user = await User.findOne({ email: email }).exec()
+        user = await User.findById(req._id).exec()
     } catch (err) {
         return res
             .status(500)

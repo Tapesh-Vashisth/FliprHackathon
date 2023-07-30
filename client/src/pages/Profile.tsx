@@ -1,15 +1,34 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { useForm } from 'react-hook-form';
+import axiosInstance from "../api/axiosInstance";
+import { toast } from 'react-toastify';
+import { userActions } from '../features/userSlice';
+
 
 function Profile() {
+    const user = useAppSelector((state) => state.user);
     const [editProfile, setEditProfile] = useState(false);
     const [discardChanges, setDiscardChanges] = useState(false);
+
+    const dispatch = useAppDispatch();
+    
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+        watch,
+        reset
+    } = useForm();
+
 
     const handleEditProfile = () => {
         setEditProfile(true);
         setDiscardChanges(true);
     };
-    
+
     const handleDiscardChanges = () => {
+        reset({name: user.name});
         setDiscardChanges(false);
         setEditProfile(false);
     };
@@ -22,6 +41,39 @@ function Profile() {
             ></path>
         </svg>
     );
+
+    const onSubmit = async (data: any) => {
+        if (data.newPassword === data.confirmPassword) {
+            const formData = {
+                ...data
+            }
+            
+            
+            try {
+                const response = await axiosInstance.put("/user/editaccount", formData);
+                
+                dispatch(userActions.setName(data.name))
+                toast.success("Profile Updated Successfully!", {
+                    position: "top-right"
+                });
+            } catch (err: any) {
+                console.log(err);
+                toast.error(err.response.data.message, {
+                    position: "top-right",
+                });
+            }
+        } 
+    }
+
+    useEffect(() => {
+        reset({
+            name: user.name,
+            password: "",
+            newPassword: "",
+            confirmPassword: ""
+        })
+    }, [])
+    
     
     return (
     <div className="user-profile__lower">
@@ -41,29 +93,82 @@ function Profile() {
                     </button>
                 )}
             </div>
-            <form className="user-profile__lower--form">
+            <form className="user-profile__lower--form" onSubmit={handleSubmit(onSubmit)}>
                 <div className="user-profile__lower--inputGroup">
                     <label>Name</label>
-                    <input disabled={!editProfile} />
+                    <input 
+                        disabled={!editProfile} 
+                        {...register("name", {
+                            required: "Name is required"
+                        })} 
+                    />
+                    {errors.name && (
+                        <p className="errorMessage" role="alert">
+                            {errors.name?.message?.toString()}
+                        </p>
+                    )}
                 </div>
                 <div className="user-profile__lower--inputGroup">
                     <label>Email</label>
                     <input
                         disabled={true}
                         title="Cannot Edit Email"
+                        value={user.email}
+
                     />
                 </div>
                 <div className="user-profile__lower--inputGroup">
                     <label>Current Password</label>
-                    <input disabled={!editProfile} />
+                    <input 
+                        disabled={!editProfile} 
+                        {...register("password", {
+                            required: "Password is required"
+                        })} 
+                        type='password'
+                        />
+                    {errors.password && (
+                        <p className="errorMessage" role="alert">
+                            {errors.currentPassword?.message?.toString()}
+                        </p>
+                    )}
                 </div>
                 <div className="user-profile__lower--inputGroup">
                     <label>New Password</label>
-                    <input disabled={!editProfile} />
+                    <input 
+                        disabled={!editProfile} 
+                        {...register("newPassword", {
+                            pattern: {
+                                value: /^.{8,}$/,
+                                message:
+                                "Password must be atleast 8 characters long",
+                            }
+                        })} 
+                        type='password'
+                        />
+                    {errors.newPassword && (
+                        <p className="errorMessage" role="alert">
+                            {errors.newPassword?.message?.toString()}
+                        </p>
+                    )}
                 </div>
                 <div className="user-profile__lower--inputGroup">
                     <label>Confirm New Password</label>
-                    <input disabled={!editProfile} />
+                    <input 
+                        disabled={!editProfile} 
+                        {...register("confirmPassword", {
+                            
+                        })} 
+                        type='password'
+                    />
+                    {
+                        watch("newPassword") && watch("newPassword") !== watch("confirmPassword") 
+                        ?
+                        <p className="errorMessage" role="alert">
+                            Password must match
+                        </p>          
+                        :
+                        null
+                    }
                 </div>
                 <div className="user-profile__lower--button">
                     <button disabled={!editProfile}>

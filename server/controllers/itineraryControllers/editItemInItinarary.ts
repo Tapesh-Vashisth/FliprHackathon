@@ -2,13 +2,15 @@ import { Request, Response } from "express";
 import Itinarary from "../../models/Itinarary";
 
 const editItemInItinarary = async (req: Request, res: Response) => {
-    const { _id_itinarary, _id_place, date } = req.body
+    const { _id_place, date, description } = req.body
+    const _id_itinarary = req.params.id
 
     let itinarary = await Itinarary.findById(_id_itinarary).exec()
 
     itinarary!.places = itinarary!.places.map((value, index) => {
         if (value.place===_id_place) {
             value.date = date
+            value.description = description
         }
         return value
     })

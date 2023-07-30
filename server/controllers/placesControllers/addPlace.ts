@@ -7,16 +7,17 @@ const addPlace = async (req: Request, res: Response) => {
     let geocoding_api_url = `https://api.geoapify.com/v1/geocode/search?text=${searchQuery}&limit=10&format=json&apiKey=${process.env.MAP_API_KEY}`
 
     let data: any = await axios.get(geocoding_api_url)
-    data = data.results
+    console.log(data.data)
+    data = data.data.results
 
     let return_data = []
 
     for (let i=0; i<data.length; i++) {
-        let { lon, lat, city, name, place_id } = data[i]
+        let { lon, lat, city, place_id } = data[i]
+        console.log(data[i])
 
         return_data.push({
             place_id,
-            name,
             lon,
             lat,
             city
@@ -24,7 +25,6 @@ const addPlace = async (req: Request, res: Response) => {
 
         let new_place = new Place({
             place_id,
-            name,
             lon,
             lat,
             city

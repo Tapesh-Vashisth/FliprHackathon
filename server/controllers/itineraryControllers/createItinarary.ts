@@ -2,8 +2,15 @@ import { Request, Response } from "express";
 import Itinarary from "../../models/Itinarary";
 import User from "../../models/User";
 
-const createItinarary = async (req: Request, res: Response) => {
-    const { iName, email } = req.body
+const createItinarary = async (req: any, res: Response) => {
+    const { iName } = req.body
+
+    let user = await User.findById(req._id).exec()
+
+    if (!user)
+        return res
+            .status(400)
+            .json({ message: "No user found!" })
 
     let itinarary = new Itinarary({
         name: iName,
@@ -17,10 +24,6 @@ const createItinarary = async (req: Request, res: Response) => {
             .status(500)
             .json({ message: "Internal error occurred in saving itinarary!" })
     }
-
-    let user = await User.findOne({
-        email: email
-    }).exec()
 
     user!.itinarary.push(itinarary._id)
 

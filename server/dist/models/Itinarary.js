@@ -16,6 +16,7 @@ const itinararySchema = new Schema({
                 ref: "Place",
                 required: true
             },
+            description: String,
             date: Date
         }]
 });

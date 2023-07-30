@@ -16,10 +16,11 @@ const User_1 = __importDefault(require("../../models/User"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const editAccountDetails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("update account");
-    const { name, email, password, newPassword } = req.body;
+    const { name, password, newPassword } = req.body;
+    console.log(req._id, req.body);
     let user;
     try {
-        user = yield User_1.default.findOne({ email: email }).exec();
+        user = yield User_1.default.findById(req._id).exec();
     }
     catch (err) {
         return res
@@ -35,7 +36,7 @@ const editAccountDetails = (req, res) => __awaiter(void 0, void 0, void 0, funct
             .status(409)
             .json({ message: "Wrong password entered : Cannot edit account details!" });
     }
-    if (newPassword.length > 0) {
+    if (newPassword && newPassword.length > 0) {
         const hashedPassword = bcryptjs_1.default.hashSync(newPassword, 5);
         user.password = hashedPassword;
     }

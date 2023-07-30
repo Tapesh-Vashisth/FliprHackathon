@@ -10,7 +10,7 @@ const placeSchema = new Schema({
     },
     name: {
         type: String,
-        required: true
+        required: false
     },
     city: {
         type: String,
