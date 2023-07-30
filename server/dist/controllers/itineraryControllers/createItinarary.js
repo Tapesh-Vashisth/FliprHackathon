@@ -26,7 +26,7 @@ const createItinarary = (req, res) => __awaiter(void 0, void 0, void 0, function
         places: []
     });
     try {
-        yield itinarary.save();
+        yield itinerary.save();
     }
     catch (err) {
         return res
@@ -44,6 +44,6 @@ const createItinarary = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
     return res
         .status(200)
-        .json({ message: "Created itinarary successfully!" });
+        .json({ message: "Created itinerary successfully!" });
 });
 exports.default = createItinarary;

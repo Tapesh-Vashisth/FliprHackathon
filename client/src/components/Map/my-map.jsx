@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import L from 'leaflet';
 import {
     MapContainer, TileLayer, Marker, Popup
@@ -16,9 +16,13 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
+
 const MyMap = () => {
 	const position = [51.505, -0.09]
-
+	
+	useEffect(() => {
+		console.log("huu");
+	}, []);
 	return (
 		<MapContainer center={position} zoom={13} scrollWheelZoom={true}>
 			<TileLayer
