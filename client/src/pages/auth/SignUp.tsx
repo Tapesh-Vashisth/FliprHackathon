@@ -7,6 +7,7 @@ import axiosInstance from "../../api/axiosInstance";
 import OtpInput from "../../components/OtpInput";
 import Spinner from "react-bootstrap/Spinner";
 import { ToastContainer, toast } from "react-toastify";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const SignUp = () => {
     const [showModal, setShowModal] = useState(false);
@@ -150,11 +151,7 @@ const SignUp = () => {
                     <div className="page-signup__form--button-container">
                         <button className="button-primary" type="submit">
                             {loading ? (
-                                <div>
-                                    <Spinner animation="border" variant="light">
-                                        {" "}
-                                    </Spinner>
-                                </div>
+                                <CircularProgress size={"1.5rem"} />
                             ) : (
                                 "SignMe Up"
                             )}

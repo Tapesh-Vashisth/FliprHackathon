@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;700;800;900&family=Roboto:wght@100;400;500;700;900&display=swap");
 .user-profile {
     min-height: 100vh;
     width: 60%;
@@ -165,8 +166,22 @@
             padding: 1rem;
             &--card {
                 min-height: 20rem;
-                border: 1px solid red;
+                border: 1px solid slategray;
                 margin-top: 2rem;
+                position: relative;
+                &--image {
+                    img {
+                        width: 100%;
+                    }
+                }
+                &--data {
+                    p {
+                        display: flex;
+                        font-size: 12px;
+                        font-weight: 500;
+                        font-family: "Montserrat", sans-serif;
+                    }
+                }
             }
         }
     }
