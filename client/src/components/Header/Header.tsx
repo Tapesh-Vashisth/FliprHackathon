@@ -8,7 +8,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { DropdownButton } from "react-bootstrap";
 import axiosInstance from "../../api/axiosInstance";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { userActions } from "../../features/userSlice";
 
 const Header = () => {
@@ -60,7 +60,11 @@ const Header = () => {
                     className="bg-body-tertiary header"
                 >
                     <Container fluid>
-                        <Navbar.Brand href="/" className="header__brand">
+                        <Navbar.Brand
+                            to="/"
+                            as={Link}
+                            className="header__brand"
+                        >
                             Travel Planner {earth}
                         </Navbar.Brand>
                         <Navbar.Toggle className="header__toggler" />
@@ -79,7 +83,8 @@ const Header = () => {
                             <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 pe-3 header__offcanvas">
                                     <Nav.Link
-                                        href="#action1"
+                                        as={Link}
+                                        to="/"
                                         className="header__navLink pe-3
                                         "
                                     >
@@ -87,7 +92,8 @@ const Header = () => {
                                     </Nav.Link>
                                     {!user.isLoggedIn && (
                                         <Nav.Link
-                                            href="/auth/login"
+                                            as={Link}
+                                            to="/auth/login"
                                             className="header__navLink"
                                         >
                                             Login
@@ -103,7 +109,12 @@ const Header = () => {
                                             bsPrefix="header__dropdown"
                                         >
                                             <Dropdown.Item eventKey="1">
-                                                Profile
+                                                <Nav.Link
+                                                    to="/dashboard"
+                                                    as={Link}
+                                                >
+                                                    Profile
+                                                </Nav.Link>
                                             </Dropdown.Item>
                                             <Dropdown.Divider />
                                             <Dropdown.Item
