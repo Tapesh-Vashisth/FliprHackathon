@@ -1,6 +1,5 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
 const CarosulComp = () => (
     <Carousel
         additionalTransfrom={0}
@@ -54,23 +53,34 @@ const CarosulComp = () => (
         sliderClass=""
         slidesToSlide={1}
         swipeable
-    
     >
-        <img
-            src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_1280.jpg"
-            alt=""
-            width={"100%"}
-        />
-        <img
-            src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_1280.jpg"
-            alt=""
-            width={"100%"}
-        />
-        <img
-            src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_1280.jpg"
-            alt=""
-            width={"100%"}
-        />
+        <div className="carousal-item__imageContainer">
+            <img src={require("./image-1.jpg")} alt="training2" />
+            <div className="carousal-item__imageContainer--content">
+                <h3>Plan</h3>
+            </div>
+        </div>
+        <div className="carousal-item__imageContainer">
+            <img src={require("./image-2.jpg")} alt="training2" />
+            <div className="carousal-item__imageContainer--content">
+                <h3>Travel</h3>
+            </div>
+        </div>
+        <div className="carousal-item__imageContainer">
+            <img src={require("./image-4.jpg")} alt="training2" />
+            <div className="carousal-item__imageContainer--content">
+                <h3>Explore</h3>
+            </div>
+        </div>
+        <div className="carousal-item__imageContainer">
+            <img
+                src={require("./image-4.jpg")}
+                alt="training2"
+            />
+            <div className="carousal-item__imageContainer--content">
+                <h3>Enjoy</h3>
+            </div>
+        </div>
     </Carousel>
 );
 export default CarosulComp;
