@@ -2,18 +2,18 @@ import { Request, Response } from "express";
 import User from "../../models/User";
 import Place from "../../models/Place";
 
-const addFavouritePlace = async (req: Request, res: Response) => {
-    const { place_id, email } = req.body
+const addFavouritePlace = async (req: any, res: Response) => {
+    const { place_id } = req.body
 
-    let user = await User.findOne({
-        email: email
-    })
+    let user = await User.findById(req._id).exec()
 
     let place = await Place.findOne({
         place_id: place_id
     })
 
-    user!.favouritePlaces.push(place!._id)
+    user!.favouritePlaces.push({
+        place: place!._id,
+    })
 
     try {
         await user!.save()

@@ -47,7 +47,7 @@ const ProfileImageUpdate = () => {
                     position: "top-right",
                 });
             } else {
-                toast.error(err.response.data, {
+                toast.error(err.response.data.message, {
                     position: "top-right",
                 });
             }

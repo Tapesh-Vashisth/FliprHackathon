@@ -2,13 +2,13 @@ import { Request, Response } from "express";
 import User from "../../models/User";
 import bcrypt from "bcryptjs"
 
-const deleteAccount = async (req: Request, res: Response) => {
+const deleteAccount = async (req: any, res: Response) => {
     console.log('delete account')
-    const { email, password } = req.body
+    const { password } = req.body
 
     let user: any
     try {
-        user = await User.findOne({ email: email }).exec()
+        user = await User.findById(req._id).exec()
     } catch (err) {
         return res
             .status(500)
@@ -25,7 +25,7 @@ const deleteAccount = async (req: Request, res: Response) => {
     
     let deletion: any
     try {
-        deletion = await User.findOneAndDelete({ email: email }).exec()
+        deletion = await User.findByIdAndDelete(req._id).exec()
     } catch (err) {
         return res
             .status(500)

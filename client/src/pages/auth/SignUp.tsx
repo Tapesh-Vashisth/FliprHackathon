@@ -35,7 +35,7 @@ const SignUp = () => {
             });
         } catch (err: any) {
             console.log(err);
-            toast.error(err.response.data, {
+            toast.error(err.response.data.message, {
                 position: "top-right",
             });
             setLoading(false);
@@ -65,7 +65,7 @@ const SignUp = () => {
         } catch (err: any) {
             console.log(err);
             setLoading(false);
-            toast.success(err.response.data, {
+            toast.error(err.response.data.message, {
                 position: "top-right",
             });
         }

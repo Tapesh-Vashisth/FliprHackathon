@@ -1,9 +1,9 @@
 import React from "react";
-import Header from "../components/Header/Header";
+import { NavLink } from "react-router-dom";
+
 function Error404() {
     return (
         <div className="error-404">
-            <Header />
             <div className="space">
                 <div className="space__central-body">
                     <img
@@ -11,13 +11,13 @@ function Error404() {
                         src="http://salehriaz.com/404Page/img/404.svg"
                         alt=""
                     />
-                    <a
-                        href="http://salehriaz.com/404Page/404.html"
+                    <NavLink
+                        to="/"
                         className="btn-go-home"
                         target="/"
                     >
                         GO BACK HOME
-                    </a>
+                    </NavLink>
                 </div>
                 <div className="space__objects">
                     <img
