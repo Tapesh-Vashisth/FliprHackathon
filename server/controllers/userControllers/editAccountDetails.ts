@@ -22,7 +22,7 @@ const editAccountDetails: any = async (req: any, res: Response) => {
     }
 
     const passwordCompare = await bcrypt.compare(password, user.password)
-
+    
     if (!passwordCompare) {
         return res
             .status(409)
