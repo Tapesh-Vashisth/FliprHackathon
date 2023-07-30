@@ -4,6 +4,7 @@ import addPlace from "../controllers/placesControllers/addPlace";
 import getReviews from "../controllers/reviewsControllers/getReviews";
 import addReview from "../controllers/reviewsControllers/addReview";
 import verifyJWT from "../middleware/verifyJWT";
+import editReview from "../controllers/reviewsControllers/editReview";
 
 const router = express.Router()
 
@@ -17,5 +18,7 @@ router.post('/add', addPlace)
 router.use(verifyJWT);
 
 router.post('/addreview', addReview);
+
+router.post('/editreview', editReview);
 
 export default router;

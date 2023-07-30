@@ -16,6 +16,7 @@ function PlaceSidebar(props: any) {
     const user = useAppSelector((state) => state.user);
     const [image, setImage] = useState("");
     const [Loading, setLoading] = useState(true);
+    const [rateLoading, setRateLoading] = useState(false);
     const [reviews, setReviews] = useState([]);
     const [isReviewed, setIsReviewed] = useState(false);
     const [weather, setWeather] = useState({
@@ -44,6 +45,7 @@ function PlaceSidebar(props: any) {
         e.preventDefault();
         console.log(review, rating);
 
+        setRateLoading(true);
         try {
             const response = await axiosInstance.post("/place/addreview", {
                 username: user.name,
@@ -53,12 +55,16 @@ function PlaceSidebar(props: any) {
                 email: user.email,
             });
             toast.success("Review submitted successfully");
+            setRateLoading(false);
+            getReviews();
         } catch (err: any) {
             toast.error(err.response.data.message, { position: "top-right" });
+            setRateLoading(false);
         }
     };
 
     const getReviews = async () => {
+        setLoading(true);
         try {
             const response = await axiosInstance.get(
                 "/place/reviews/" + props.data.place_id
@@ -89,8 +95,25 @@ function PlaceSidebar(props: any) {
         }
     };
 
-    const editReviewHandler = (e: any) => {
+    const editReviewHandler = async (e: any) => {
         e.preventDefault();
+        setRateLoading(true);
+        try {
+            const response = await axiosInstance.post("/place/editreview", {
+                username: user.name,
+                place_id: props.data.place_id,
+                rating: rating,
+                reviewBody: review,
+            });
+            
+            console.log(response);
+            toast.success("Review Edited Successfully", {position: "top-right"});
+            setRateLoading(false);
+            getReviews();
+        } catch (err: any) {
+            toast.error(err.response.data.message, {position: "top-right"})
+            setRateLoading(false);
+        }
     };
 
     useEffect(() => {
@@ -263,9 +286,17 @@ function PlaceSidebar(props: any) {
                                 ></textarea>
                                 <div className="placesidebar__reviews--button">
                                     <button>
-                                        {isReviewed
-                                            ? "Edit Review And Rating"
-                                            : "Submit Review And Rating"}
+                                        {   
+                                            rateLoading
+                                            ?
+                                            <CircularProgress size={"1.5rem"} />
+                                            :
+                                            isReviewed
+                                            ? 
+                                            "Edit Review And Rating"
+                                            : 
+                                            "Submit Review And Rating"
+                                        }
                                     </button>
                                 </div>
                             </form>
