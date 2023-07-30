@@ -4,7 +4,6 @@ import PageLoader from "./components/Loaders/PageLoader";
 import axiosInstance from "./api/axiosInstance";
 import { useAppDispatch } from "./app/hooks";
 import { userActions } from "./features/userSlice";
-import MyMap from "./components/Map/My-map";
 import Navigation from "./components/Navigation";
 
 function App() {
