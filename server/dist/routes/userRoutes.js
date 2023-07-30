@@ -15,6 +15,7 @@ const updateImage_1 = __importDefault(require("../controllers/userControllers/up
 const editAccountDetails_1 = __importDefault(require("../controllers/userControllers/editAccountDetails"));
 const deleteAccount_1 = __importDefault(require("../controllers/userControllers/deleteAccount"));
 const check_1 = __importDefault(require("../controllers/userControllers/check"));
+const addFavouritePlace_1 = __importDefault(require("../controllers/userControllers/addFavouritePlace"));
 const router = express_1.default.Router();
 router.post('/signup', signup_1.default);
 router.post('/login', login_1.default);
@@ -27,4 +28,5 @@ router.get('/logout', logout_1.default);
 router.post('/updateimage', updateImage_1.default);
 router.put('/editaccount', editAccountDetails_1.default);
 router.post('/deleteUser', deleteAccount_1.default);
+router.put('/addfav', addFavouritePlace_1.default);
 exports.default = router;
