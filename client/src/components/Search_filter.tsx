@@ -1,206 +1,93 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 
+
+
+
 const Search_filter = () => {
     const navigate = useNavigate();
+    const [categories, setCategories] = useState(
+        [
+            {
+                name: "Accommodation",
+                value: "accommodation",
+                selected: false
+            },
+            {
+                name: "Tourism Attraction",
+                value:"tourism.attraction",
+                selected: false
+            },
+            {
+                name: "Tourism Sights",
+                value:"tourism.sights",
+                selected: false
+            },
+            {
+                name: "Temples",
+                value:"religion.place_of_worship",
+                selected: false
+            },
+            {
+                name: "Shopping Mall",
+                value:"commercial.shopping_mall",
+                selected: false
+            },
+            {
+                name: "Restaurant",
+                value:"catering.restaurant",
+                selected: false
+            },
+            {
+                name: "Catering",
+                value:"catering",
+                selected: false
+            },
+            {
+                name: "Entertainment",
+                value:"entertainment",
+                selected: false
+            },
+            {
+                name: "Healthcare",
+                value:"healthcare",
+                selected: false
+            },
+            {
+                name: "Parking",
+                value:"parking",
+                selected: false
+            },
+            {
+                name: "Transport",
+                value:"public_transport",
+                selected: false
+            },
+        ]
+    )
+
     const [showSearh, setShowSearch] = useState(false);
-    const [selectedCat, setSelectedCat] = React.useState(false);
-    const [selectedDog, setSelectedDog] = React.useState(true);
-    const [selectOther, setSelectOther] = React.useState(false);
     const [locType, setLocType] = React.useState("city");
     const [loading, setLoading] = React.useState(false);
-    const [latitude, setLatitude] = React.useState("");
-    const [longitude, setLongitude] = React.useState("");
-    const [activeBoarding, setActiveBoarding] = React.useState(true);
-    const [activeHouseSitting, setActiveHouseSitting] = React.useState(false);
-    const [activeDropIn, setActiveDropIn] = React.useState(false);
-    const [activeDayCare, setActiveDayCare] = React.useState(false);
-    const [activeWalking, setActiveWalking] = React.useState(false);
-    const [activeBreeding, setActiveBreeding] = React.useState(false);
-    const [activeAdopt, setActiveAdopt] = React.useState(false);
-    const [serviceType, setServiceType] = React.useState("boarding");
-    const [location, setLocation] = React.useState("");
 
-    const locationHandler = (event: any) => {
-        setLocation(event.target.value);
-    };
-
-    const dogClickHandler = () => {
-        setSelectedDog(true);
-        setSelectOther(false);
-        setSelectedCat(false);
-    };
-    const catClickHandler = () => {
-        setSelectedCat(true);
-        setSelectOther(false);
-        setSelectedDog(false);
-    };
-
-    const adoptionClickHandler = (event: any) => {
-        setActiveBoarding(false);
-        setActiveDayCare(false);
-        setActiveDropIn(false);
-        setActiveHouseSitting(false);
-        setActiveWalking(false);
-        setActiveBreeding(false);
-        setActiveAdopt(true);
-        setServiceType("petAdoption");
-    };
-
-    const groomingClickHandler = (event: any) => {
-        setActiveAdopt(false);
-        setActiveBoarding(true);
-        setActiveDayCare(false);
-        setActiveDropIn(false);
-        setActiveHouseSitting(false);
-        setActiveWalking(false);
-        setActiveBreeding(false);
-        setServiceType("petGrooming");
-    };
-
-    const trainingClickHandler = () => {
-        setActiveAdopt(false);
-        setActiveHouseSitting(true);
-        setActiveBoarding(false);
-        setActiveDayCare(false);
-        setActiveDropIn(false);
-        setActiveWalking(false);
-        setActiveBreeding(false);
-        setServiceType("petTraining");
-    };
-
-    const walkingClickHandler = () => {
-        setActiveAdopt(false);
-        setActiveDropIn(true);
-        setActiveHouseSitting(false);
-        setActiveBoarding(false);
-        setActiveDayCare(false);
-        setActiveWalking(false);
-        setActiveBreeding(false);
-        setServiceType("petWalking");
-    };
-
-    const vetClickHandler = () => {
-        setActiveAdopt(false);
-        setActiveDayCare(true);
-        setActiveDropIn(false);
-        setActiveHouseSitting(false);
-        setActiveBoarding(false);
-        setActiveWalking(false);
-        setActiveBreeding(false);
-        setServiceType("petVet");
-    };
-
-    const daycareClickHandler = () => {
-        setActiveAdopt(false);
-        setActiveWalking(true);
-        setActiveDayCare(false);
-        setActiveDropIn(false);
-        setActiveHouseSitting(false);
-        setActiveBoarding(false);
-        setActiveBreeding(false);
-        setServiceType("petCare");
-    };
-
-    const breedingClickHandler = () => {
-        setActiveAdopt(false);
-        setActiveWalking(false);
-        setActiveDayCare(false);
-        setActiveDropIn(false);
-        setActiveHouseSitting(false);
-        setActiveBoarding(false);
-        setActiveBreeding(true);
-        setServiceType("petBreeding");
-    };
-
-    const otherClickHandler = () => {
-        setSelectOther(true);
-        setSelectedDog(false);
-        setSelectedCat(false);
-    };
-
-    const currLocClickHandler = () => {
-        // const options = {
-        //     enableHighAccuracy: true,
-        //     timeout: 5000,
-        //     maximumAge: 0,
-        // };
-        // const sucess = (pos) => {
-        //     console.log(pos.coords.longitude);
-        //     console.log(pos.coords.latitude);
-        //     setLocType("geolocation");
-        //     setLatitude(pos.coords.latitude);
-        //     setLongitude(pos.coords.longitude);
-        // };
-        // const error = (err) => {
-        //     setLocType("city");
-        //     console.log(err);
-        // };
-        // navigator.geolocation.getCurrentPosition(sucess, error, options);
-    };
-    const cityClickHandler = () => {
-        setLocType("city");
-    };
-    let activeGroomingStyles = activeBoarding ? "search-filter__active": "search-filter__Boarding"
-    let activeTrainingStyles = activeHouseSitting
-        ? "search-filter__active"
-        : "search-filter__HouseSitting"
-    let activeVetStyles = activeDayCare ? "search-filter__active" : "search-filter__DogDayCare";
-    let activeDaycareStyles = activeWalking ? "search-filter__active" : "search-filter__DogWalking";
-    let activeWalkingStyles = activeDropIn
-        ? "search-filter__active"
-        : "search-filter__DropInVisits"
-    let activeBreedingStyles = activeBreeding ? "search-filter__active" : "search-filter__breeding";
 
     const submitHandler = () => {
-        // if (!authCtx.isLoggedIn) {
-        //     navigate("/login");
-        // }
-        let petType = "";
-        if (selectedCat) {
-            petType = "cat";
-        }
-        if (selectOther) {
-            petType = "other";
-        }
-        if (selectedDog) {
-            petType = "dog";
-        }
-        console.log(serviceType, location, petType);
-        // let lowerLocation = location.toLowerCase();
-        setLoading(true);
-        if (locType === "city") {
-            fetch(
-                `https://friskei-backend.onrender.com/search/${serviceType}/${petType}/${location}`,
-                {
-                    method: "get",
-                }
-            ).then((response) => {
-                response.json().then((data) => {
-                    navigate("/search", { state: data });
-                });
-            });
-        }
-        if (locType === "geolocation") {
-            fetch(
-                `https://friskei-backend.onrender.com/search/${serviceType}/${petType}/${location}`,
-                {
-                    method: "POST",
-                    body: JSON.stringify({
-                        latitude: latitude,
-                        longitude: longitude,
-                        radius: 5,
-                    }),
-                }
-            ).then((response) => {
-                response.json().then((data) => {
-                    navigate("/search", { state: data });
-                });
-            });
-        }
+        
     };
+
+    const selectHandler = (index: number) => {
+        console.log(categories);
+        setCategories((prev) => {
+            const holdCategories = [...prev];
+
+            holdCategories[index].selected = !prev[index].selected;
+            return holdCategories;
+        }) 
+    }
+
+
     return (
         !showSearh
         ?
@@ -214,69 +101,22 @@ const Search_filter = () => {
                 </div>
                 <div className="search-filter__lower">
                     <div className="search-filter__options">
-                        <div
-                            className={activeGroomingStyles}
-                            onClick={groomingClickHandler}
-                        >
-                            <div className="search-filter__imageDiv">
-                                {/* <img alt="" src={Boarding} /> */}
-                            </div>
-                            <p>Grooming</p>
-                        </div>
-                        <div
-                            className={activeTrainingStyles}
-                            onClick={trainingClickHandler}
-                        >
-                            <div className="search-filter__imageDiv">
-                                {/* <img alt="" src={HouseSitting} /> */}
-                            </div>
-                            <p>Training</p>
-                        </div>
-                        <div
-                            className={activeWalkingStyles}
-                            onClick={walkingClickHandler}
-                        >
-                            <div className="search-filter__imageDiv">
-                                {/* <img alt="" src={DropInVisits} /> */}
-                            </div>
-                            <p>Walking</p>
-                        </div>
-                        <div
-                            className={activeVetStyles}
-                            onClick={vetClickHandler}
-                        >
-                            <div className="search-filter__imageDiv">
-                                {/* <img alt="" src={DogDayCare} /> */}
-                            </div>
-                            <p>Vet</p>
-                        </div>
-                        <div
-                            className={activeDaycareStyles}
-                            onClick={daycareClickHandler}
-                        >
-                            <div className="search-filter__imageDiv">
-                                {/* <img alt="" src={DogWalking} /> */}
-                            </div>
-                            <p>DayCare</p>
-                        </div>
-                        <div
-                            className={activeBreedingStyles}
-                            onClick={breedingClickHandler}
-                        >
-                            <div className="search-filter__imageDiv">
-                                {/* <img alt="" src={Heart} /> */}
-                            </div>
-                            <p>Breeding</p>
-                        </div>
-                        {/* <div
-                            className={activePetAdoptStyles}
-                            onClick={adoptionClickHandler}
-                        >
-                            <div className={styles.imageDiv}>
-                                <img alt="" src={Adopt} />
-                            </div>
-                            <p>Pet Adoption</p>
-                        </div> */}
+                    {
+                        categories.map((category, index) => {
+                            return (
+                                <div
+                                    key={index}
+                                    className={categories[index].selected ? "search-filter__active" : "search-filter__inactive"}
+                                    onClick={() => selectHandler(index)}
+                                >
+                                    <div className="search-filter__imageDiv">
+                                        {/* <img alt="" src={Boarding} /> */}
+                                    </div>
+                                    <p>{category.name}</p>
+                                </div>
+                            )    
+                        })   
+                    }
                     </div>
                     {locType === "city" && (
                         <div className="search-filter__sizeSearch">
@@ -289,7 +129,7 @@ const Search_filter = () => {
                                         padding: "16.5px 0 16.5px 18px",
                                         width: "100%",
                                     }}
-                                    onChange={locationHandler}
+                                    onChange={() => {}}
                                 />
                             </div>
                             <div className="search-filter__button">

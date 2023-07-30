@@ -87,6 +87,21 @@ $background-color_2: #2e67d1;
         justify-content: space-evenly;
         gap: 1rem;
     }
+
+    &__inactive {
+        width: 100%;
+        border-radius: 9px;
+        border: 2px solid rgb(208, 205, 205);
+        padding: 8px;
+        p {
+            text-align: center;
+        }
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+
     &__Boarding {
         width: 100%;
         border-radius: 9px;
