@@ -1,10 +1,10 @@
 import mapInstance from "../api/mapApiInstance"
-import config from './config.js'
+import config from "./config";
 
 export const searchByPlace = async (place: String, listCategories: [String]) => {
 
     let str = "";
-    listCategories.forEach((value,index)=>{
+    listCategories.forEach((value, index)=>{
         str += value;
     })
 
