@@ -11,6 +11,7 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import config from "../../helper/config";
 import { useAppSelector } from '../../app/hooks';
 import Search_filter from '../Search_filter';
+import PlaceSidebar from '../PlaceSidebar';
 
 let DefaultIcon = L.icon({
 	iconUrl: icon,
@@ -31,6 +32,8 @@ const MyMap = () => {
 		return null;
 	}
 
+	
+
 	function MultipleMarkers() {
 		return markers.map((m) => {
 			return (
@@ -40,16 +43,20 @@ const MyMap = () => {
 							<h1>
 								{m.name}
 							</h1> 
-							<div style = {{display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "5px"}}>
+							<div style = {{display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "5px", marginTop: "5px"}}>
 								{
 									m.categories.map((x) => {
 										return (
 											<div style = {{padding: "6px", borderRadius: "10px", backgroundColor: "lightgreen", minHeight: "5px"}}>
-												<p style = {{fontSize: "14px", margin: "0"}}>{x}</p>
+												<p style = {{fontSize: "12px", margin: "0"}}>{x}</p>
 											</div>
 										)
 									})
 								}
+							</div>
+							<div style = {{display: "flex", flexDirection: "row", gap: "5px", marginTop: "10px"}}>
+								<button style = {{padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer"}}>show more</button>
+								<button style = {{padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer"}}>Add to favorites</button>
 							</div>
 						</div>
 					</Popup>
@@ -59,7 +66,8 @@ const MyMap = () => {
 	}
 
 	return (
-		<>
+		<div style = {{position: "relative"}}>
+			{/* <PlaceSidebar /> */}
 			<Search_filter setmarkers={setmarkers} />
 			<MapContainer center={markers[0].coordinates} zoom={13} scrollWheelZoom={true}>
 				<TileLayer
@@ -68,22 +76,8 @@ const MyMap = () => {
 				/>
 				<ChangeMapView coords={markers[0].coordinates} />
 				<MultipleMarkers />
-				{/* {
-					markers.map((x, index) => {
-						console.log(x);
-						return (
-							<Marker position={x.coordinates} >
-								<Popup>
-									<h1>
-										{x.name}
-									</h1>
-								</Popup>
-							</Marker>
-						)
-					})
-				} */}
 			</MapContainer>
-		</>
+		</div>
 	)
 }
 
