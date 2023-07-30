@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 
 import placeRouter from "./routes/placeRoutes";
 import userRouter from "./routes/userRoutes";
+import itinararyRouter from "./routes/itinararyRoutes";
 import addPlace from "./controllers/placesControllers/addPlace";
 
 dotenv.config();
@@ -21,6 +22,8 @@ app.use(cors({
 app.use(cookieParser());
 
 app.use('/api/user', userRouter)
+app.use('/api/itinarary', itinararyRouter)
+
 app.post('/api/search', addPlace)
 
 const port = process.env.PORT || 5500;

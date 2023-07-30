@@ -28,11 +28,14 @@ const userSchema = new Schema({
         type: String,
         required: false
     },
-    favouritePlaces: {
-        type: [mongoose_1.default.Schema.Types.ObjectId],
-        ref: "Place",
-        required: false
-    },
+    favouritePlaces: [{
+            place: {
+                type: mongoose_1.default.Schema.Types.ObjectId,
+                ref: "Place",
+                required: false
+            },
+            description: String
+        }],
     itinarary: [{
             type: mongoose_1.default.Schema.Types.ObjectId,
             ref: "itinarary"

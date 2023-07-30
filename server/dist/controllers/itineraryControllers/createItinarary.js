@@ -15,7 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Itinarary_1 = __importDefault(require("../../models/Itinarary"));
 const User_1 = __importDefault(require("../../models/User"));
 const createItinarary = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { iName, email } = req.body;
+    const { iName } = req.body;
+    let user = yield User_1.default.findById(req._id).exec();
+    if (!user)
+        return res
+            .status(400)
+            .json({ message: "No user found!" });
     let itinarary = new Itinarary_1.default({
         name: iName,
         places: []
@@ -28,9 +33,6 @@ const createItinarary = (req, res) => __awaiter(void 0, void 0, void 0, function
             .status(500)
             .json({ message: "Internal error occurred in saving itinarary!" });
     }
-    let user = yield User_1.default.findOne({
-        email: email
-    }).exec();
     user.itinarary.push(itinarary._id);
     try {
         yield user.save();

@@ -3,15 +3,16 @@
     width: 60%;
     margin: 0 auto;
     &__upper {
-        min-height: 15rem;
+        min-height: 20rem;
         background-color: #0c5153;
         padding-top: 1.5rem;
         padding-left: 3rem;
         display: flex;
         align-items: center;
-        gap: 2rem;
+        gap: 3rem;
         h1 {
             color: white !important;
+            margin-bottom: 3rem;
         }
         &--profile-image {
             height: 8.5rem;
