@@ -61,7 +61,7 @@ export const getPlace = async (req: Request, res: Response) => {
     
         for (let i=0; i<response.details.length; i++) {
             let { lat, lon, name, city, place_id } = response.details[i].properties
-            if (!response.details[i].properties.name || name.length<=0) {
+            if (response.details[i].properties && (!response.details[i].properties.name || name.length<=0)) {
                 name = response.details[i].properties && response.details[i].properties.formatted
             }
     
