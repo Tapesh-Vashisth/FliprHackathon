@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
-const itinerarySchema = new Schema({
+const itinararySchema = new Schema({
     name: {
         type: String,
         required: true
@@ -19,4 +19,4 @@ const itinerarySchema = new Schema({
             date: Date
         }]
 });
-exports.default = mongoose_1.default.model('Itinerary', itinerarySchema);
+exports.default = mongoose_1.default.model('itinarary', itinararySchema);
