@@ -13,6 +13,7 @@ import editAccountDetails from "../controllers/userControllers/editAccountDetail
 import deleteAccount from "../controllers/userControllers/deleteAccount"
 import check from "../controllers/userControllers/check"
 import addFavouritePlace from "../controllers/userControllers/addFavouritePlace"
+import getFavourites from "../controllers/userControllers/getFavourites"
 
 const router = express.Router()
 
@@ -30,5 +31,6 @@ router.post('/updateimage', updateImage)
 router.put('/editaccount', editAccountDetails)
 router.post('/deleteUser', deleteAccount)
 router.put('/addfav', addFavouritePlace)
+router.get('/favourites', getFavourites)
 
 export default router;
