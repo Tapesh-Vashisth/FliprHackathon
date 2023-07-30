@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axiosInstance";
-import Spinner from "react-bootstrap/Spinner";
 import { ToastContainer, toast } from "react-toastify";
 import { useAppDispatch } from "../../app/hooks";
 import { userActions } from "../../features/userSlice";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Login = () => {
     const {
@@ -27,8 +27,8 @@ const Login = () => {
                 password: data.password,
             });
             setLoading(false);
-            
-            dispatch(userActions.setState({...response.data}));
+
+            dispatch(userActions.setState({ ...response.data }));
             navigate("/", { replace: true });
             toast.success("Logged in successfully!", {
                 position: "top-right",
@@ -101,15 +101,7 @@ const Login = () => {
                     <div className="page-signup__form--button-container">
                         <button className="button-primary" type="submit">
                             {loading ? (
-                                <Spinner
-                                    animation="border"
-                                    role="status"
-                                    variant="primary"
-                                >
-                                    <span className="visually-hidden">
-                                        Loading...
-                                    </span>
-                                </Spinner>
+                                <CircularProgress size={"1.5rem"} />
                             ) : (
                                 "LogMe In"
                             )}
