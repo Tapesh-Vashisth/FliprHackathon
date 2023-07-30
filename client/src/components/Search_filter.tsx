@@ -2,12 +2,13 @@ import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import axiosInstance from "../api/axiosInstance";
 
 
 
-
-const Search_filter = () => {
+const Search_filter = (props: any) => {
     const navigate = useNavigate();
+    const [city, setCity] = useState("");
     const [categories, setCategories] = useState(
         [
             {
@@ -73,8 +74,27 @@ const Search_filter = () => {
     const [loading, setLoading] = React.useState(false);
 
 
-    const submitHandler = () => {
-        
+    const submitHandler = async (e: any) => {
+        e.preventDefault();
+        let searchCategories = categories.filter((x) => x.selected === true)
+        console.log(searchCategories, city);
+
+        try {
+            const query = searchCategories.map((x) => x.value).join(",");
+            console.log(query);
+            const response = await axiosInstance.get(`/place/search?searchText=${city}&categories=${query}`)
+            console.log(response);
+
+            let markers = [{name: response.data.place[0].name ? response.data.place[0].name: response.data.place[0].city, coordinates: [response.data.place[0].lat, response.data.place[0].lon], categories: [] }];
+            markers = [...markers, ...response.data.details.map((x: any) => {
+                return {name: x.properties.name ? x.properties.name : x.properties.formatted, coordinates: x.geometry.coordinates.reverse(), categories: x.properties.categories }
+            })]
+
+            console.log(markers);
+            props.setmarkers(markers);
+        } catch (err: any) {
+            console.log(err);
+        }
     };
 
     const selectHandler = (index: number) => {
@@ -119,7 +139,7 @@ const Search_filter = () => {
                     }
                     </div>
                     {locType === "city" && (
-                        <div className="search-filter__sizeSearch">
+                        <form className="search-filter__sizeSearch" onSubmit={submitHandler}>
                             <div className="search-filter__zipPicker">
                                 <p>Service Location</p>
                                 <input
@@ -129,27 +149,17 @@ const Search_filter = () => {
                                         padding: "16.5px 0 16.5px 18px",
                                         width: "100%",
                                     }}
-                                    onChange={() => {}}
+                                    onChange={(e: any) => {setCity(e.target.value)}}
+                                    value = {city}
+                                    required
                                 />
                             </div>
                             <div className="search-filter__button">
-                                <button onClick={submitHandler}>
+                                <button>
                                     Search
                                 </button>
                             </div>
-                        </div>
-                    )}
-                    {locType === "geolocation" && (
-                        <div className="search-filter__sizeSearch">
-                            <div
-                                className="search-filter__button"
-                                style={{ margin: "0 auto" }}
-                            >
-                                <button onClick={submitHandler}>
-                                    Search
-                                </button>
-                            </div>
-                        </div>
+                        </form>
                     )}
                 </div>
             </>
