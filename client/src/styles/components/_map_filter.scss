@@ -1,0 +1,459 @@
+$color_1: #d1000a;
+$color_2: white;
+$font-family_1: "Poppins", sans-serif;
+$background-color_1: #d1000a;
+$background-color_2: #2e67d1;
+
+@import "https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&family=Space+Grotesk&display=swap";
+.search-filter {
+	width: 50vw;
+	height: 60vh;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+
+    &__upper {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1rem;
+        border-top-right-radius: 9px;
+        border-top-left-radius: 9px;
+        background-color: $background-color_1;
+    
+        h1 {
+            margin: 0 auto;
+        }
+    
+        input {
+            height: 24px;
+            width: 24px;
+            display: inline-block;
+            margin: 0 10px;
+        }
+        input[type="checkbox"] {
+            &:checked {
+                background-color: $background-color_1 !important;
+                color: $color_1;
+                accent-color: #d1000a;
+                outline: 1px solid rgba(255, 255, 255, 0.592);
+            }
+        }
+        .option {
+            font-size: 14px;
+            font-family: $font-family_1;
+            font-weight: 500;
+            color: $color_2;
+        }
+    }
+    &__lower {
+        padding: 8px 24px 16px;
+        border: 1px solid #d1000a;
+        background-color: white;
+        border-top: none;
+        border-radius: 10px;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+    }
+    &__outerSentance {
+        display: flex;
+        gap: 30%;
+        p {
+            font-size: 14px;
+            font-family: $font-family_1;
+            color: $color_2;
+        }
+    }
+    &__dog {
+        font-size: 14px;
+        font-family: $font-family_1;
+        color: $color_2;
+    }
+    &__cat {
+        font-size: 14px;
+        font-family: $font-family_1;
+        color: $color_2;
+    }
+    &__imageDiv {
+        text-align: center;
+        img {
+            height: 20px;
+        }
+    }
+    &__options {
+        display: grid;
+        align-items: center;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: space-evenly;
+        gap: 1rem;
+    }
+    &__Boarding {
+        width: 100%;
+        border-radius: 9px;
+        border: 2px solid rgb(208, 205, 205);
+        padding: 8px;
+        p {
+            text-align: center;
+        }
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__HouseSitting {
+        width: 100%;
+        border-radius: 9px;
+        border: 2px solid rgb(208, 205, 205);
+        padding: 8px;
+        p {
+            text-align: center;
+        }
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__DropInVisits {
+        width: 100%;
+        border-radius: 9px;
+        border: 2px solid rgb(208, 205, 205);
+        padding: 8px;
+        p {
+            text-align: center;
+        }
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__DogDayCare {
+        width: 100%;
+        border-radius: 9px;
+        border: 2px solid rgb(208, 205, 205);
+        padding: 8px;
+        p {
+            text-align: center;
+        }
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__DogWalking {
+        width: 100%;
+        border-radius: 9px;
+        border: 2px solid rgb(208, 205, 205);
+        padding: 8px;
+        p {
+            text-align: center;
+        }
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__breeding {
+        width: 100%;
+        border-radius: 9px;
+        border: 2px solid rgb(208, 205, 205);
+        padding: 8px;
+        p {
+            text-align: center;
+        }
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__adopt {
+        width: 100%;
+        border-radius: 9px;
+        border: 2px solid rgb(208, 205, 205);
+        padding: 8px;
+        p {
+            text-align: center;
+        }
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__InputDatePicker {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+    }
+    &__zipPicker {
+        width: 50%;
+        p {
+            margin: 0;
+        }
+    }
+    &__arrow {
+        width: 14px;
+        margin: 0 1rem;
+        margin-top: 1rem;
+    }
+    &__sizeSearch {
+        display: flex;
+        position: relative;
+        height: fit-content;
+        margin-top: 1rem;
+        justify-content: space-between;
+    }
+    &__size {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+    &__sizeOuter {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        P {
+            margin: 0;
+        }
+    }
+    &__small {
+        width: 100%;
+        border: 2px solid #d1000a;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        padding: 1rem 1rem;
+        p {
+            text-align: center;
+            font-size: 14px;
+            margin: 0;
+            font-family: $font-family_1;
+        }
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__medium {
+        width: 100%;
+        border: 2px solid #d1000a;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        padding: 1rem 1rem;
+        p {
+            text-align: center;
+            font-size: 14px;
+            margin: 0;
+            font-family: $font-family_1;
+        }
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__large {
+        width: 100%;
+        border: 2px solid #d1000a;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        padding: 1rem 1rem;
+        p {
+            text-align: center;
+            font-size: 14px;
+            margin: 0;
+            font-family: $font-family_1;
+        }
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__Giant {
+        width: 100%;
+        border: 2px solid #d1000a;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        padding: 1rem 1rem;
+        p {
+            text-align: center;
+            font-size: 14px;
+            margin: 0;
+            font-family: $font-family_1;
+        }
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__button {
+        display: flex;
+        align-items: center;
+        width: 50%;
+        margin-top: 15px;
+        button {
+            width: 90%;
+            padding: 1rem 2rem;
+            margin-left: auto;
+            font-weight: 700;
+            font-family: $font-family_1;
+            border: none;
+            background-color: $background-color_1;
+            color: $color_2;
+            border-radius: 90px;
+        }
+    }
+    &__options2 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 1rem;
+    }
+    &__Boarding2 {
+        width: 100%;
+        border-radius: 9px;
+        border: 2px solid #d1000a;
+        padding: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__HouseSitting2 {
+        width: 100%;
+        border-radius: 9px;
+        border: 2px solid #d1000a;
+        padding: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__DropInVisits2 {
+        width: 100%;
+        border-radius: 9px;
+        border: 2px solid #d1000a;
+        padding: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        &:hover {
+            border: 2px solid #d1000a;
+            cursor: pointer;
+        }
+    }
+    &__buttonDiv {
+        width: 100%;
+        text-align: center;
+        margin-top: 2rem;
+        button {
+            width: 30%;
+            padding: 1rem 2rem;
+            margin-left: auto;
+            font-weight: 700;
+            font-family: $font-family_1;
+            border: none;
+            background-color: $background-color_2;
+            color: $color_2;
+            border-radius: 90px;
+        }
+    }
+    &__active {
+        border: 2px solid #d1000a;
+        width: 100%;
+        border-radius: 9px;
+        padding: 8px;
+        p {
+            text-align: center;
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    &__activeSize {
+        width: 100%;
+        border: 2px solid #404347;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        padding: 1rem 1rem;
+        p {
+            text-align: center;
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+@media (max-width: 1134px) {
+	.search-filter {
+		width: 80vw;
+	}
+}
+@media (max-width: 992px) {
+	.search-filter {
+		width: 95vw;
+	}
+}
+@media (max-width: 836px) {
+	.search-filter__options {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+@media (max-width: 567px) {
+	.search-filter__size {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.search-filter {
+		height: fit-content;
+	}
+}
+@media (max-width: 515px) {
+	.search-filter__options {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.search-filter__options2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.search-filter__lower {
+		padding: 15px 5px;
+	}
+	.search-filter__Boarding {
+		padding: 3px;
+	}
+	.search-filter__HouseSitting {
+		padding: 3px;
+	}
+	.search-filter__DropInVisits {
+		padding: 3px;
+	}
+	.search-filter__DogDayCare {
+		padding: 3px;
+	}
+	.search-filter__DogWalking {
+		padding: 3px;
+	}
+}

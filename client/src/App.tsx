@@ -38,10 +38,10 @@ function App() {
             .then((result) => {
                 if (result.state === "granted") {
                     console.log("granted", result.state);
-                    navigator.geolocation.getCurrentPosition(storeLocation)
+                    navigator.geolocation.getCurrentPosition(storeLocation, () => {}, {timeout: 5000, maximumAge: 0})
                     //If granted then you can directly call your function here
                 } else if (result.state === "prompt") {
-                    navigator.geolocation.getCurrentPosition(storeLocation)
+                    navigator.geolocation.getCurrentPosition(storeLocation, () => {}, {timeout: 5000, maximumAge: 0})
                     console.log(result.state);
                 } else if (result.state === "denied") {
                     //If denied then you have to show instructions to enable location
@@ -50,10 +50,10 @@ function App() {
                 result.onchange = function () {
                     if (result.state === "granted") {
                         console.log("granted", result.state);
-                        navigator.geolocation.getCurrentPosition(storeLocation)
+                        navigator.geolocation.getCurrentPosition(storeLocation, () => {}, {timeout: 5000, maximumAge: 0})
                         //If granted then you can directly call your function here
                     } else if (result.state === "prompt") {
-                        navigator.geolocation.getCurrentPosition(storeLocation)
+                        navigator.geolocation.getCurrentPosition(storeLocation, () => {}, {timeout: 5000, maximumAge: 0})
                         console.log(result.state);
                     } else if (result.state === "denied") {
                         //If denied then you have to show instructions to enable location
