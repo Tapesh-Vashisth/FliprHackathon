@@ -23,7 +23,9 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const MyMap = () => {
 	const state = useAppSelector((user) => user.user);
-	const [markers, setmarkers] = useState([{ name: "London", coordinates: [51.505, -0.09], categories: [] }]);
+	const [markers, setmarkers] = useState([{ name: "London", coordinates: [51.505, -0.09], categories: [], place_id: "51887a0b35540555c0596a37555282904240f00101f9011ffe010000000000c00207" }]);
+	const [showSidebar, setShowSidebar] = useState(false);
+	const [data, setData] = useState({place_name: null, place_id: null, coordinates: null, categories: []});
 
 	function ChangeMapView({ coords }) {
 		const map = useMap();
@@ -32,6 +34,15 @@ const MyMap = () => {
 		return null;
 	}
 
+	const showMoreHandler = (data) => {
+		setData({
+			place_name: data.name,
+			place_id: data.place_id,
+			coordinates: data.coordinates,
+			categories: data.categories
+		})
+		setShowSidebar(true);
+	}
 	
 
 	function MultipleMarkers() {
@@ -55,7 +66,12 @@ const MyMap = () => {
 								}
 							</div>
 							<div style = {{display: "flex", flexDirection: "row", gap: "5px", marginTop: "10px"}}>
-								<button style = {{padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer"}}>show more</button>
+								<button 
+									style = {{padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer"}}
+									onClick={() => showMoreHandler({...m})}
+								>
+									show more
+								</button>
 								<button style = {{padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer"}}>Add to favorites</button>
 							</div>
 						</div>
@@ -67,7 +83,13 @@ const MyMap = () => {
 
 	return (
 		<div style = {{position: "relative"}}>
-			{/* <PlaceSidebar /> */}
+			{
+				showSidebar
+				?
+				<PlaceSidebar data = {data} setShowSidebar = {setShowSidebar} />
+				:
+				null
+			}
 			<Search_filter setmarkers={setmarkers} />
 			<MapContainer center={markers[0].coordinates} zoom={13} scrollWheelZoom={true}>
 				<TileLayer
