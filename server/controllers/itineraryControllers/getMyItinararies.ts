@@ -15,13 +15,8 @@ const getMyItinararies = async (req: any, res: Response) => {
 
     let userItinararies: any = []
     for (let i=0; i<itinararyIds.length; i++) {
-        let userItinarary = await Itinarary.findById(itinararyIds[i]).exec()
-        let custom_it: any = userItinarary
-        for (let j=0; j<userItinarary!.places!.length; j++) {
-            let place = await Place.findById(userItinarary!.places![j].place).exec()
-            custom_it.places[j].place = place
-        }
-        userItinararies.push(custom_it)
+        let userItinarary = await Itinarary.findById(itinararyIds[i]).populate("places.place")
+        userItinararies.push(userItinarary)
     }
 
     return res

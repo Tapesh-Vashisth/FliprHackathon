@@ -28,6 +28,9 @@ const userSlice = createSlice({
             state.email = action.payload.email;
             state.isLoggedIn = true;
             state.image = action.payload.image;
+        },
+        setImage: (state, action: PayloadAction <string>) => {
+            state.image = action.payload;
         }
     }
 });

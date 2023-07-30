@@ -3,7 +3,8 @@ import Itinarary from "../../models/Itinarary";
 import Place from "../../models/Place";
 
 const addToItinarary = async (req: Request, res: Response) => {
-    const { _id_itinarary, _id_place, date } = req.body
+    const { _id_place, date, description } = req.body
+    const _id_itinarary = req.params.id
 
     let place = await Place.findOne({
         place_id: _id_place
@@ -24,7 +25,8 @@ const addToItinarary = async (req: Request, res: Response) => {
 
     itinarary!.places.push({
         place: place!.id,
-        date: new Date(date)
+        date: new Date(date),
+        description: description
     })
 
     try {

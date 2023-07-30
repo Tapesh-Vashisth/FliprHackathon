@@ -13,7 +13,9 @@ const addFavouritePlace = async (req: Request, res: Response) => {
         place_id: place_id
     })
 
-    user!.favouritePlaces.push(place!._id)
+    user!.favouritePlaces.push({
+        place: place!._id,
+    })
 
     try {
         await user!.save()

@@ -16,10 +16,10 @@ const User_1 = __importDefault(require("../../models/User"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const deleteAccount = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('delete account');
-    const { email, password } = req.body;
+    const { password } = req.body;
     let user;
     try {
-        user = yield User_1.default.findOne({ email: email }).exec();
+        user = yield User_1.default.findById(req._id).exec();
     }
     catch (err) {
         return res
@@ -34,7 +34,7 @@ const deleteAccount = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
     let deletion;
     try {
-        deletion = yield User_1.default.findOneAndDelete({ email: email }).exec();
+        deletion = yield User_1.default.findByIdAndDelete(req._id).exec();
     }
     catch (err) {
         return res

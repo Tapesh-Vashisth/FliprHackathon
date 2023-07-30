@@ -3,7 +3,7 @@ import Itinarary from "../../models/Itinarary";
 import User from "../../models/User";
 
 const deleteItinarary = async (req: any, res: Response) => {
-    const { _id_itinarary } = req.body
+    const _id_itinarary = req.params.id
 
     let existingItinarary = await Itinarary.findByIdAndDelete(_id_itinarary).exec()
 
