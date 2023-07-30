@@ -21,27 +21,15 @@ const createItinarary = (req, res) => __awaiter(void 0, void 0, void 0, function
         places: []
     });
     try {
-        yield itinarary.save();
+        yield itinerary.save();
     }
     catch (err) {
         return res
             .status(500)
-            .json({ message: "Internal error occurred in saving itinarary!" });
-    }
-    let user = yield User_1.default.findOne({
-        email: email
-    }).exec();
-    user.itinarary.push(itinarary._id);
-    try {
-        yield user.save();
-    }
-    catch (err) {
-        return res
-            .status(500)
-            .json({ message: "Internal error occurred in saving user!" });
+            .json({ message: "Internal error occurred!" });
     }
     return res
         .status(200)
-        .json({ message: "Created itinarary successfully!" });
+        .json({ message: "Created itinerary successfully!" });
 });
 exports.default = createItinarary;
