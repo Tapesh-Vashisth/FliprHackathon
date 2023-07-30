@@ -35,7 +35,7 @@ const editAccountDetails = (req, res) => __awaiter(void 0, void 0, void 0, funct
             .status(409)
             .json({ message: "Wrong password entered : Cannot edit account details!" });
     }
-    if (newPassword.length > 0) {
+    if (newPassword && newPassword.length > 0) {
         const hashedPassword = bcryptjs_1.default.hashSync(newPassword, 5);
         user.password = hashedPassword;
     }

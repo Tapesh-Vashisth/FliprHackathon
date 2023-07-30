@@ -28,7 +28,7 @@ const editAccountDetails: any = async (req: any, res: Response) => {
             .json({ message: "Wrong password entered : Cannot edit account details!" })
     }
 
-    if (newPassword.length > 0) {
+    if (newPassword && newPassword.length > 0) {
         const hashedPassword = bcrypt.hashSync(newPassword, 5)
         user.password = hashedPassword
     }
