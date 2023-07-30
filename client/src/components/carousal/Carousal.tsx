@@ -1,8 +1,10 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 const CarosulComp = () => (
-    <>
-        <h1 className="carousal--heading">Explore Tourists Around The World</h1>
+    <div className="carousal-page">
+        <h1 className="carousal--heading">
+            Escape to Bliss: Find Your Perfect Getaway
+        </h1>
         <Carousel
             additionalTransfrom={0}
             arrows
@@ -81,6 +83,6 @@ const CarosulComp = () => (
                 </div>
             </div>
         </Carousel>
-    </>
+    </div>
 );
 export default CarosulComp;

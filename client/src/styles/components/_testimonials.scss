@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600&display=swap");
+
+.testimonials {
+    height: fit-content;
+    width: 100vw;
+    background-color: #0c5153;
+    backdrop-filter: blur(100%);
+    padding: 2rem;
+    &-title {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        h1 {
+            text-align: center;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 400;
+            color: white;
+            font-size: 50px;
+        }
+    }
+    &-review {
+        padding: 7rem 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    &-reviewcard {
+        height: 100%;
+        width: 80%;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 10px;
+        padding: 5rem 0;
+        padding-left: 2rem;
+        padding-right: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        p {
+            font-size: 20px;
+            color: #0c5153;
+            font-family: "Poppins", sans-serif;
+            font-weight: 200 !important;
+            margin-top: 2rem;
+            margin-bottom: 3.5rem;
+        }
+    }
+    &-reviewcard2 {
+        height: 100%;
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        background-color: white;
+        border-radius: 10px;
+        padding: 2rem 0;
+        padding-left: 2rem;
+        padding-right: 1rem;
+        p {
+            font-size: 20px;
+            color: #0c5153;
+            font-family: "Poppins", sans-serif;
+            font-weight: 200 !important;
+            margin-top: 2rem;
+            margin-bottom: 3.5rem;
+        }
+    }
+    &-review-2 {
+        position: relative;
+    }
+    &-reviewcard3 {
+        height: 100%;
+        width: 80%;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 10px;
+        padding: 2rem 0;
+        padding-left: 2rem;
+        padding-right: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        p {
+            font-size: 20px;
+            color: #0c5153;
+            font-family: "Poppins", sans-serif;
+            font-weight: 200 !important;
+            margin-top: 2rem;
+            margin-bottom: 3.5rem;
+        }
+    }
+    &-div {
+        text-align: center;
+        &-img {
+            width: 6rem;
+            aspect-ratio: 1/1;
+            border-radius: 100%;
+            background-color: hsl(194, 29%, 52%);
+        }
+    }
+}
+
+@media (max-width: 1023px) {
+    .testimonials-reviewcard2,
+    .testimonials-reviewcard3,
+    .testimonials-reviewcard {
+        height: 85%;
+        width: 90%;
+    }
+}
+@media (max-width: 780px) {
+    .testimonials-review {
+        grid-template-columns: 1fr;
+    }
+    .testimonials {
+        height: fit-content;
+    }
+    .testestimonials-title h1 {
+        font-size: 40px;
+    }
+}
