@@ -1,0 +1,248 @@
+.outerSentance {
+    display: flex;
+    gap: 30%;
+}
+
+.outerSentance p {
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+    color: white;
+}
+
+.Boarding,
+.HouseSitting,
+.DropInVisits,
+.DogDayCare,
+.DogWalking,
+.breeding,
+.adopt {
+    width: 100%;
+    border-radius: 9px;
+    border: 2px solid rgb(208, 205, 205);
+    padding: 8px;
+}
+.Boarding p,
+.HouseSitting p,
+.DropInVisits p,
+.DogDayCare p,
+.DogWalking p,
+.breeding p,
+.adopt p {
+    text-align: center;
+}
+
+.Boarding:hover,
+.HouseSitting:hover,
+.DropInVisits:hover,
+.DogDayCare:hover,
+.DogWalking:hover,
+.breeding:hover,
+.adopt:hover {
+    border: 2px solid #d1000a;
+    cursor: pointer;
+}
+
+.InputDatePicker {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+.zipPicker {
+    width: 50%;
+}
+.zipPicker p {
+    margin: 0;
+}
+.arrow {
+    width: 14px;
+    margin: 0 1rem;
+    margin-top: 1rem;
+}
+
+.sizeSearch {
+    display: flex;
+    position: relative;
+    height: fit-content;
+    margin-top: 1rem;
+    justify-content: space-between;
+}
+.size {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+.sizeOuter {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.sizeOuter P {
+    margin: 0;
+}
+.small,
+.medium,
+.large,
+.Giant {
+    width: 100%;
+    border: 2px solid #d1000a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 1rem 1rem;
+}
+.small p,
+.medium p,
+.large p,
+.Giant p {
+    text-align: center;
+    font-size: 14px;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+.small:hover,
+.medium:hover,
+.large:hover,
+.Giant:hover {
+    border: 2px solid #d1000a;
+    cursor: pointer;
+}
+.button {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    margin-top: 15px;
+}
+
+.button button {
+    width: 90%;
+    padding: 1rem 2rem;
+    margin-left: auto;
+    font-weight: 700;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    background-color: #d1000a;
+    color: white;
+    border-radius: 90px;
+}
+
+.options2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+
+.Boarding2,
+.HouseSitting2,
+.DropInVisits2 {
+    width: 100%;
+    border-radius: 9px;
+    border: 2px solid #d1000a;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.Boarding2:hover,
+.HouseSitting2:hover,
+.DropInVisits2:hover {
+    border: 2px solid #d1000a;
+    cursor: pointer;
+}
+
+.buttonDiv {
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+}
+.buttonDiv button {
+    width: 30%;
+    padding: 1rem 2rem;
+    margin-left: auto;
+    font-weight: 700;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    background-color: #2e67d1;
+    color: white;
+    border-radius: 90px;
+}
+
+.active {
+    border: 2px solid #d1000a;
+    width: 100%;
+    border-radius: 9px;
+    padding: 8px;
+}
+.active p {
+    text-align: center;
+}
+.active:hover {
+    cursor: pointer;
+}
+.activeSize {
+    width: 100%;
+    border: 2px solid #404347;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 1rem 1rem;
+}
+.activeSize p {
+    text-align: center;
+}
+.activeSize:hover {
+    cursor: pointer;
+}
+@media (max-width: 1134px) {
+    .container {
+        width: 80vw;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        width: 95vw;
+    }
+}
+@media (max-width: 836px) {
+    .options {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 567px) {
+    .size {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .container {
+        height: fit-content;
+    }
+}
+
+@media (max-width: 515px) {
+    .options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .options2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .lower {
+        padding: 15px 5px;
+    }
+    .Boarding,
+    .HouseSitting,
+    .DropInVisits,
+    .DogDayCare,
+    .DogWalking {
+        padding: 3px;
+    }
+}

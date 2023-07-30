@@ -1,3 +1,68 @@
-.carousal-item{
-    // margin-right: 1rem;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,700;0,800;0,900;1,100&family=Roboto:wght@100;400;500;700;900&display=swap");
+.carousal-page{
+    padding: 10rem 0;
+}
+.carousal {
+    width: 90%;
+    margin: 0 auto;
+    padding: 9rem 0;
+    &--heading {
+        text-align: center;
+        margin-top: 5rem;
+        font-size: 50px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        color: #0c5153;
+    }
+}
+.carousal-item {
+    &__imageContainer {
+        position: relative;
+        margin-right: 1rem;
+        img {
+            width: 100%;
+            border-radius: 7px;
+        }
+        &--content {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            opacity: 0;
+            text-align: center;
+            transition: all 0.3s ease-in-out 0.1s;
+            h3 {
+                color: #fff;
+                font-size: 20px;
+                font-family: "Poppins", sans-serif;
+            }
+        }
+    }
+    &__imageContainer::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.67);
+        opacity: 0;
+        z-index: 1;
+        transform: scaleY(0);
+        transform-origin: 100% 100%;
+        transition: all 0.3s ease-in-out;
+        border-radius: 7px;
+    }
+    &__imageContainer:hover::after {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+    &__imageContainer:hover {
+        .carousal-item__imageContainer--content {
+            opacity: 1;
+            top: 50%;
+        }
+    }
 }
