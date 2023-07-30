@@ -58,3 +58,59 @@
         }
     }
 }
+@media (max-width: 820px) {
+    .home-page__hero--heading {
+        font-size: 40px;
+    }
+    .home-page__hero--content {
+        padding: 6rem 3rem;
+        margin-top: 16%;
+    }
+    .home-page__hero {
+        background-position: center;
+    }
+    .home-page__hero--button--link {
+        font-weight: 400;
+    }
+}
+@media (max-width: 600px) {
+    .home-page__hero--heading {
+        font-size: 30px;
+    }
+    .home-page__hero--content {
+        padding: 9rem 3rem;
+        margin-top: 16%;
+    }
+    .home-page__hero {
+        background-position: right;
+    }
+}
+@media (max-width: 460px) {
+    .home-page__hero--heading {
+        font-size: 20px;
+    }
+    .home-page__hero--content {
+        padding: 12rem 2rem;
+        margin-top: 16%;
+    }
+    .home-page__hero {
+        background-position: -55rem;
+    }
+    .home-page__hero--button--link {
+        font-weight: 400;
+        padding: 0.5rem 1rem;
+        font-size: 14px;
+    }
+}
+@media (max-width: 325px) {
+    .home-page__hero--heading {
+        font-size: 18px;
+    }
+    .home-page__hero--content {
+        padding: 10rem 2rem;
+        margin-top: 20%;
+    }
+    .home-page__hero {
+        background-position: -59rem;
+    }
+}

@@ -119,3 +119,12 @@
         font-size: 40px;
     }
 }
+
+@media(max-width:600px){
+    .testimonials-title h1{
+        font-size: 30px;
+    }
+    .testimonials-reviewcard p {
+        font-size: 15px;
+    }
+}

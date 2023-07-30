@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
@@ -69,7 +69,7 @@ const Search_filter = (props: any) => {
         ]
     )
 
-    const [showSearh, setShowSearch] = useState(false);
+    const [showSearh, setShowSearch] = useState(true);
     const [locType, setLocType] = React.useState("city");
     const [loading, setLoading] = React.useState(false);
 
@@ -104,29 +104,42 @@ const Search_filter = (props: any) => {
 
             holdCategories[index].selected = !prev[index].selected;
             return holdCategories;
-        }) 
-    }
+        });
+    };
 
-
-    return (
-        !showSearh
-        ?
-        <SearchIcon style={{fontSize: "45px", position: "absolute", top: "10px", right: "10px", zIndex: 1000}} onClick = {() => setShowSearch(true)} />
-        :
+    return !showSearh ? (
+        <SearchIcon
+            style={{
+                fontSize: "45px",
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                zIndex: 1000,
+                color: "#0c5153",
+            }}
+            onClick={() => setShowSearch(true)}
+        />
+    ) : (
         <div className="search-filter">
             <>
                 <div className="search-filter__upper">
                     <h1>Search</h1>
-                    <CloseIcon style = {{fontSize: "20px"}} onClick = {() => setShowSearch(false)} />
+                    <CloseIcon
+                        style={{ fontSize: "20px" }}
+                        onClick={() => setShowSearch(false)}
+                    />
                 </div>
                 <div className="search-filter__lower">
                     <div className="search-filter__options">
-                    {
-                        categories.map((category, index) => {
+                        {categories.map((category, index) => {
                             return (
                                 <div
                                     key={index}
-                                    className={categories[index].selected ? "search-filter__active" : "search-filter__inactive"}
+                                    className={
+                                        categories[index].selected
+                                            ? "search-filter__active"
+                                            : "search-filter__inactive"
+                                    }
                                     onClick={() => selectHandler(index)}
                                 >
                                     <div className="search-filter__imageDiv">
@@ -134,9 +147,8 @@ const Search_filter = (props: any) => {
                                     </div>
                                     <p>{category.name}</p>
                                 </div>
-                            )    
-                        })   
-                    }
+                            );
+                        })}
                     </div>
                     {locType === "city" && (
                         <form className="search-filter__sizeSearch" onSubmit={submitHandler}>
