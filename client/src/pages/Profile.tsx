@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useAppSelector } from '../app/hooks';
 import { useForm } from 'react-hook-form';
 import axiosInstance from "../api/axiosInstance";
@@ -14,7 +14,8 @@ function Profile() {
         register,
         formState: { errors },
         handleSubmit,
-        watch
+        watch,
+        reset
     } = useForm();
 
 
@@ -57,6 +58,16 @@ function Profile() {
             }
         } 
     }
+
+    useEffect(() => {
+        reset({
+            name: user.name,
+            password: "",
+            newPassword: "",
+            confirmPassword: ""
+        })
+    }, [])
+    
     
     return (
     <div className="user-profile__lower">
@@ -97,7 +108,7 @@ function Profile() {
                         disabled={true}
                         title="Cannot Edit Email"
                         value={user.email}
-                        
+
                     />
                 </div>
                 <div className="user-profile__lower--inputGroup">
