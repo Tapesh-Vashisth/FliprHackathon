@@ -8,10 +8,15 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 import Rating from "@mui/material/Rating";
+import { useAppSelector } from "../app/hooks";
+import { toast } from "react-toastify";
 
 function PlaceSidebar(props: any) {
+    const user = useAppSelector((state) => state.user);
     const [image, setImage] = useState("");
-    const [imageLoading, setImageLoading] = useState(true);
+    const [Loading, setLoading] = useState(true);
+    const [reviews, setReviews] = useState([]);
+    const [isReviewed, setIsReviewed] = useState(false);
     const [weather, setWeather] = useState({
         weather_desc: null,
         current_temp: null,
@@ -21,47 +26,68 @@ function PlaceSidebar(props: any) {
         humidity: null,
         icon: null,
     });
+    const [averageRating, setAverageRating] = useState(0);
     const [rating, setRating] = React.useState(2);
-
-    const getPlaceImage = async () => {
-        // setImageLoading(true);
-        console.log(props.data);
-        try {
-            const data = await fetch(
-                `https://api.unsplash.com/search/photos?page=1?limit=1&query=${
-                    props.data.place_name +
-                    " " +
-                    (props.data.categories.length > 0
-                        ? props.data.categories[0].split(".").join(" ")
-                        : "city")
-                }&client_id=${config.UNSPLASH_ACCESS}`
-            );
-            const dataJ = await data.json();
-            const result = dataJ.results;
-            console.log(result);
-            if (result && result.length > 0) {
-                setImage(result[0].urls.full);
-            }
-            // setImageLoading(false);
-        } catch (err: any) {
-            console.log(err);
-        }
-    };
+    const [review, setReview] = useState("");
 
     const getWeatherData = async () => {
-        setImageLoading(true);
         const response = await weatherApi(
             props.data.coordinates[0],
             props.data.coordinates[1]
         );
         console.log(response);
         setWeather(response);
-        setImageLoading(false);
     };
+
+    const addReviewHandler = async (e: any) => {
+        e.preventDefault();
+        console.log(review, rating);
+
+        try {
+            const response = await axiosInstance.post("/place/addreview", {username: user.name, place_id: props.data.place_id, rating: rating, reviewBody: review, email: user.email})
+            toast.success("Review submitted successfully");
+        } catch (err: any) {
+            toast.error(err.response.data.message, {position: "top-right"});
+        }
+    }
+
+    const getReviews = async () => {
+        try {
+            const response = await axiosInstance.get("/place/reviews/" + props.data.place_id);
+            console.log(response.data);
+            
+            let len = response.data.length;
+            let totalRating = 0;
+            let holdReview = response.data.filter((x: any) => {
+                totalRating += x.rating;
+                return x.email === user.email
+            });
+
+            setAverageRating(totalRating/len);            
+
+            if (holdReview.length > 0) {
+                setIsReviewed(true);
+                setReview(holdReview[0].reviewBody);
+                setRating(holdReview[0].rating);
+            }
+
+            setReviews(response.data);
+
+            setLoading(false);
+        } catch (err: any) {
+            toast.error(err.response.data.message, {position: "top-right"});
+            setLoading(false);
+        }
+    }
+
+    const editReviewHandler = (e: any) => {
+        e.preventDefault();
+    }
+
     useEffect(() => {
-        // getPlaceImage();
+        setLoading(true);
         getWeatherData();
-        console.log(props);
+        getReviews();
     }, []);
 
     return (
@@ -73,7 +99,7 @@ function PlaceSidebar(props: any) {
                         onClick={() => props.setShowSidebar(false)}
                     />
                 </div>
-                {imageLoading ? (
+                {Loading ? (
                     <div
                         style={{
                             display: "flex",
@@ -96,7 +122,7 @@ function PlaceSidebar(props: any) {
                                 </h1>
                                 <Rating
                                     name="read-only"
-                                    value={rating}
+                                    value={averageRating}
                                     sx={{ fontSize: "2.4rem" }}
                                     readOnly
                                 />
@@ -193,7 +219,7 @@ function PlaceSidebar(props: any) {
 
                             {
                                 <div className="placesidebar__rate-experience">
-                                    <span>Rate Your Experience</span>
+                                    <span>{isReviewed ? "Edit" : "Rate"} Your Experience</span>
                                     <Rating
                                         name="simple-controlled"
                                         value={rating}
@@ -204,18 +230,20 @@ function PlaceSidebar(props: any) {
                                     />
                                 </div>
                             }
-                            <div className="placesidebar__reviews">
+                            <form className="placesidebar__reviews" onSubmit={isReviewed ? editReviewHandler : addReviewHandler}>
                                 <p className="placesidebar__reviews--heading">
-                                    Add Review
+                                    {isReviewed ? "Edit" : "Add"} Review
                                 </p>
                                 <textarea
                                     rows={5}
                                     placeholder="write your review"
+                                    value={review}
+                                    onChange={(e: any) => setReview(e.target.value)}
                                 ></textarea>
                                 <div className="placesidebar__reviews--button">
-                                    <button>Submit Review And Rating</button>
+                                    <button>{isReviewed ? "Edit Review And Rating" : "Submit Review And Rating"}</button>
                                 </div>
-                            </div>
+                            </form>
                         </>
                     </div>
                 )}
