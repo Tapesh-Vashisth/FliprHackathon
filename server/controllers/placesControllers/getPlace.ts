@@ -34,6 +34,12 @@ export const getPlace = async (req: Request, res: Response) => {
                 .json({ message: "Internal error occurred, or place already exists" })
         }
     }
+
+    if (!req.query.categories || req.query.categories!.length===0 || placeSearch.data.results.length===0) {
+        return res
+            .status(404)
+            .json({ message: "No places or cities with the search query was found!!" })
+    }
     
     const data: any = await axios.get(`https://api.geoapify.com/v2/places?categories=${req.query.categories}&filter=place:${placeSearch.data.results[0].place_id}&limit=20&apiKey=${process.env.MAP_API_KEY}`)
     
@@ -42,6 +48,26 @@ export const getPlace = async (req: Request, res: Response) => {
     }
     
     response.details = data.data.features;
+
+    for (let i=0; i<response.details.length; i++) {
+        let { lat, lon, name, city, place_id } = response.details[i]
+
+        let new_place = new Place({
+            place_id,
+            lat,
+            lon,
+            city,
+            name
+        })
+
+        try {
+            await new_place.save()
+        } catch (err) {
+            return res
+                .status(500)
+                .json({ message: "Internal error occurred, or place already exists" })
+        }
+    }
 
     return res.status(200).json(response);
 }
