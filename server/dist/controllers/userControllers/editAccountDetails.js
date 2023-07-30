@@ -17,6 +17,7 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const editAccountDetails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("update account");
     const { name, password, newPassword } = req.body;
+    console.log(req._id, req.body);
     let user;
     try {
         user = yield User_1.default.findById(req._id).exec();
