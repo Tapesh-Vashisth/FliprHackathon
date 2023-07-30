@@ -3,11 +3,10 @@ $color_2: white;
 $font-family_1: "Poppins", sans-serif;
 $background-color_1: #d1000a;
 $background-color_2: #2e67d1;
-
-@import "https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&family=Space+Grotesk&display=swap";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;700;800;900&family=Roboto:wght@100;400;500;700;900&display=swap");
 .search-filter {
-	width: 50vw;
-	height: 60vh;
+    width: 50vw;
+    height: 60vh;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -19,12 +18,13 @@ $background-color_2: #2e67d1;
         padding: 1rem 1rem;
         border-top-right-radius: 9px;
         border-top-left-radius: 9px;
-        background-color: $background-color_1;
-    
+        background-color: #0c5153;
+        color: white;
         h1 {
             margin: 0 auto;
+            font-family: "Montserrat", sans-serif;
         }
-    
+
         input {
             height: 24px;
             width: 24px;
@@ -33,7 +33,7 @@ $background-color_2: #2e67d1;
         }
         input[type="checkbox"] {
             &:checked {
-                background-color: $background-color_1 !important;
+                background-color: #0c5153 !important;
                 color: $color_1;
                 accent-color: #d1000a;
                 outline: 1px solid rgba(255, 255, 255, 0.592);
@@ -41,14 +41,14 @@ $background-color_2: #2e67d1;
         }
         .option {
             font-size: 14px;
-            font-family: $font-family_1;
+            font-family: "Montserrat", sans-serif;
             font-weight: 500;
             color: $color_2;
         }
     }
     &__lower {
         padding: 8px 24px 16px;
-        border: 1px solid #d1000a;
+        border: 1px solid #0c5153;
         background-color: white;
         border-top: none;
         border-radius: 10px;
@@ -95,9 +95,11 @@ $background-color_2: #2e67d1;
         padding: 8px;
         p {
             text-align: center;
+            font-size: 14px;
+            font-family: "Montserrat", sans-serif;
         }
         &:hover {
-            border: 2px solid #d1000a;
+            border: 2px solid #0c5153;
             cursor: pointer;
         }
     }
@@ -201,7 +203,13 @@ $background-color_2: #2e67d1;
     &__zipPicker {
         width: 50%;
         p {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
             margin: 0;
+        }
+        input{
+            font-size: 14px;
+            font-family: "Montserrat", sans-serif;
         }
     }
     &__arrow {
@@ -324,7 +332,7 @@ $background-color_2: #2e67d1;
             font-weight: 700;
             font-family: $font-family_1;
             border: none;
-            background-color: $background-color_1;
+            background-color: #0c5153;
             color: $color_2;
             border-radius: 90px;
         }
@@ -395,12 +403,14 @@ $background-color_2: #2e67d1;
         }
     }
     &__active {
-        border: 2px solid #d1000a;
+        border: 2px solid #0c5153;
         width: 100%;
         border-radius: 9px;
         padding: 8px;
         p {
+            font-family: "Montserrat", sans-serif;
             text-align: center;
+            font-size: 14px;
         }
         &:hover {
             cursor: pointer;
@@ -424,51 +434,51 @@ $background-color_2: #2e67d1;
     }
 }
 @media (max-width: 1134px) {
-	.search-filter {
-		width: 80vw;
-	}
+    .search-filter {
+        width: 80vw;
+    }
 }
 @media (max-width: 992px) {
-	.search-filter {
-		width: 95vw;
-	}
+    .search-filter {
+        width: 95vw;
+    }
 }
 @media (max-width: 836px) {
-	.search-filter__options {
-		grid-template-columns: repeat(3, 1fr);
-	}
+    .search-filter__options {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 @media (max-width: 567px) {
-	.search-filter__size {
-		grid-template-columns: repeat(2, 1fr);
-	}
-	.search-filter {
-		height: fit-content;
-	}
+    .search-filter__size {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .search-filter {
+        height: fit-content;
+    }
 }
 @media (max-width: 515px) {
-	.search-filter__options {
-		grid-template-columns: repeat(2, 1fr);
-	}
-	.search-filter__options2 {
-		grid-template-columns: repeat(2, 1fr);
-	}
-	.search-filter__lower {
-		padding: 15px 5px;
-	}
-	.search-filter__Boarding {
-		padding: 3px;
-	}
-	.search-filter__HouseSitting {
-		padding: 3px;
-	}
-	.search-filter__DropInVisits {
-		padding: 3px;
-	}
-	.search-filter__DogDayCare {
-		padding: 3px;
-	}
-	.search-filter__DogWalking {
-		padding: 3px;
-	}
+    .search-filter__options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .search-filter__options2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .search-filter__lower {
+        padding: 15px 5px;
+    }
+    .search-filter__Boarding {
+        padding: 3px;
+    }
+    .search-filter__HouseSitting {
+        padding: 3px;
+    }
+    .search-filter__DropInVisits {
+        padding: 3px;
+    }
+    .search-filter__DogDayCare {
+        padding: 3px;
+    }
+    .search-filter__DogWalking {
+        padding: 3px;
+    }
 }
