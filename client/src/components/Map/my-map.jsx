@@ -12,7 +12,7 @@ import config from "../../helper/config";
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
-    shadowUrl: iconShadow
+    shadowUrl: iconShadow,
 });
 
 L.Marker.prototype.options.icon = DefaultIcon;
