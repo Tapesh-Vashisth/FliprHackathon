@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "../components/Header/Header";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../app/hooks";
+import Carousel from "../components/carousal/Carousal";
 function Home() {
     const user = useAppSelector((state) => state.user);
     return (
@@ -36,6 +37,7 @@ function Home() {
                         </div>
                     </div>
                 </div>
+                <Carousel />
             </div>
         </>
     );
