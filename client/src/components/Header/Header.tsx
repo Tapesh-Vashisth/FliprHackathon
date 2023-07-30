@@ -10,6 +10,7 @@ import { DropdownButton } from "react-bootstrap";
 import axiosInstance from "../../api/axiosInstance";
 import { useNavigate, Link } from "react-router-dom";
 import { userActions } from "../../features/userSlice";
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from "react-share"
 
 const Header = () => {
     const user = useAppSelector((state) => state.user);
@@ -65,6 +66,7 @@ const Header = () => {
                             as={Link}
                             className="header__brand"
                         >
+                            
                             Travel Planner {earth}
                         </Navbar.Brand>
                         <Navbar.Toggle className="header__toggler" />
