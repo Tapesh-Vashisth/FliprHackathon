@@ -28,7 +28,7 @@ const addPlace = async (req: Request, res: Response) => {
             lon,
             lat,
             city
-        })
+        })  
 
         try {
             await new_place.save()

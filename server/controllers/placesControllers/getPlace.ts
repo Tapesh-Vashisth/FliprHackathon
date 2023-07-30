@@ -14,6 +14,26 @@ export const getPlace = async (req: Request, res: Response) => {
     }
 
     response.place = (placeSearch.data.results);
+
+    for (let i=0; i<response.place.length; i++) {
+        let { lon, lat, city, place_id } = response.place[i]
+        console.log(response.Place[i])
+
+        let new_place = new Place({
+            place_id,
+            lon,
+            lat,
+            city
+        })
+
+        try {
+            await new_place.save()
+        } catch (err) {
+            return res
+                .status(500)
+                .json({ message: "Internal error occurred, or place already exists" })
+        }
+    }
     
     const data: any = await axios.get(`https://api.geoapify.com/v2/places?categories=${req.query.categories}&filter=place:${placeSearch.data.results[0].place_id}&limit=20&apiKey=${process.env.MAP_API_KEY}`)
     
