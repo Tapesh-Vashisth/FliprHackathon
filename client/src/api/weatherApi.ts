@@ -16,7 +16,8 @@ const weatherApi = async (lat: Number, lon: Number) => {
             feels_like: data.data.main.feels_like,
             min: data.data.main.temp_min,
             max: data.data.main.temp_max,
-            humidity: data.data.main.humidity
+            humidity: data.data.main.humidity,
+            icon: data.data.weather[0].icon
         }
     
         return result
@@ -28,7 +29,8 @@ const weatherApi = async (lat: Number, lon: Number) => {
             feels_like: null,
             min: null,
             max: null,
-            humidity: null
+            humidity: null,
+            icon: null
         }
 
         return result;
