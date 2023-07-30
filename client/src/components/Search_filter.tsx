@@ -83,18 +83,24 @@ const Search_filter = (props: any) => {
             );
             console.log(response);
             setLoading(false);
-            let markers = [
-                {
-                    name: response.data.place[0].name
-                        ? response.data.place[0].name
-                        : response.data.place[0].city,
-                    coordinates: [
-                        response.data.place[0].lat,
-                        response.data.place[0].lon,
-                    ],
-                    categories: [],
-                },
-            ];
+            
+            let markers: any = [];
+            if (response.data.place.length > 0) {
+                markers = [
+                    {
+                        name: response.data.place[0].name
+                            ? response.data.place[0].name
+                            : response.data.place[0].city,
+                        coordinates: [
+                            response.data.place[0].lat,
+                            response.data.place[0].lon,
+                        ],
+                        categories: [],
+                        place_id: response.data.place[0].place_id
+                    },
+                ];
+            }
+
             markers = [
                 ...markers,
                 ...response.data.details.map((x: any) => {
@@ -104,6 +110,7 @@ const Search_filter = (props: any) => {
                             : x.properties.formatted,
                         coordinates: x.geometry.coordinates.reverse(),
                         categories: x.properties.categories,
+                        place_id: x.properties.place_id
                     };
                 }),
             ];
