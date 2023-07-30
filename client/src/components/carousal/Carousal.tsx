@@ -1,86 +1,86 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 const CarosulComp = () => (
-    <Carousel
-        additionalTransfrom={0}
-        arrows
-        autoPlaySpeed={3000}
-        centerMode={false}
-        className=""
-        containerClass="container-with-dots"
-        dotListClass=""
-        draggable
-        focusOnSelect={false}
-        infinite
-        itemClass="carousal-item"
-        keyBoardControl
-        minimumTouchDrag={80}
-        pauseOnHover
-        renderArrowsWhenDisabled={false}
-        renderButtonGroupOutside={false}
-        renderDotsOutside={false}
-        responsive={{
-            desktop: {
-                breakpoint: {
-                    max: 3000,
-                    min: 1024,
+    <>
+        <h1 className="carousal--heading">Explore Tourists Around The World</h1>
+        <Carousel
+            additionalTransfrom={0}
+            arrows
+            autoPlaySpeed={3000}
+            centerMode={false}
+            className="carousal"
+            containerClass="container-with-dots"
+            dotListClass=""
+            draggable
+            focusOnSelect={false}
+            infinite
+            itemClass="carousal-item"
+            keyBoardControl
+            minimumTouchDrag={80}
+            pauseOnHover
+            renderArrowsWhenDisabled={false}
+            renderButtonGroupOutside={false}
+            renderDotsOutside={false}
+            responsive={{
+                desktop: {
+                    breakpoint: {
+                        max: 3000,
+                        min: 1024,
+                    },
+                    items: 3,
+                    partialVisibilityGutter: 40,
                 },
-                items: 3,
-                partialVisibilityGutter: 40,
-            },
-            mobile: {
-                breakpoint: {
-                    max: 464,
-                    min: 0,
+                mobile: {
+                    breakpoint: {
+                        max: 464,
+                        min: 0,
+                    },
+                    items: 1,
+                    partialVisibilityGutter: 30,
                 },
-                items: 1,
-                partialVisibilityGutter: 30,
-            },
-            tablet: {
-                breakpoint: {
-                    max: 1024,
-                    min: 464,
+                tablet: {
+                    breakpoint: {
+                        max: 1024,
+                        min: 464,
+                    },
+                    items: 2,
+                    partialVisibilityGutter: 30,
                 },
-                items: 2,
-                partialVisibilityGutter: 30,
-            },
-        }}
-        rewind={false}
-        rewindWithAnimation={false}
-        rtl={false}
-        shouldResetAutoplay
-        showDots={false}
-        sliderClass=""
-        slidesToSlide={1}
-        swipeable
-    >
-        <div className="carousal-item__imageContainer">
-            <img src={require("./image-1.jpg")} alt="training2" />
-            <div className="carousal-item__imageContainer--content">
-                <h3>Plan</h3>
+            }}
+            rewind={false}
+            rewindWithAnimation={false}
+            rtl={false}
+            shouldResetAutoplay
+            showDots={false}
+            sliderClass=""
+            slidesToSlide={1}
+            swipeable
+        >
+            <div className="carousal-item__imageContainer">
+                <img src={require("./image-1.jpg")} alt="training2" />
+                <div className="carousal-item__imageContainer--content">
+                    <h3>Plan</h3>
+                </div>
             </div>
-        </div>
-        <div className="carousal-item__imageContainer">
-            <img src={require("./image-2.jpg")} alt="training2" />
-            <div className="carousal-item__imageContainer--content">
-                <h3>Travel</h3>
+            <div className="carousal-item__imageContainer">
+                <img src={require("./image-2.jpg")} alt="training2" />
+                <div className="carousal-item__imageContainer--content">
+                    <h3>Travel</h3>
+                </div>
             </div>
-        </div>
-        <div className="carousal-item__imageContainer">
-            <img src={require("./image-4.jpg")} alt="training2" />
-            <div className="carousal-item__imageContainer--content">
-                <h3>Explore</h3>
+            <div className="carousal-item__imageContainer">
+                <img src={require("./image-4.jpg")} alt="training2" />
+                <div className="carousal-item__imageContainer--content">
+                    <h3>Explore</h3>
+                </div>
             </div>
-        </div>
-        <div className="carousal-item__imageContainer">
-            <img
-                src={require("./image-4.jpg")}
-                alt="training2"
-            />
-            <div className="carousal-item__imageContainer--content">
-                <h3>Enjoy</h3>
+            <div className="carousal-item__imageContainer">
+                <img src={require("./image-3.jpg")} alt="training2" />
+                <div className="carousal-item__imageContainer--content">
+                    <h3>Repeat</h3>
+                </div>
             </div>
-        </div>
-    </Carousel>
+        </Carousel>
+    </>
 );
 export default CarosulComp;
