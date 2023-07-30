@@ -5,14 +5,18 @@ interface initialState {
     name: string,
     email: string,
     image: string | null,
-    isLoggedIn: boolean
+    isLoggedIn: boolean,
+    latitude: number | null,
+    longitude: number | null
 }
 
 const initialState: initialState = {
     name: "",
     email: "",
     image: null,
-    isLoggedIn: false
+    isLoggedIn: false,
+    latitude: null,
+    longitude: null
 }
 
 const userSlice = createSlice({
@@ -34,6 +38,10 @@ const userSlice = createSlice({
         },
         setName: (state, action: PayloadAction <string>) => {
             state.name = action.payload;
+        },
+        setLocation: (state, action: PayloadAction <{latitude: number, longitude: number}>) => {
+            state.latitude = action.payload.latitude;
+            state.longitude = action.payload.longitude; 
         }
     }
 });
