@@ -21,7 +21,7 @@ export const getPlace = async (req: Request, res: Response) => {
         if (!response.place[i].name || name.length <= 0) {
             console.log(response.place[i].name)
             try {
-                name = response.place[i].properties.formatted
+                name = response.place[i].properties && response.place[i].properties.formatted
             } catch (err) {}
         }
 
@@ -30,7 +30,7 @@ export const getPlace = async (req: Request, res: Response) => {
             lon,
             lat,
             city,
-            name
+            name: name || city
         })
 
         try {
@@ -62,7 +62,7 @@ export const getPlace = async (req: Request, res: Response) => {
         for (let i=0; i<response.details.length; i++) {
             let { lat, lon, name, city, place_id } = response.details[i].properties
             if (!response.details[i].properties.name || name.length<=0) {
-                name = response.details[i].properties.formatted
+                name = response.details[i].properties && response.details[i].properties.formatted
             }
     
             let new_place = new Place({
@@ -70,7 +70,7 @@ export const getPlace = async (req: Request, res: Response) => {
                 lat,
                 lon,
                 city,
-                name
+                name: name || city
             })
     
             try {
