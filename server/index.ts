@@ -23,8 +23,7 @@ app.use(cookieParser());
 
 app.use('/api/user', userRouter)
 app.use('/api/itinarary', itinararyRouter)
-
-app.post('/api/search', addPlace)
+app.use('/api/place',placeRouter)
 
 const port = process.env.PORT || 5500;
 

@@ -1,9 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,700;0,800;0,900;1,100&family=Roboto:wght@100;400;500;700;900&display=swap");
+.carousal-page{
+    padding: 10rem 0;
+}
+.carousal {
+    width: 90%;
+    margin: 0 auto;
+    padding: 9rem 0;
+    &--heading {
+        text-align: center;
+        margin-top: 5rem;
+        font-size: 50px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        color: #0c5153;
+    }
+}
 .carousal-item {
-    margin-top: 3rem;
     &__imageContainer {
         position: relative;
+        margin-right: 1rem;
         img {
             width: 100%;
+            border-radius: 7px;
         }
         &--content {
             position: absolute;
@@ -35,6 +53,7 @@
         transform: scaleY(0);
         transform-origin: 100% 100%;
         transition: all 0.3s ease-in-out;
+        border-radius: 7px;
     }
     &__imageContainer:hover::after {
         opacity: 1;

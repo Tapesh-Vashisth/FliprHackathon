@@ -8,9 +8,9 @@ const express_1 = __importDefault(require("express"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const placeRoutes_1 = __importDefault(require("./routes/placeRoutes"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const itinararyRoutes_1 = __importDefault(require("./routes/itinararyRoutes"));
-const addPlace_1 = __importDefault(require("./controllers/placesControllers/addPlace"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json({ limit: '50mb' }));
@@ -22,7 +22,7 @@ app.use((0, cors_1.default)({
 app.use((0, cookie_parser_1.default)());
 app.use('/api/user', userRoutes_1.default);
 app.use('/api/itinarary', itinararyRoutes_1.default);
-app.post('/api/search', addPlace_1.default);
+app.use('/api/place', placeRoutes_1.default);
 const port = process.env.PORT || 5500;
 mongoose_1.default.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@database.vxrvuo9.mongodb.net/`).then(() => {
     console.log("database connected");

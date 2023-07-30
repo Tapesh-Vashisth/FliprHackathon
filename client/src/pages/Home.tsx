@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import Carousel from "../components/carousal/Carousal";
 import Footer from "../components/Footer/Footer";
-import SocialSharing from "../components/SocialSharing";
+import Testimonials from "../components/Testimonials/Testimonials";
 function Home() {
     const user = useAppSelector((state) => state.user);
     return (
@@ -40,6 +40,7 @@ function Home() {
                     </div>
                 </div>
                 <Carousel />
+                <Testimonials />
             </div>
             <Footer />
         </>
