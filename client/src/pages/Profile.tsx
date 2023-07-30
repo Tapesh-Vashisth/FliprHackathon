@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from 'react'
-import { useAppSelector } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useForm } from 'react-hook-form';
 import axiosInstance from "../api/axiosInstance";
 import { toast } from 'react-toastify';
+import { userActions } from '../features/userSlice';
 
 
 function Profile() {
     const user = useAppSelector((state) => state.user);
     const [editProfile, setEditProfile] = useState(false);
     const [discardChanges, setDiscardChanges] = useState(false);
+
+    const dispatch = useAppDispatch();
     
     const {
         register,
@@ -25,6 +28,7 @@ function Profile() {
     };
 
     const handleDiscardChanges = () => {
+        reset({name: user.name});
         setDiscardChanges(false);
         setEditProfile(false);
     };
@@ -43,16 +47,18 @@ function Profile() {
             const formData = {
                 ...data
             }
-            console.log(formData);
+            
             
             try {
-                const response = await axiosInstance.put("/user/editaccount", {formData});
+                const response = await axiosInstance.put("/user/editaccount", formData);
+                
+                dispatch(userActions.setName(data.name))
                 toast.success("Profile Updated Successfully!", {
                     position: "top-right"
                 });
             } catch (err: any) {
                 console.log(err);
-                toast.error(err.response.data, {
+                toast.error(err.response.data.message, {
                     position: "top-right",
                 });
             }
@@ -118,7 +124,8 @@ function Profile() {
                         {...register("password", {
                             required: "Password is required"
                         })} 
-                    />
+                        type='password'
+                        />
                     {errors.password && (
                         <p className="errorMessage" role="alert">
                             {errors.currentPassword?.message?.toString()}
@@ -133,10 +140,11 @@ function Profile() {
                             pattern: {
                                 value: /^.{8,}$/,
                                 message:
-                                    "Password must be atleast 8 characters long",
+                                "Password must be atleast 8 characters long",
                             }
                         })} 
-                    />
+                        type='password'
+                        />
                     {errors.newPassword && (
                         <p className="errorMessage" role="alert">
                             {errors.newPassword?.message?.toString()}
@@ -150,6 +158,7 @@ function Profile() {
                         {...register("confirmPassword", {
                             
                         })} 
+                        type='password'
                     />
                     {
                         watch("newPassword") && watch("newPassword") !== watch("confirmPassword") 

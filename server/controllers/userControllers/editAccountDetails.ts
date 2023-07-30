@@ -6,6 +6,7 @@ const editAccountDetails: any = async (req: any, res: Response) => {
     console.log("update account")
 
     const { name, password, newPassword } = req.body
+    console.log(req._id, req.body);
 
     let user: any
     try {

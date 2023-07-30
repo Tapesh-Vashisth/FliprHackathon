@@ -45,7 +45,7 @@ const Header = () => {
             navigate("/auth/login");
         } catch (err: any) {
             console.log(err);
-            toast.error(err.response.data, {
+            toast.error(err.response.data.message, {
                 position: "top-right",
             });
         }
