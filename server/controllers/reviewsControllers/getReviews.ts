@@ -7,6 +7,7 @@ const getReviews = async (req: Request, res: Response) => {
     const place_id = req.params.id
 
     let place = await Place.findOne({ place_id: place_id }).populate("reviews")
+    
 
     if (!place) 
         return res

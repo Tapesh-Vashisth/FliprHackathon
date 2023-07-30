@@ -7,7 +7,8 @@ interface initialState {
     image: string | null,
     isLoggedIn: boolean,
     latitude: number | null,
-    longitude: number | null
+    longitude: number | null,
+    favouritePlaces: []
 }
 
 const initialState: initialState = {
@@ -16,7 +17,8 @@ const initialState: initialState = {
     image: null,
     isLoggedIn: false,
     latitude: null,
-    longitude: null
+    longitude: null,
+    favouritePlaces: []
 }
 
 const userSlice = createSlice({
@@ -27,11 +29,12 @@ const userSlice = createSlice({
         setLoggedin: (state, action: PayloadAction <boolean>) => {
             state.isLoggedIn = action.payload;
         },
-        setState: (state, action: PayloadAction <{name: string, email: string, image: string | null}>) => {
+        setState: (state, action: PayloadAction <{name: string, email: string, image: string | null, favouritePlaces: []}>) => {
             state.name = action.payload.name;
             state.email = action.payload.email;
             state.isLoggedIn = true;
             state.image = action.payload.image;
+            state.favouritePlaces = action.payload.favouritePlaces;
         },
         setImage: (state, action: PayloadAction <string>) => {
             state.image = action.payload;
