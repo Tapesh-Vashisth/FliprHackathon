@@ -9,6 +9,7 @@ import './my-map.css';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import config from "../../helper/config";
+import { useAppSelector } from '../../app/hooks';
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -19,7 +20,9 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 
 const MyMap = () => {
-	const position = [51.505, -0.09]
+	const state = useAppSelector((user)=>user.user);
+	
+	const position = [state.latitude || 51.505, state.longitude || -0.09];
 	
 	return (
 		<MapContainer center={position} zoom={13} scrollWheelZoom={true}>
