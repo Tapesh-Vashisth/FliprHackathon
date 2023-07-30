@@ -8,6 +8,7 @@ import './my-map.css';
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import config from "../../helper/config";
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -20,16 +21,13 @@ L.Marker.prototype.options.icon = DefaultIcon;
 const MyMap = () => {
 	const position = [51.505, -0.09]
 	
-	useEffect(() => {
-		console.log("huu");
-	}, []);
 	return (
 		<MapContainer center={position} zoom={13} scrollWheelZoom={true}>
 			<TileLayer
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+				url='https://tile.openstreetmap.de/{z}/{x}/{y}.png'
 			/>
-			<Marker position={position}>
+			<Marker position={position} >
 				<Popup>
 					<h1>
 						A pretty CSS3 popup. <br /> Easily customizable.
