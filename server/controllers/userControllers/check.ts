@@ -14,11 +14,7 @@ const check = async (req: any, res: Response) => {
 
     return res
         .status(200)
-        .json({
-            name: user.name, 
-            email: user.email, 
-            image: user.image && user.image.length > 0 ? user.image : null
-        });
+        .json(user);
 }
 
 export default check;

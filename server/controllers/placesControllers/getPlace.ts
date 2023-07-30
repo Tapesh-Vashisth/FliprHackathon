@@ -64,7 +64,7 @@ export const getPlace = async (req: Request, res: Response) => {
             if (response.details[i].properties && (!response.details[i].properties.name || name.length<=0)) {
                 name = response.details[i].properties && response.details[i].properties.formatted
             }
-    
+            
             let new_place = new Place({
                 place_id,
                 lat,

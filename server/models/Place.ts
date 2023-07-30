@@ -23,6 +23,10 @@ const placeSchema = new Schema({
     lon: {
         type: String,
         required: false
+    },
+    reviews: {
+        type: [mongoose.Schema.Types.ObjectId],
+        required: false
     }
 })
 

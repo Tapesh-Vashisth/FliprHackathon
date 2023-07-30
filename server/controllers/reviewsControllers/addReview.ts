@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import Review from "../../models/Review";
+import Place from "../../models/Place";
 
 const addReview = async (req: Request, res: Response) => {
-    const { placeId, username, reviewBody, rating } = req.body
+    const { username, reviewBody, rating, place_id } = req.body
 
     const newReview = new Review({
-        placeId,
         username,
         reviewBody,
         rating
@@ -18,6 +18,18 @@ const addReview = async (req: Request, res: Response) => {
         return res
             .status(400)
             .json({ message: "Review not saved; Internal error!" })
+    }
+
+    let place = await Place.findOne({ place_id: place_id }).exec()
+    place!.reviews.push(newReview._id)
+
+    try {
+        await place!.save()
+    } catch (err) {
+        console.log("save place error")
+        return res
+            .status(400)
+            .json({ message: "Place not saved; Internal error!" })
     }
 
     return res

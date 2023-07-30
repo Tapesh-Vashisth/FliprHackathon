@@ -3,11 +3,6 @@ import mongoose from "mongoose"
 
 const Schema = mongoose.Schema
 const reviewSchema = new Schema({
-    placeId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Place",
-        required: true
-    },
     username: {
         type: String,
         required: true
