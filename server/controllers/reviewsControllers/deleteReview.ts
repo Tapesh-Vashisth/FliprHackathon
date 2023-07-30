@@ -1,34 +1,31 @@
+import mongoose from "mongoose";
+import Place from "../../models/Place";
 import Review from "../../models/Review";
 import { Request, Response } from "express"
 
 const deleteReview = async (req: Request, res: Response) => {
-    const { placeId, username } = req.body
+    const { place_id, review_objectId } = req.body
 
-    let review: any
-    try {
-        review = await Review.findOne({
-            placeId: placeId,
-            username: username
-        })
-    } catch (err) {
-        console.log("review find error")
-        return res  
-            .status(500)
-            .json({ message: "Internal error!" })
-    }
+    let place = await Place.findOne({ place_id: place_id }).exec()
 
-    try {
-        await review.delete()
-    } catch (err) {
-        console.log("error in deleting review")
+    if (!place) 
         return res
-            .status(500)
-            .json({ message: "Internal error!" })
+            .status(404)
+            .json({ message: "This place does not exist!!" })
+
+    place.reviews = place.reviews.filter((x) => {
+        return x !== new mongoose.Types.ObjectId(review_objectId)
+    })
+
+    try {
+        await Review.findByIdAndDelete(review_objectId)
+    } catch (err) {
+        
     }
 
     return res
         .status(200)
-        .json({ message: "Review deleted successfully!" })
+        .json({ message: "Deleted review successfully!" })
 }
 
 export default deleteReview
