@@ -65,3 +65,61 @@
         }
     }
 }
+.create-itinarary {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__form {
+        width: 40%;
+        height: 50%;
+        position: relative;
+        background-color: white;
+        border-radius: 7px;
+        display: flex;
+        justify-content: center;
+        &__mainform{
+            display: flex;
+            flex-direction: column;
+            justify-self: center;
+            gap:3rem;
+            width: 60%;
+            h1{
+                text-align: center;
+                font-size: 16px;
+                margin-top: 1rem;
+            }
+            &--inputGroup{
+                width: 100%;
+                gap: 0.4rem;
+                display: flex;
+                flex-direction: column;
+                input{
+                    padding: 1rem;
+                    width: 100%;
+                }
+                label{
+                    font-size: 12px;
+                }
+            }
+            &--buttonGroup{
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                button{
+                    padding: 0.5rem 2rem;
+                    font-size: 14px;
+                    border: 1px solid slategray;
+                    margin-top: 2rem;
+                }
+            }
+        }
+    }
+    
+}
