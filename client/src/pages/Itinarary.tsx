@@ -131,15 +131,23 @@ function Itinarary() {
                                                 "Please add places to the itinarary"
                                             )}
                                         </div>
-                                        <SocialSharing url={'https://golden-zabaione-725504.netlify.app' + `/map/itn?lat=${
-                                                            x.placesInfo[0].lat
-                                                        }&lon=${
-                                                            x.placesInfo[0].lon
-                                                        }&place_id=${
-                                                            x.placesInfo[0].place_id
-                                                        }&places=${JSON.stringify(
-                                                            x.placesInfo
-                                                        )}`} type='itinarary'/>
+                                        {x.placesInfo.length > 0 ? (
+                                            <SocialSharing
+                                                url={
+                                                    "https://golden-zabaione-725504.netlify.app" +
+                                                    `/map/itn?lat=${
+                                                        x.placesInfo[0].lat
+                                                    }&lon=${
+                                                        x.placesInfo[0].lon
+                                                    }&place_id=${
+                                                        x.placesInfo[0].place_id
+                                                    }&places=${JSON.stringify(
+                                                        x.placesInfo
+                                                    )}`
+                                                }
+                                                type="itinarary"
+                                            />
+                                        ) : null}
                                     </div>
                                 );
                             })}

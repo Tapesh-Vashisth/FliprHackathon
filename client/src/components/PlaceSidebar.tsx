@@ -42,14 +42,12 @@ function PlaceSidebar(props: any) {
                 props.data.coordinates[0],
                 props.data.coordinates[1]
             );
-            console.log(response);
             setWeather(response);
         }
     };
 
     const addReviewHandler = async (e: any) => {
         e.preventDefault();
-        console.log(review, rating);
 
         setRateLoading(true);
         try {
@@ -75,7 +73,6 @@ function PlaceSidebar(props: any) {
             const response = await axiosInstance.get(
                 "/place/reviews/" + props.data.place_id
             );
-            console.log(response.data);
 
             let len = response.data.length;
             let totalRating = 0;
@@ -112,7 +109,6 @@ function PlaceSidebar(props: any) {
                 reviewBody: review,
             });
 
-            console.log(response);
             toast.success("Review Edited Successfully", {
                 position: "top-right",
             });
@@ -130,7 +126,6 @@ function PlaceSidebar(props: any) {
                 "/itinarary/myitinararies"
             );
             setItenararies(response.data);
-            console.log(response.data, "it it");
         } catch (err: any) {
             console.log(err);
         }
@@ -139,8 +134,6 @@ function PlaceSidebar(props: any) {
     const addtoItn = async (e: any) => {
         try {
             e.preventDefault();
-            console.log(props);
-            console.log(date, desc, selectItn);
             const response = await axiosInstance.put(
                 `/itinarary/add/${selectItn}`,
                 {
@@ -207,66 +200,72 @@ function PlaceSidebar(props: any) {
                                 />
                             </div>
 
-                            <form
-                                onSubmit={addtoItn}
-                                className="placesidebar__select"
-                                style={{
-                                    padding: "1rem 2rem",
-                                    textAlign: "center",
-                                }}
-                            >
-                                <p>Add To Your Itinarary</p>
-                                <div className="placesidebar__select--div">
-                                    <select
-                                        value={selectItn}
-                                        onChange={(e: any) => {
-                                            console.log(e.target.value);
-                                            SetSelecItn(e.target.value);
-                                        }}
-                                        aria-label="Default select example"
-                                    >
-                                        <option value="test">
-                                            Add To Your Itenerary
-                                        </option>
-                                        {itenarires.map(
-                                            (itenarary: any, index) => {
-                                                return (
-                                                    <option
-                                                        value={
-                                                            itenarary._doc._id
-                                                        }
-                                                        key={index}
-                                                    >
-                                                        {itenarary._doc.name}
-                                                    </option>
-                                                );
+                            {
+                                user.isLoggedIn
+                                ?
+
+                                <form
+                                    onSubmit={addtoItn}
+                                    className="placesidebar__select"
+                                    style={{
+                                        padding: "1rem 2rem",
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    <p>Add To Your Itinarary</p>
+                                    <div className="placesidebar__select--div">
+                                        <select
+                                            value={selectItn}
+                                            onChange={(e: any) => {
+                                                SetSelecItn(e.target.value);
+                                            }}
+                                            aria-label="Default select example"
+                                        >
+                                            <option value="test">
+                                                Add To Your Itenerary
+                                            </option>
+                                            {itenarires.map(
+                                                (itenarary: any, index) => {
+                                                    return (
+                                                        <option
+                                                            value={
+                                                                itenarary._doc._id
+                                                            }
+                                                            key={index}
+                                                        >
+                                                            {itenarary._doc.name}
+                                                        </option>
+                                                    );
+                                                }
+                                            )}
+                                        </select>
+                                        <input
+                                            type="date"
+                                            name=""
+                                            id="date"
+                                            value={date}
+                                            onChange={(e) =>
+                                                setDate(e.target.value)
                                             }
-                                        )}
-                                    </select>
-                                    <input
-                                        type="date"
-                                        name=""
-                                        id="date"
-                                        value={date}
-                                        onChange={(e) =>
-                                            setDate(e.target.value)
-                                        }
-                                    />
-                                    <input
-                                        type="desc"
-                                        name=""
-                                        id="desc"
-                                        value={desc}
-                                        onChange={(e) =>
-                                            setDesc(e.target.value)
-                                        }
-                                        placeholder="description"
-                                    />
-                                </div>
-                                <div className="placesidebar__select-buttondiv">
-                                    <button type="submit">Add!</button>
-                                </div>
-                            </form>
+                                        />
+                                        <input
+                                            type="desc"
+                                            name=""
+                                            id="desc"
+                                            value={desc}
+                                            onChange={(e) =>
+                                                setDesc(e.target.value)
+                                            }
+                                            placeholder="description"
+                                        />
+                                    </div>
+                                    <div className="placesidebar__select-buttondiv">
+                                        <button type="submit">Add!</button>
+                                    </div>
+                                </form>
+                                :
+                                null
+                            }
 
                             {weather.current_temp ? (
                                 <div className="placesidebar__weather">
@@ -310,6 +309,7 @@ function PlaceSidebar(props: any) {
                                     </div>
                                 </div>
                             ) : null}
+
                             {props.data.categories &&
                             props.data.categories.length > 0 ? (
                                 <div style={{ padding: "10px" }}>
@@ -349,7 +349,10 @@ function PlaceSidebar(props: any) {
                                 </div>
                             ) : null}
 
+                            
                             {
+                                user.isLoggedIn
+                                ?
                                 <div className="placesidebar__rate-experience">
                                     <span>
                                         {isReviewed ? "Edit" : "Rate"} Your
@@ -364,38 +367,46 @@ function PlaceSidebar(props: any) {
                                         sx={{ fontSize: "3rem" }}
                                     />
                                 </div>
+                                :
+                                null
                             }
-                            <form
-                                className="placesidebar__reviews"
-                                onSubmit={
-                                    isReviewed
-                                        ? editReviewHandler
-                                        : addReviewHandler
-                                }
-                            >
-                                <p className="placesidebar__reviews--heading">
-                                    {isReviewed ? "Edit" : "Add"} Review
-                                </p>
-                                <textarea
-                                    rows={5}
-                                    placeholder="write your review"
-                                    value={review}
-                                    onChange={(e: any) =>
-                                        setReview(e.target.value)
+                            {
+                                user.isLoggedIn
+                                ?
+                                <form
+                                    className="placesidebar__reviews"
+                                    onSubmit={
+                                        isReviewed
+                                            ? editReviewHandler
+                                            : addReviewHandler
                                     }
-                                ></textarea>
-                                <div className="placesidebar__reviews--button">
-                                    <button>
-                                        {rateLoading ? (
-                                            <CircularProgress size={"1.5rem"} />
-                                        ) : isReviewed ? (
-                                            "Edit Review And Rating"
-                                        ) : (
-                                            "Submit Review And Rating"
-                                        )}
-                                    </button>
-                                </div>
-                            </form>
+                                >
+                                    <p className="placesidebar__reviews--heading">
+                                        {isReviewed ? "Edit" : "Add"} Review
+                                    </p>
+                                    <textarea
+                                        rows={5}
+                                        placeholder="write your review"
+                                        value={review}
+                                        onChange={(e: any) =>
+                                            setReview(e.target.value)
+                                        }
+                                    ></textarea>
+                                    <div className="placesidebar__reviews--button">
+                                        <button>
+                                            {rateLoading ? (
+                                                <CircularProgress size={"1.5rem"} />
+                                            ) : isReviewed ? (
+                                                "Edit Review And Rating"
+                                            ) : (
+                                                "Submit Review And Rating"
+                                            )}
+                                        </button>
+                                    </div>
+                                </form>
+                                :
+                                null
+                            }
                             <div className="placesidebar__othersReviews">
                                 {reviews.map((review: any, index) => {
                                     return review.email !== user.email ? (
