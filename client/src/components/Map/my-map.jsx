@@ -42,36 +42,38 @@ const MyMap = () => {
 		return false
 	}
 
-	const addtofav = async (place_id) => {
-		console.log(place_id)
-
-		try {
-			if (!checkfav(place_id)) {
-				dispatch(userActions.addFav({id: place_id, description: ""}))
-				const req = await axiosInstance.put('/user/addfav', {
-					place_id: place_id
-				})
-				console.log(req.data)
-			}
-			else {
-				dispatch(userActions.removeFav(place_id))
-				const req = await axiosInstance.put('/user/deletefav', {
-					place_id: place_id
-				})
-				console.log(req.data)
-			}
-		} catch (err) {
-			toast.error(err.response.data.message,{
-				position: 'top-right'
-			});
-		}
-	}
-
 	function ChangeMapView({ coords }) {
 		const map = useMap();
 		map.setView(coords, map.getZoom());
 
 		return null;
+	}
+
+	const handleFavorite = async (data) => {
+		setData({
+			place_name: data.name,
+			place_id: data.place_id,
+			coordinates: data.coordinates,
+			categories: data.categories
+		})
+
+
+		if (!checkfav(data.place_id)) {
+			setShowAddFavorite(true);
+		} else {
+			try {
+				console.log("remove");
+				dispatch(userActions.removeFav(data.place_id))
+                const req = await axiosInstance.put('/user/deletefav', {
+                    place_id: data.place_id
+                })
+                console.log(req.data)
+			} catch (err) {
+				toast.error(err.response.data.message,{
+					position: 'top-right'
+				});
+			}
+		}
 	}
 
 	const showMoreHandler = (data) => {
@@ -81,6 +83,7 @@ const MyMap = () => {
 			coordinates: data.coordinates,
 			categories: data.categories
 		})
+		
 		setShowSidebar(true);
 	}
 	
@@ -112,7 +115,7 @@ const MyMap = () => {
 								>
 									show more
 								</button>
-								<button style = {{padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer"}} onClick={async() => await addtofav(m.place_id)}>{!checkfav(m.place_id) ? "Add to favorites" : "Added to favourites"}</button>
+								<button style = {{padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer"}} onClick={() => handleFavorite({...m})}>{!checkfav(m.place_id) ? "Add to favorites" : "Added to favourites"}</button>
 							</div>
 						</div>
 					</Popup>
@@ -124,9 +127,9 @@ const MyMap = () => {
 	return (
 		<div style = {{position: "relative"}}>
 			{
-					showAddFavorite
+				showAddFavorite
 				?
-				<AddADescription />
+				<AddADescription setShowAddFavorite = {setShowAddFavorite} place_id = {data.place_id} />
 				:
 				null
 			}
