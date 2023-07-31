@@ -6,6 +6,7 @@ import { useAppSelector } from "../app/hooks";
 import ProfileImageUpdate from "../components/UpdateImage";
 import Profile from "./Profile";
 import Favorites from "./Favorites";
+import Itinarary from "./Itinarary";
 
 function Dashboard(props: any) {
     const user = useAppSelector((state) => state.user);
@@ -95,6 +96,7 @@ function Dashboard(props: any) {
                 </div>
                 {profile && (<Profile />)}
                 {favorites && (<Favorites />)}
+                {Itenery && <Itinarary />}
             </div>
         </>
     );

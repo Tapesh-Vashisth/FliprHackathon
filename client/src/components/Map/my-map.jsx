@@ -12,6 +12,7 @@ import config from "../../helper/config";
 import { useAppSelector } from '../../app/hooks';
 import Search_filter from '../Search_filter';
 import PlaceSidebar from '../PlaceSidebar';
+import AddADescription from '../AddADescription';
 
 let DefaultIcon = L.icon({
 	iconUrl: icon,
@@ -22,6 +23,7 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 
 const MyMap = () => {
+	const [showAddFavorite, setShowAddFavorite] = useState(false);
 	const state = useAppSelector((user) => user.user);
 	const [markers, setmarkers] = useState([{ name: "London", coordinates: [51.505, -0.09], categories: [], place_id: "51887a0b35540555c0596a37555282904240f00101f9011ffe010000000000c00207" }]);
 	const [showSidebar, setShowSidebar] = useState(false);
@@ -83,6 +85,13 @@ const MyMap = () => {
 
 	return (
 		<div style = {{position: "relative"}}>
+			{
+					showAddFavorite
+				?
+				<AddADescription />
+				:
+				null
+			}
 			{
 				showSidebar
 				?
