@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axiosInstance from "../api/axiosInstance";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Link } from "react-router-dom";
 
 
 function Itinarary() {
@@ -14,7 +15,7 @@ function Itinarary() {
     const handleCreateItinarary = () => {
         showModal(true);
     };
-    
+
     const handleDiscardItinarary = () => {
         showModal(false);
     };
@@ -23,7 +24,7 @@ function Itinarary() {
         e.preventDefault();
         setCreating(true);
         try {
-            const response = await axiosInstance.post("itinarary/create", {iName: name, description: desc});
+            const response = await axiosInstance.post("itinarary/create", { iName: name, description: desc });
             console.log(response);
             getMyItinararies();
             toast.success("Created Successfully!");
@@ -31,12 +32,12 @@ function Itinarary() {
             setCreating(false);
         } catch (err: any) {
             console.log(err);
-            toast.error(err.response.data.message, {position: "top-right"});
+            toast.error(err.response.data.message, { position: "top-right" });
             setCreating(false);
         }
     };
-    
-    const getMyItinararies =  async () => {
+
+    const getMyItinararies = async () => {
         try {
             const response = await axiosInstance.get("itinarary/myitinararies");
             console.log("itit", response.data);
@@ -44,7 +45,7 @@ function Itinarary() {
             showModal(false);
         } catch (err: any) {
             console.log(err);
-            toast.error(err.response.data.message, {position: "top-right"});
+            toast.error(err.response.data.message, { position: "top-right" });
         }
     }
 
@@ -64,10 +65,10 @@ function Itinarary() {
                             Create Itenarary
                         </button>
                     </div>
-                    <div className="itinarary__favourites--itinarary--list" style = {{paddingBottom: "30px"}}>
+                    <div className="itinarary__favourites--itinarary--list" style={{ paddingBottom: "30px" }}>
                         {
                             itanaries.map((x: any, index) => {
-                               return (
+                                return (
                                     <div className="itinarary__favourites--itinarary--list--itenarary">
                                         <div className="itinarary__favourites--itinarary--list--itenarary-left">
                                             <div className="itinarary__favourites--itinarary--list--itenarary-left-1">
@@ -78,21 +79,23 @@ function Itinarary() {
                                             </div>
                                         </div>
                                         <div className="itinarary__favourites--itinarary--list--itenarary-right">
-                                            <p>
-                                                {
-                                                    x.placesInfo.length > 0
+                                            {
+                                                x.placesInfo.length > 0
                                                     ?
-                                                    x.placesInfo.map((place: any, index: any) => {
-                                                        return place.name + (index !== x.placesInfo.length - 1 ? ", ": ""); 
-                                                    })
+                                                    <Link to={`/map/itn?lat=${x.placesInfo[0].lat}&lon=${x.placesInfo[0].lon}&place_id=${x.placesInfo[0].place_id}&places=${JSON.stringify(x.placesInfo)}`}>
+                                                        <p>
+                                                            {x.placesInfo.map((place: any, index: any) => {
+                                                                return place.name + (index !== x.placesInfo.length - 1 ? ", ": ""); 
+                                                            })}
+                                                        </p>
+                                                    </Link>
                                                     :
                                                     "Please add places to the itinarary"
-                                                }
-                                            </p>
+                                            }
                                         </div>
                                     </div>
-                               ) 
-                            }) 
+                                )
+                            })
                         }
                     </div>
                 </div>
@@ -104,21 +107,21 @@ function Itinarary() {
                             <h1>Create Itinarary</h1>
                             <div className="create-itinarary__form__mainform--inputGroup">
                                 <label>Name Of Itinarary</label>
-                                <input type = "text" value = {name} onChange={(e: any) => setName(e.target.value)} />
+                                <input type="text" value={name} onChange={(e: any) => setName(e.target.value)} />
                             </div>
                             <div className="create-itinarary__form__mainform--inputGroup">
                                 <label>Description Of Itinarary</label>
-                                <input type = "text" value = {desc} onChange={(e: any) => setDesc(e.target.value)} />
+                                <input type="text" value={desc} onChange={(e: any) => setDesc(e.target.value)} />
                             </div>
                             <div className="create-itinarary__form__mainform--buttonGroup">
                                 <button>
-                                {creating ? (
-                                    <CircularProgress size={"1.5rem"} />
-                                ) : (
-                                    "Create"
-                                )}
+                                    {creating ? (
+                                        <CircularProgress size={"1.5rem"} />
+                                    ) : (
+                                        "Create"
+                                    )}
                                 </button>
-                                <button onClick={handleDiscardItinarary} type = "button">
+                                <button onClick={handleDiscardItinarary} type="button">
                                     Discard
                                 </button>
                             </div>

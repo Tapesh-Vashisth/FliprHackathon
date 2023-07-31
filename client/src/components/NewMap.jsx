@@ -35,6 +35,25 @@ const MyMap = () => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [data, setData] = useState({ place_name: null, place_id: null, coordinates: null, categories: [] });
 
+	const handleMarkers = async (places) => {
+		const p = JSON.parse(places);
+		console.log(p);
+		Array.from(p).forEach((place)=>{
+			setmarkers((prev)=>{
+				return [...prev, {name: place.name, coordinates: [place.lat, place.lon], place_id: place.place_id, categories: []}]
+			})
+		})
+	}
+
+	useEffect(()=>{
+		if(query.get('places'))
+		{
+			console.log('inside');
+			console.log(query.get('places'))
+			handleMarkers(query.get('places'));
+		}
+	},[])
+
 	const checkfav = (place_id) => {
 		let favs = state.favs
 		for (let i = 0; i < favs.length; i++) {
@@ -86,6 +105,7 @@ const MyMap = () => {
 	}
 
 	function MultipleMarkers() {
+		console.log(markers);
 		return markers.map((m) => {
 			return (
 				<Marker position={m.coordinates}>
@@ -124,7 +144,7 @@ const MyMap = () => {
 	return (
 		<>
 		<Header />
-		
+
 		<div style={{ position: "relative" }}>
 			{
 				showSidebar
