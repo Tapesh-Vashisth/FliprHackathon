@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import axiosInstance from "../api/axiosInstance";
-import config from "../helper/config";
 import Moment from "react-moment";
 import CircularProgress from "@mui/material/CircularProgress";
 import weatherApi from "../api/weatherApi";
