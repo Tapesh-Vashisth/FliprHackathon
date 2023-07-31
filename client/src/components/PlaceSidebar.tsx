@@ -11,6 +11,7 @@ import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 import Rating from "@mui/material/Rating";
 import { useAppSelector } from "../app/hooks";
 import { toast } from "react-toastify";
+import { Dropdown, DropdownButton, Nav } from "react-bootstrap";
 
 function PlaceSidebar(props: any) {
     const user = useAppSelector((state) => state.user);
@@ -31,6 +32,7 @@ function PlaceSidebar(props: any) {
     const [averageRating, setAverageRating] = useState(0);
     const [rating, setRating] = React.useState(2);
     const [review, setReview] = useState("");
+    const [itenarires, setItenararies] = useState([]);
 
     const getWeatherData = async () => {
         const response = await weatherApi(
@@ -116,6 +118,16 @@ function PlaceSidebar(props: any) {
         }
     };
 
+    const getItn = async () => {
+        try {
+            const response = await axiosInstance.get("/itinarary/myitinararies");
+            console.log(response.data);
+            setItenararies(response.data);   
+        } catch (err: any) {
+            console.log(err);
+        }
+    }
+
     useEffect(() => {
         setLoading(true);
         getWeatherData();
@@ -158,6 +170,33 @@ function PlaceSidebar(props: any) {
                                     sx={{ fontSize: "2.4rem" }}
                                     readOnly
                                 />
+                            </div>
+
+                            <div style = {{padding: "1rem 2rem"}}>
+                                    <DropdownButton
+                                        drop="down-centered"
+                                        align="end"
+                                        variant="secondary"
+                                        title="Add to Itinararies"
+                                        className="pe-3"
+                                        bsPrefix="header__dropdown"
+                                    >
+                                        <Dropdown.Item eventKey="1">
+                                            <Nav.Link
+                                                // to="/dashboard"
+                                                // as={Link}
+                                            >
+                                                Profile
+                                            </Nav.Link>
+                                        </Dropdown.Item>
+                                        <Dropdown.Divider />
+                                        <Dropdown.Item
+                                            eventKey="4"
+                                            // onClick={logout}
+                                        >
+                                            Logout
+                                        </Dropdown.Item>
+                                    </DropdownButton>
                             </div>
 
                             {/* <div style = {{position: "relative", padding: "0px 1rem"}}>

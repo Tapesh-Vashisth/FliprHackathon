@@ -3,11 +3,11 @@ import Itinarary from "../../models/Itinarary";
 import Place from "../../models/Place";
 
 const addToItinarary = async (req: Request, res: Response) => {
-    const { _id_place, date, description } = req.body
+    const { place_id, date, description } = req.body
     const _id_itinarary = req.params.id
 
     let place = await Place.findOne({
-        place_id: _id_place
+        place_id: place_id
     }).exec()
 
     if (!place) {
@@ -24,7 +24,7 @@ const addToItinarary = async (req: Request, res: Response) => {
             .json({ message: "Itinarary does not exist!" })
 
     itinarary!.places.push({
-        place: place!.id,
+        place: place!.place_id,
         date: new Date(date),
         description: description
     })
