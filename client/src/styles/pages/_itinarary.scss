@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;700;800;900&family=Roboto:wght@100;400;500;700;900&display=swap");
+.itinarary__favourites {
+    border: 1px solid slategray;
+    min-height: 60vh;
+    &--heading {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid slategray;
+        h1 {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            font-family: "Montserrat", sans-serif;
+        }
+    }
+    &--create {
+        display: flex;
+        justify-content: end;
+
+        button {
+            display: inline-block;
+            border: none;
+            padding: 1rem;
+            border-left: 1px solid slategray;
+            border-bottom: 1px solid slategray;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+    &--itinarary--list {
+        margin-top: 1rem;
+        &--itenarary {
+            width: 95%;
+            margin: 0 auto;
+            display: grid;
+            border: 1px solid slategray;
+            grid-template-columns: 1fr 2fr;
+            &-left {
+                border-right: 1px solid slategray;
+                &-1 {
+                    border-bottom: 1px solid slategray;
+                    padding: 1rem;
+                    p {
+                        font-size: 12px;
+                        font-weight: 500;
+                        font-family: "Montserrat", sans-serif;
+                    }
+                }
+                &-2 {
+                    padding: 1rem;
+                    p {
+                        font-size: 12px;
+                        font-weight: 500;
+                        font-family: "Montserrat", sans-serif;
+                    }
+                }
+            }
+            &-right {
+                padding: 1rem;
+                font-size: 12px;
+                font-weight: 500;
+                font-family: "Montserrat", sans-serif;
+            }
+        }
+    }
+}

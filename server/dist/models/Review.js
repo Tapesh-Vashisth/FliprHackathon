@@ -8,8 +8,7 @@ const Schema = mongoose_1.default.Schema;
 const reviewSchema = new Schema({
     userId: {
         type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: "User",
-        unique: true
+        ref: "User"
     },
     email: {
         type: String,
