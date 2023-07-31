@@ -63,12 +63,12 @@ const MyMap = () => {
 			try {
 				console.log("remove");
 				dispatch(userActions.removeFav(data.place_id))
-                const req = await axiosInstance.put('/user/deletefav', {
-                    place_id: data.place_id
-                })
-                console.log(req.data)
+				const req = await axiosInstance.put('/user/deletefav', {
+					place_id: data.place_id
+				})
+				console.log(req.data)
 			} catch (err) {
-				toast.error(err.response.data.message,{
+				toast.error(err.response.data.message, {
 					position: 'top-right'
 				});
 			}
@@ -82,7 +82,7 @@ const MyMap = () => {
 			coordinates: data.coordinates,
 			categories: data.categories
 		})
-		
+
 		setShowSidebar(true);
 	}
 
@@ -114,7 +114,7 @@ const MyMap = () => {
 								>
 									show more
 								</button>
-								<button style = {{padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer"}} onClick={() => handleFavorite({...m})}>{!checkfav(m.place_id) ? "Add to favorites" : "Added to favourites"}</button>
+								<button style={{ padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer" }} onClick={() => handleFavorite({ ...m })}>{!checkfav(m.place_id) ? "Add to favorites" : "Added to favourites"}</button>
 							</div>
 						</div>
 					</Popup>
@@ -124,31 +124,35 @@ const MyMap = () => {
 	}
 
 	return (
-		<div style = {{position: "relative"}}>
-			{
-				showAddFavorite
-				?
-				<AddADescription setShowAddFavorite = {setShowAddFavorite} place_id = {data.place_id} />
-				:
-				null
-			}
-			{
-				showSidebar
-				?
-				<PlaceSidebar data = {data} setShowSidebar = {setShowSidebar} />
-				:
-				null
-			}
-			<Search_filter setmarkers={setmarkers} />
-			<MapContainer center={markers[0].coordinates} zoom={13} scrollWheelZoom={true}>
-				<TileLayer
-					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-					url='https://tile.openstreetmap.de/{z}/{x}/{y}.png'
-				/>
-				<ChangeMapView coords={markers[0].coordinates} />
-				<MultipleMarkers />
-			</MapContainer>
-		</div>
+		<>
+			<Header />
+
+			<div style={{ position: "relative" }}>
+				{
+					showAddFavorite
+						?
+						<AddADescription setShowAddFavorite={setShowAddFavorite} place_id={data.place_id} />
+						:
+						null
+				}
+				{
+					showSidebar
+						?
+						<PlaceSidebar data={data} setShowSidebar={setShowSidebar} />
+						:
+						null
+				}
+				<Search_filter setmarkers={setmarkers} />
+				<MapContainer center={markers[0].coordinates} zoom={13} scrollWheelZoom={true}>
+					<TileLayer
+						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+						url='https://tile.openstreetmap.de/{z}/{x}/{y}.png'
+					/>
+					<ChangeMapView coords={markers[0].coordinates} />
+					<MultipleMarkers />
+				</MapContainer>
+			</div>
+		</>
 	)
 }
 
