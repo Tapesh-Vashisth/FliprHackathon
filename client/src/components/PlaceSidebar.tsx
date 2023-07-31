@@ -177,7 +177,10 @@ function PlaceSidebar(props: any) {
                             </div>
 
                             <div style={{ padding: "1rem 2rem" }}>
-                                <Form.Select aria-label="Default select example">
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    className="placesidebar"
+                                >
                                     <option>Add To Your Itenerary</option>
                                     {itenarires.map((itenarary: any) => {
                                         return (
