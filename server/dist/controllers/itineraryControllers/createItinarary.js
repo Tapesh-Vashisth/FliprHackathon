@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Itinarary_1 = __importDefault(require("../../models/Itinarary"));
 const User_1 = __importDefault(require("../../models/User"));
 const createItinarary = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { iName } = req.body;
+    const { iName, description } = req.body;
     let user = yield User_1.default.findById(req._id).exec();
     if (!user)
         return res
@@ -23,6 +23,7 @@ const createItinarary = (req, res) => __awaiter(void 0, void 0, void 0, function
             .json({ message: "No user found!" });
     let itinarary = new Itinarary_1.default({
         name: iName,
+        description: description,
         places: []
     });
     try {

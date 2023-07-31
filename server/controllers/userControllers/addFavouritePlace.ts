@@ -3,7 +3,7 @@ import User from "../../models/User";
 import Place from "../../models/Place";
 
 const addFavouritePlace = async (req: any, res: Response) => {
-    const { place_id } = req.body
+    const { place_id, description } = req.body
 
     let user = await User.findById(req._id).exec()
 
@@ -13,6 +13,7 @@ const addFavouritePlace = async (req: any, res: Response) => {
 
     user!.favouritePlaces.push({
         place: place!._id,
+        description: description
     })
 
     try {

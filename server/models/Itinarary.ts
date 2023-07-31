@@ -7,12 +7,12 @@ const itinararySchema = new Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        required: false
+    },
     places: [{
-        place: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Place",
-            required: true
-        },
+        place: String,
         description: String,
         date: Date
     }]
