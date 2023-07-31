@@ -1,16 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import axiosInstance from "../api/axiosInstance";
+import CircularProgress from "@mui/material/CircularProgress";
+
 
 function Itinarary() {
     const [modal, showModal] = useState(false);
+    const [name, setName] = useState("");
+    const [desc, setDesc] = useState("");
+    const [itanaries, setItanaries] = useState([]);
+    const [creating, setCreating] = useState(false);
+
     const handleCreateItinarary = () => {
         showModal(true);
     };
+    
     const handleDiscardItinarary = () => {
         showModal(false);
     };
-    const handleSubmitItinarary = () => {
-      
+
+    const handleSubmitItinarary = async (e: any) => {
+        e.preventDefault();
+        setCreating(true);
+        try {
+            const response = await axiosInstance.post("itinarary/create", {iName: name, description: desc});
+            console.log(response);
+            getMyItinararies();
+            toast.success("Created Successfully!");
+            showModal(false);
+            setCreating(false);
+        } catch (err: any) {
+            console.log(err);
+            toast.error(err.response.data.message, {position: "top-right"});
+            setCreating(false);
+        }
     };
+    
+    const getMyItinararies =  async () => {
+        try {
+            const response = await axiosInstance.get("itinarary/myitinararies");
+            console.log("itit", response.data);
+            setItanaries(response.data);
+            showModal(false);
+        } catch (err: any) {
+            console.log(err);
+            toast.error(err.response.data.message, {position: "top-right"});
+        }
+    }
+
+    useEffect(() => {
+        getMyItinararies();
+    }, [])
+
     return (
         <div className="itinarary__favourites">
             {!modal && (
@@ -43,19 +84,25 @@ function Itinarary() {
             {modal && (
                 <div className="create-itinarary">
                     <div className="create-itinarary__form">
-                        <form className="create-itinarary__form__mainform">
+                        <form className="create-itinarary__form__mainform" onSubmit={handleSubmitItinarary} >
                             <h1>Create Itinarary</h1>
                             <div className="create-itinarary__form__mainform--inputGroup">
                                 <label>Name Of Itinarary</label>
-                                <input />
+                                <input type = "text" value = {name} onChange={(e: any) => setName(e.target.value)} />
                             </div>
                             <div className="create-itinarary__form__mainform--inputGroup">
                                 <label>Description Of Itinarary</label>
-                                <input />
+                                <input type = "text" value = {desc} onChange={(e: any) => setDesc(e.target.value)} />
                             </div>
                             <div className="create-itinarary__form__mainform--buttonGroup">
-                                <button>Create</button>
-                                <button onClick={handleDiscardItinarary}>
+                                <button>
+                                {creating ? (
+                                    <CircularProgress size={"1.5rem"} />
+                                ) : (
+                                    "Create"
+                                )}
+                                </button>
+                                <button onClick={handleDiscardItinarary} type = "button">
                                     Discard
                                 </button>
                             </div>
