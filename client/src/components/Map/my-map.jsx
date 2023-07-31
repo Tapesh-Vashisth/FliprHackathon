@@ -13,6 +13,7 @@ import config from "../../helper/config";
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import Search_filter from '../Search_filter';
 import PlaceSidebar from '../PlaceSidebar';
+import AddADescription from '../AddADescription';
 import { userActions } from '../../features/userSlice';
 import { toast } from 'react-toastify';
 import Header from '../Header/Header';
@@ -25,6 +26,7 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 const MyMap = () => {
+	const [showAddFavorite, setShowAddFavorite] = useState(false);
 	const state = useAppSelector((user) => user.user);
 	const dispatch = useAppDispatch();
 	const [markers, setmarkers] = useState([{ name: "London", coordinates: [51.505, -0.09], categories: [], place_id: "51887a0b35540555c0596a37555282904240f00101f9011ffe010000000000c00207" }]);
@@ -39,36 +41,38 @@ const MyMap = () => {
 		return false
 	}
 
-	const addtofav = async (place_id) => {
-		console.log(place_id)
-
-		try {
-			if (!checkfav(place_id)) {
-				dispatch(userActions.addFav({ id: place_id, description: "" }))
-				const req = await axiosInstance.put('/user/addfav', {
-					place_id: place_id
-				})
-				console.log(req.data)
-			}
-			else {
-				dispatch(userActions.removeFav(place_id))
-				const req = await axiosInstance.put('/user/deletefav', {
-					place_id: place_id
-				})
-				console.log(req.data)
-			}
-		} catch (err) {
-			toast.error(err.response.data.message, {
-				position: 'top-right'
-			});
-		}
-	}
-
 	function ChangeMapView({ coords }) {
 		const map = useMap();
 		map.setView(coords, map.getZoom());
 
 		return null;
+	}
+
+	const handleFavorite = async (data) => {
+		setData({
+			place_name: data.name,
+			place_id: data.place_id,
+			coordinates: data.coordinates,
+			categories: data.categories
+		})
+
+
+		if (!checkfav(data.place_id)) {
+			setShowAddFavorite(true);
+		} else {
+			try {
+				console.log("remove");
+				dispatch(userActions.removeFav(data.place_id))
+                const req = await axiosInstance.put('/user/deletefav', {
+                    place_id: data.place_id
+                })
+                console.log(req.data)
+			} catch (err) {
+				toast.error(err.response.data.message,{
+					position: 'top-right'
+				});
+			}
+		}
 	}
 
 	const showMoreHandler = (data) => {
@@ -78,6 +82,7 @@ const MyMap = () => {
 			coordinates: data.coordinates,
 			categories: data.categories
 		})
+		
 		setShowSidebar(true);
 	}
 
@@ -109,7 +114,7 @@ const MyMap = () => {
 								>
 									show more
 								</button>
-								<button style={{ padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer" }} onClick={async () => await addtofav(m.place_id)}>{!checkfav(m.place_id) ? "Add to favorites" : "Remove from favourites"}</button>
+								<button style = {{padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer"}} onClick={() => handleFavorite({...m})}>{!checkfav(m.place_id) ? "Add to favorites" : "Added to favourites"}</button>
 							</div>
 						</div>
 					</Popup>
@@ -119,28 +124,31 @@ const MyMap = () => {
 	}
 
 	return (
-		<>
-			<Header />
-
-			<div style={{ position: "relative" }}>
-				{
-					showSidebar
-						?
-						<PlaceSidebar data={data} setShowSidebar={setShowSidebar} />
-						:
-						null
-				}
-				<Search_filter setmarkers={setmarkers} />
-				<MapContainer center={markers[0].coordinates} zoom={13} scrollWheelZoom={true}>
-					<TileLayer
-						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-						url='https://tile.openstreetmap.de/{z}/{x}/{y}.png'
-					/>
-					<ChangeMapView coords={markers[0].coordinates} />
-					<MultipleMarkers />
-				</MapContainer>
-			</div>
-		</>
+		<div style = {{position: "relative"}}>
+			{
+				showAddFavorite
+				?
+				<AddADescription setShowAddFavorite = {setShowAddFavorite} place_id = {data.place_id} />
+				:
+				null
+			}
+			{
+				showSidebar
+				?
+				<PlaceSidebar data = {data} setShowSidebar = {setShowSidebar} />
+				:
+				null
+			}
+			<Search_filter setmarkers={setmarkers} />
+			<MapContainer center={markers[0].coordinates} zoom={13} scrollWheelZoom={true}>
+				<TileLayer
+					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+					url='https://tile.openstreetmap.de/{z}/{x}/{y}.png'
+				/>
+				<ChangeMapView coords={markers[0].coordinates} />
+				<MultipleMarkers />
+			</MapContainer>
+		</div>
 	)
 }
 

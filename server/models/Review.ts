@@ -5,8 +5,7 @@ const Schema = mongoose.Schema
 const reviewSchema = new Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        unique: true
+        ref: "User"
     },
     email: {
         type: String, 
