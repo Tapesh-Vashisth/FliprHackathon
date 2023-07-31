@@ -2,6 +2,7 @@ import User from "../../models/User";
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import { Response, NextFunction } from "express";
+import Place from "../../models/Place";
 
 const login = async (req: any, res: Response, next: NextFunction) => {
     
@@ -42,9 +43,21 @@ const login = async (req: any, res: Response, next: NextFunction) => {
         sameSite: 'lax'
     })
 
+    let favs = existingUser.favouritePlaces
+    let newfavs = []
+    for (let i=0; i<favs.length; i++) {
+        let place = await Place.findById(favs[i].place)
+        newfavs.push(place!.place_id)
+    }
+
+    existingUser.favs = newfavs
+
+    let hold = {...existingUser}
+    hold.favs = newfavs
+
     return res
         .status(200)
-        .json(existingUser)
+        .json(hold)
 }
 
 export default login

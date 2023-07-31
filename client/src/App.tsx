@@ -15,7 +15,7 @@ function App() {
         setScreenLoad(true);
         try {
             const response = await axiosInstance.get("/user/check");
-            console.log(response);
+            console.log(response.data);
             dispatch(userActions.setState(response.data));
             setScreenLoad(false);
         } catch (err: any) {

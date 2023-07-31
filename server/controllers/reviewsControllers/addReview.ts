@@ -2,10 +2,11 @@ import { Request, Response } from "express";
 import Review from "../../models/Review";
 import Place from "../../models/Place";
 
-const addReview = async (req: Request, res: Response) => {
+const addReview = async (req: any, res: Response) => {
     console.log(req.body);
     const { username, reviewBody, rating, place_id, email } = req.body
     console.log(req._id);
+    
     const newReview = new Review({
         userId: req._id,
         email: email,
