@@ -37,12 +37,14 @@ function PlaceSidebar(props: any) {
     const [desc, setDesc] = useState("");
 
     const getWeatherData = async () => {
-        const response = await weatherApi(
-            props.data.coordinates[0],
-            props.data.coordinates[1]
-        );
-        console.log(response);
-        setWeather(response);
+        if (props.data.coordinates && props.data.coordinates.length > 0) {
+            const response = await weatherApi(
+                props.data.coordinates[0],
+                props.data.coordinates[1]
+            );
+            console.log(response);
+            setWeather(response);
+        }
     };
 
     const addReviewHandler = async (e: any) => {
