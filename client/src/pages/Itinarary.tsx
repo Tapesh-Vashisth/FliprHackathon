@@ -95,14 +95,20 @@ function Itinarary() {
                                             {x.placesInfo.length > 0 ? (
                                                 <Link
                                                     to={`/map/itn?lat=${
-                                                        x.placesInfo[0].lat
+                                                        x?.placesInfo[0]?.lat
                                                     }&lon=${
-                                                        x.placesInfo[0].lon
+                                                        x?.placesInfo[0]?.lon
                                                     }&place_id=${
-                                                        x.placesInfo[0].place_id
+                                                        x?.placesInfo[0]
+                                                            ?.place_id
                                                     }&places=${JSON.stringify(
-                                                        x.placesInfo
-                                                    )}`}
+                                                        x?.placesInfo
+                                                    )}&place_name=${
+                                                        x?.placeInfo[0]?.place
+                                                            .name ||
+                                                        x?.placeInfo[0]?.place
+                                                            .city
+                                                    }`}
                                                     style={{
                                                         textDecoration: "none",
                                                     }}
@@ -136,16 +142,19 @@ function Itinarary() {
                                                 url={
                                                     "https://golden-zabaione-725504.netlify.app" +
                                                     `/map/itn?lat=${
-                                                        x.placesInfo[0].lat
+                                                        x?.placesInfo[0]?.lat
                                                     }&lon=${
-                                                        x.placesInfo[0].lon
+                                                        x?.placesInfo[0]?.lon
                                                     }&place_id=${
-                                                        x.placesInfo[0].place_id
+                                                        x?.placesInfo[0]
+                                                            ?.place_id
                                                     }&places=${JSON.stringify(
-                                                        x.placesInfo
+                                                        x?.placesInfo
                                                     )}&place_name=${
-                                                        x.placeInfo[0].name ||
-                                                        x.placeInfo[0].city
+                                                        x?.placeInfo[0]?.place
+                                                            .name ||
+                                                        x?.placeInfo[0]?.place
+                                                            .city
                                                     }`
                                                 }
                                                 type="itinarary"
