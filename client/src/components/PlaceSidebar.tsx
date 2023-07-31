@@ -11,7 +11,7 @@ import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 import Rating from "@mui/material/Rating";
 import { useAppSelector } from "../app/hooks";
 import { toast } from "react-toastify";
-import { Dropdown, DropdownButton, Nav } from "react-bootstrap";
+import { Dropdown, DropdownButton, Form } from "react-bootstrap";
 
 function PlaceSidebar(props: any) {
     const user = useAppSelector((state) => state.user);
@@ -33,6 +33,9 @@ function PlaceSidebar(props: any) {
     const [rating, setRating] = React.useState(2);
     const [review, setReview] = useState("");
     const [itenarires, setItenararies] = useState([]);
+    const [selectItn, SetSelecItn] = useState('');
+    const [date, setDate] = useState('');
+    const [desc, setDesc] = useState('');
 
     const getWeatherData = async () => {
         const response = await weatherApi(
@@ -107,24 +110,51 @@ function PlaceSidebar(props: any) {
                 rating: rating,
                 reviewBody: review,
             });
-            
+
             console.log(response);
-            toast.success("Review Edited Successfully", {position: "top-right"});
+            toast.success("Review Edited Successfully", {
+                position: "top-right",
+            });
             setRateLoading(false);
             getReviews();
         } catch (err: any) {
-            toast.error(err.response.data.message, {position: "top-right"})
+            toast.error(err.response.data.message, { position: "top-right" });
             setRateLoading(false);
         }
     };
 
     const getItn = async () => {
         try {
-            const response = await axiosInstance.get("/itinarary/myitinararies");
+            const response = await axiosInstance.get(
+                "/itinarary/myitinararies"
+            );
             console.log(response.data);
-            setItenararies(response.data);   
+            setItenararies(response.data);
         } catch (err: any) {
             console.log(err);
+        }
+    };
+
+    const addtoItn = async (e: any) => {
+        try {
+            e.preventDefault();
+            console.log(props);
+            console.log(date, desc, selectItn);
+            const response = await axiosInstance.post(
+                `/itinarary/add/:${selectItn}`,
+                {
+                    place_id: props.data.place_id,
+                    date: date,
+                    description: desc
+                }
+            );
+            toast.success('Added to Itinarary',{
+                position: 'top-left'
+            });
+        } catch (err) {
+            toast.error('some error occured',{
+                position: 'top-left'
+            })
         }
     }
 
@@ -132,6 +162,7 @@ function PlaceSidebar(props: any) {
         setLoading(true);
         getWeatherData();
         getReviews();
+        getItn();
     }, []);
 
     return (
@@ -172,42 +203,22 @@ function PlaceSidebar(props: any) {
                                 />
                             </div>
 
-                            <div style = {{padding: "1rem 2rem"}}>
-                                    <DropdownButton
-                                        drop="down-centered"
-                                        align="end"
-                                        variant="secondary"
-                                        title="Add to Itinararies"
-                                        className="pe-3"
-                                        bsPrefix="header__dropdown"
-                                    >
-                                        <Dropdown.Item eventKey="1">
-                                            <Nav.Link
-                                                // to="/dashboard"
-                                                // as={Link}
-                                            >
-                                                Profile
-                                            </Nav.Link>
-                                        </Dropdown.Item>
-                                        <Dropdown.Divider />
-                                        <Dropdown.Item
-                                            eventKey="4"
-                                            // onClick={logout}
-                                        >
-                                            Logout
-                                        </Dropdown.Item>
-                                    </DropdownButton>
-                            </div>
+                            <form onSubmit={addtoItn} className="placesidebar__select" style={{ padding: "1rem 2rem", textAlign: 'center' }}>
+                                <select value={selectItn} onChange={(e:any) => {console.log(e.target.value);SetSelecItn(e.target.value)}} aria-label="Default select example">
+                                    <option value='test' >Add To Your Itenerary</option>
+                                    {itenarires.map((itenarary: any) => {
+                                        return (
+                                            <option value={itenarary._id}>
+                                                {itenarary.name}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
+                                <input type="date" name="" id="date" value={date} onChange={(e)=> setDate(e.target.value)} />
+                                <input type="desc" name="" id="desc" value={desc} onChange={(e)=> setDesc(e.target.value)} />
+                                <button type="submit">Add!</button>
+                            </form>
 
-                            {/* <div style = {{position: "relative", padding: "0px 1rem"}}>
-                                    {
-                                        image
-                                        ?
-                                        <img src = {image} style = {{width: "100%", maxHeight: "60vh"}} alt='No image found' />
-                                        :
-                                        <img src = {require("../images/Image_not_available.png")} style = {{width: "100%"}} alt='No image found' />
-                                    }
-                                </div> */}
                             {weather.current_temp ? (
                                 <div className="placesidebar__weather">
                                     <h1>Weather Today </h1>
@@ -260,7 +271,7 @@ function PlaceSidebar(props: any) {
                                             flexDirection: "row",
                                             gap: "10px",
                                             marginTop: "10px",
-                                            flexWrap: "wrap"
+                                            flexWrap: "wrap",
                                         }}
                                     >
                                         {props.data.categories.map((x: any) => {
@@ -326,17 +337,13 @@ function PlaceSidebar(props: any) {
                                 ></textarea>
                                 <div className="placesidebar__reviews--button">
                                     <button>
-                                        {   
-                                            rateLoading
-                                            ?
+                                        {rateLoading ? (
                                             <CircularProgress size={"1.5rem"} />
-                                            :
-                                            isReviewed
-                                            ? 
+                                        ) : isReviewed ? (
                                             "Edit Review And Rating"
-                                            : 
+                                        ) : (
                                             "Submit Review And Rating"
-                                        }
+                                        )}
                                     </button>
                                 </div>
                             </form>

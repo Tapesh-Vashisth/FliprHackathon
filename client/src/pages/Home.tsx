@@ -30,10 +30,10 @@ function Home() {
                             )}
                             {user.isLoggedIn && (
                                 <Link
-                                    to={"/dashboard"}
+                                    to={"/map"}
                                     className="home-page__hero--button--link"
                                 >
-                                    View Dashboard
+                                    Explore
                                 </Link>
                             )}
                         </div>
