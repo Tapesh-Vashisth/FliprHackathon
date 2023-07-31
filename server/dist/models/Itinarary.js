@@ -10,12 +10,12 @@ const itinararySchema = new Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        required: false
+    },
     places: [{
-            place: {
-                type: mongoose_1.default.Schema.Types.ObjectId,
-                ref: "Place",
-                required: true
-            },
+            place: String,
             description: String,
             date: Date
         }]

@@ -3,7 +3,7 @@ import Itinarary from "../../models/Itinarary";
 import User from "../../models/User";
 
 const createItinarary = async (req: any, res: Response) => {
-    const { iName } = req.body
+    const { iName, description } = req.body
 
     let user = await User.findById(req._id).exec()
 
@@ -14,6 +14,7 @@ const createItinarary = async (req: any, res: Response) => {
 
     let itinarary = new Itinarary({
         name: iName,
+        description: description,
         places: []
     })
 
