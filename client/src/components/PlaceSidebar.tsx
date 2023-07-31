@@ -140,8 +140,8 @@ function PlaceSidebar(props: any) {
             e.preventDefault();
             console.log(props);
             console.log(date, desc, selectItn);
-            const response = await axiosInstance.post(
-                `/itinarary/add/:${selectItn}`,
+            const response = await axiosInstance.put(
+                `/itinarary/add/${selectItn}`,
                 {
                     place_id: props.data.place_id,
                     date: date,
@@ -215,7 +215,8 @@ function PlaceSidebar(props: any) {
                                     })}
                                 </select>
                                 <input type="date" name="" id="date" value={date} onChange={(e)=> setDate(e.target.value)} />
-                                <input type="desc" name="" id="desc" value={desc} onChange={(e)=> setDesc(e.target.value)} />
+                                <input type="desc" name="" id="desc" value={desc} onChange={(e)=> setDesc(e.target.value)} 
+                                placeholder="description"/>
                                 <button type="submit">Add!</button>
                             </form>
 
