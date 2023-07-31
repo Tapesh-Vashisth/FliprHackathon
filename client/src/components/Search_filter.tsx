@@ -181,7 +181,7 @@ const Search_filter = (props: any) => {
                             onSubmit={submitHandler}
                         >
                             <div className="search-filter__zipPicker">
-                                <p>Service Location</p>
+                                <p>Search Destinations</p>
                                 <input
                                     type="text"
                                     placeholder="City"
