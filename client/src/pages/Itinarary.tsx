@@ -105,10 +105,9 @@ function Itinarary() {
                                                     }&places=${JSON.stringify(
                                                         x?.placesInfo
                                                     )}&place_name=${
-                                                        x?.placeInfo[0]?.place
-                                                            .name ||
-                                                        x?.placeInfo[0]?.place
-                                                            .city
+                                                        x?.placesInfo[0]
+                                                            ?.name ||
+                                                        x?.placesInfo[0]?.city
                                                     }`}
                                                     style={{
                                                         textDecoration: "none",
@@ -152,10 +151,9 @@ function Itinarary() {
                                                     }&places=${JSON.stringify(
                                                         x?.placesInfo
                                                     )}&place_name=${
-                                                        x?.placeInfo[0]?.place
-                                                            .name ||
-                                                        x?.placeInfo[0]?.place
-                                                            .city
+                                                        x?.placesInfo[0]
+                                                            ?.name ||
+                                                        x?.placesInfo[0]?.city
                                                     }`
                                                 }
                                                 type="itinarary"
