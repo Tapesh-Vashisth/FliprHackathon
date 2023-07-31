@@ -44,6 +44,7 @@ function Navigation() {
                     <Route path="" element={<Home />} />
                     <Route path="map" element={<MyMap />} />   
                     <Route path="map/favourite" element={<NewMap />} />   
+                    <Route path="map/itn" element={<NewMap />} />   
                 </Route>
 
                 <Route path="/" element={<Protected />}>

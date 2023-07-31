@@ -60,7 +60,7 @@ const Login = () => {
                     className="page-login__form--mainform"
                     onSubmit={handleSubmit(onSubmit)}
                 >
-                    <h1 className="page-login__form--heading">Welcom Back</h1>
+                    <h1 className="page-login__form--heading">Welcome Back</h1>
                     <div className="page-login__form--input_group">
                         <label className="page-login__form--input_group--label">
                             Email*
@@ -104,18 +104,18 @@ const Login = () => {
                             {loading ? (
                                 <CircularProgress size={"1.5rem"} />
                             ) : (
-                                "LogMe In"
+                                "Log Me In"
                             )}
                         </button>
                     </div>
                     <div className="page-login__dontExists">
-                        <span>Don't Have an Account</span>
+                        <span>Don't Have an Account?</span>
                         {arrow}
                         <Link
                             to={"/auth/signup"}
                             className="page-login__dontExists--link"
                         >
-                            JoinUs Here
+                            Join Us Here
                         </Link>
                     </div>
                 </form>

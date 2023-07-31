@@ -79,7 +79,7 @@ function Dashboard(props: any) {
                         className={IteneryStyles}
                         onClick={handleItenaryClick}
                     >
-                        Itinararies
+                        Itineraries
                     </button>
                     <button
                         className={FavoriteStyles}

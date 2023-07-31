@@ -116,9 +116,29 @@
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        button {
-            padding: 1rem 3rem;
-            border: none;
+        flex-direction: column;
+        border: 1px solid slategray;
+        width: 95%;
+        margin: 0 auto;
+        &--div {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            select,
+            input {
+                padding: 1rem;
+                background-color: #f0f0f0;
+                border: none;
+            }
+        }
+
+        &-buttondiv {
+            width: 100%;
+            button {
+                padding: 1rem 3rem;
+                border: none;
+                width: 100%;
+            }
         }
     }
 }
