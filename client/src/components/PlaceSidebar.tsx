@@ -129,6 +129,7 @@ function PlaceSidebar(props: any) {
                 "/itinarary/myitinararies"
             );
             setItenararies(response.data);
+            console.log(response.data, "it it");
         } catch (err: any) {
             console.log(err);
         }
@@ -150,6 +151,9 @@ function PlaceSidebar(props: any) {
             toast.success("Added to Itinarary", {
                 position: "top-left",
             });
+            SetSelecItn("");
+            setDate("");
+            setDesc("");
         } catch (err) {
             toast.error("some error occured", {
                 position: "top-left",
@@ -227,7 +231,9 @@ function PlaceSidebar(props: any) {
                                             (itenarary: any, index) => {
                                                 return (
                                                     <option
-                                                        value={itenarary._id}
+                                                        value={
+                                                            itenarary._doc._id
+                                                        }
                                                         key={index}
                                                     >
                                                         {itenarary._doc.name}

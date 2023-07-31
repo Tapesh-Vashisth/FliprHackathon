@@ -120,16 +120,16 @@
         border: 1px solid slategray;
         width: 95%;
         margin: 0 auto;
-        &--div{
+        &--div {
             display: flex;
             flex-direction: column;
             width: 100%;
-            select,input{
+            select,
+            input {
                 padding: 1rem;
+                background-color: #f0f0f0;
+                border: none;
             }
-            input{
-                border-top:none;
-            };
         }
 
         &-buttondiv {
