@@ -4,14 +4,13 @@ import axiosInstance from "../api/axiosInstance";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Link } from "react-router-dom";
 
-
 function Itinarary() {
     const [modal, showModal] = useState(false);
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
     const [itanaries, setItanaries] = useState([]);
     const [creating, setCreating] = useState(false);
-
+    const [loading, setLoading] = useState(false);
     const handleCreateItinarary = () => {
         showModal(true);
     };
@@ -24,7 +23,10 @@ function Itinarary() {
         e.preventDefault();
         setCreating(true);
         try {
-            const response = await axiosInstance.post("itinarary/create", { iName: name, description: desc });
+            const response = await axiosInstance.post("itinarary/create", {
+                iName: name,
+                description: desc,
+            });
             console.log(response);
             getMyItinararies();
             toast.success("Created Successfully!");
@@ -43,15 +45,18 @@ function Itinarary() {
             console.log("itit", response.data);
             setItanaries(response.data);
             showModal(false);
+            setLoading(false);
         } catch (err: any) {
             console.log(err);
+            setLoading(false);
             toast.error(err.response.data.message, { position: "top-right" });
         }
-    }
+    };
 
     useEffect(() => {
+        setLoading(true);
         getMyItinararies();
-    }, [])
+    }, []);
 
     return (
         <div className="itinarary__favourites">
@@ -65,9 +70,16 @@ function Itinarary() {
                             Create Itenarary
                         </button>
                     </div>
-                    <div className="itinarary__favourites--itinarary--list" style={{ paddingBottom: "30px" }}>
-                        {
-                            itanaries.map((x: any, index) => {
+                    {loading ? (
+                        <div style={{ textAlign: "center" }}>
+                            <CircularProgress />
+                        </div>
+                    ) : (
+                        <div
+                            className="itinarary__favourites--itinarary--list"
+                            style={{ paddingBottom: "30px" }}
+                        >
+                            {itanaries.map((x: any, index) => {
                                 return (
                                     <div className="itinarary__favourites--itinarary--list--itenarary">
                                         <div className="itinarary__favourites--itinarary--list--itenarary-left">
@@ -75,43 +87,85 @@ function Itinarary() {
                                                 <p>Itinarary : {x._doc.name}</p>
                                             </div>
                                             <div className="itinarary__favourites--itinarary--list--itenarary-left-2">
-                                                <p>Desc : {x._doc.description}</p>
+                                                <p>
+                                                    Desc : {x._doc.description}
+                                                </p>
                                             </div>
                                         </div>
                                         <div className="itinarary__favourites--itinarary--list--itenarary-right">
-                                            {
-                                                x.placesInfo.length > 0
-                                                    ?
-                                                    <Link to={`/map/itn?lat=${x.placesInfo[0].lat}&lon=${x.placesInfo[0].lon}&place_id=${x.placesInfo[0].place_id}&places=${JSON.stringify(x.placesInfo)}`} style={{textDecoration: 'none'}}>
-                                                        <p>
-                                                            {x.placesInfo.map((place: any, index: any) => {
-                                                                return (place.name || place.city) + (index !== x.placesInfo.length - 1 ? ", ": ""); 
-                                                            })}
-                                                        </p>
-                                                    </Link>
-                                                    :
-                                                    "Please add places to the itinarary"
-                                            }
+                                            {x.placesInfo.length > 0 ? (
+                                                <Link
+                                                    to={`/map/itn?lat=${
+                                                        x.placesInfo[0].lat
+                                                    }&lon=${
+                                                        x.placesInfo[0].lon
+                                                    }&place_id=${
+                                                        x.placesInfo[0].place_id
+                                                    }&places=${JSON.stringify(
+                                                        x.placesInfo
+                                                    )}`}
+                                                    style={{
+                                                        textDecoration: "none",
+                                                    }}
+                                                >
+                                                    <p>
+                                                        {x.placesInfo.map(
+                                                            (
+                                                                place: any,
+                                                                index: any
+                                                            ) => {
+                                                                return (
+                                                                    (place.name ||
+                                                                        place.city) +
+                                                                    (index !==
+                                                                    x.placesInfo
+                                                                        .length -
+                                                                        1
+                                                                        ? ", "
+                                                                        : "")
+                                                                );
+                                                            }
+                                                        )}
+                                                    </p>
+                                                </Link>
+                                            ) : (
+                                                "Please add places to the itinarary"
+                                            )}
                                         </div>
                                     </div>
-                                )
-                            })
-                        }
-                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
                 </div>
             )}
             {modal && (
                 <div className="create-itinarary">
                     <div className="create-itinarary__form">
-                        <form className="create-itinarary__form__mainform" onSubmit={handleSubmitItinarary} >
+                        <form
+                            className="create-itinarary__form__mainform"
+                            onSubmit={handleSubmitItinarary}
+                        >
                             <h1>Create Itinarary</h1>
                             <div className="create-itinarary__form__mainform--inputGroup">
                                 <label>Name Of Itinarary</label>
-                                <input type="text" value={name} onChange={(e: any) => setName(e.target.value)} />
+                                <input
+                                    type="text"
+                                    value={name}
+                                    onChange={(e: any) =>
+                                        setName(e.target.value)
+                                    }
+                                />
                             </div>
                             <div className="create-itinarary__form__mainform--inputGroup">
                                 <label>Description Of Itinarary</label>
-                                <input type="text" value={desc} onChange={(e: any) => setDesc(e.target.value)} />
+                                <input
+                                    type="text"
+                                    value={desc}
+                                    onChange={(e: any) =>
+                                        setDesc(e.target.value)
+                                    }
+                                />
                             </div>
                             <div className="create-itinarary__form__mainform--buttonGroup">
                                 <button>
@@ -121,7 +175,10 @@ function Itinarary() {
                                         "Create"
                                     )}
                                 </button>
-                                <button onClick={handleDiscardItinarary} type="button">
+                                <button
+                                    onClick={handleDiscardItinarary}
+                                    type="button"
+                                >
                                     Discard
                                 </button>
                             </div>
