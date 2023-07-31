@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import axiosInstance from "../api/axiosInstance";
-import config from "../helper/config";
 import Moment from "react-moment";
 import CircularProgress from "@mui/material/CircularProgress";
 import weatherApi from "../api/weatherApi";
@@ -38,12 +37,14 @@ function PlaceSidebar(props: any) {
     const [desc, setDesc] = useState("");
 
     const getWeatherData = async () => {
-        const response = await weatherApi(
-            props.data.coordinates[0],
-            props.data.coordinates[1]
-        );
-        console.log(response);
-        setWeather(response);
+        if (props.data.coordinates && props.data.coordinates.length > 0) {
+            const response = await weatherApi(
+                props.data.coordinates[0],
+                props.data.coordinates[1]
+            );
+            console.log(response);
+            setWeather(response);
+        }
     };
 
     const addReviewHandler = async (e: any) => {

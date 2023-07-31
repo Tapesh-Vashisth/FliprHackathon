@@ -6,10 +6,8 @@ import {
 import 'leaflet/dist/leaflet.css';
 import './my-map.css';
 import axiosInstance from "../../api/axiosInstance"
-
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-import config from "../../helper/config";
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import Search_filter from '../Search_filter';
 import PlaceSidebar from '../PlaceSidebar';
