@@ -7,7 +7,7 @@ export const getPlace = async (req: Request, res: Response) => {
 
     const response: any = {};
 
-    const placeSearch:any = await axios.get(`https://api.geoapify.com/v1/geocode/search?text=${req.query.searchText}&format=json&apiKey=${process.env.MAP_API_KEY}`);
+    const placeSearch:any = await axios.get(`https://api.geoapify.com/v1/geocode/search?text=${req.query.searchText}&format=json&apiKey=${process.env.REACT_APP_MAP_API_KEY}`);
 
     if(!placeSearch.data) {
         return res.status(404).json({message: "Place Not Found!"});
@@ -51,7 +51,7 @@ export const getPlace = async (req: Request, res: Response) => {
     }
     
     if (flag===0) {
-        const data: any = await axios.get(`https://api.geoapify.com/v2/places?categories=${req.query.categories}&filter=place:${placeSearch.data.results[0].place_id}&limit=20&apiKey=${process.env.MAP_API_KEY}`)
+        const data: any = await axios.get(`https://api.geoapify.com/v2/places?categories=${req.query.categories}&filter=place:${placeSearch.data.results[0].place_id}&limit=20&apiKey=${process.env.REACT_APP_MAP_API_KEY}`)
         
         if(!data.data) {
             return res.status(404).json({message: "Destinations Not Found!"});
