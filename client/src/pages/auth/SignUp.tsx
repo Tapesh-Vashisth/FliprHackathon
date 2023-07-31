@@ -153,19 +153,19 @@ const SignUp = () => {
                             {loading ? (
                                 <CircularProgress size={"1.5rem"} />
                             ) : (
-                                "SignMe Up"
+                                "Sign Me Up"
                             )}
                         </button>
                     </div>
                 </form>
                 <div className="page-signup__alreadyExists">
-                    <span>Account Already Exists</span>
+                    <span>Already Have An Account?</span>
                     {arrow}
                     <Link
                         to={"/auth/login"}
                         className="page-signup__alreadyExists--link"
                     >
-                        LoginHere
+                        Login Here
                     </Link>
                 </div>
             </div>
