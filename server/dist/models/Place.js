@@ -26,6 +26,11 @@ const placeSchema = new Schema({
     lon: {
         type: String,
         required: false
-    }
+    },
+    reviews: [{
+            type: mongoose_1.default.Schema.Types.ObjectId,
+            ref: "Review",
+            required: false
+        }]
 });
 exports.default = mongoose_1.default.model('Place', placeSchema);

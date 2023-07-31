@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const User_1 = __importDefault(require("../../models/User"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const Place_1 = __importDefault(require("../../models/Place"));
 const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     var existingUser;
@@ -48,8 +49,17 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
         httpOnly: true,
         sameSite: 'lax'
     });
+    let favs = existingUser.favouritePlaces;
+    let newfavs = [];
+    for (let i = 0; i < favs.length; i++) {
+        let place = yield Place_1.default.findById(favs[i].place);
+        newfavs.push(place.place_id);
+    }
+    existingUser.favs = newfavs;
+    let hold = Object.assign({}, existingUser);
+    hold.favs = newfavs;
     return res
         .status(200)
-        .json(existingUser);
+        .json(hold);
 });
 exports.default = login;

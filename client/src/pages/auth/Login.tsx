@@ -27,6 +27,7 @@ const Login = () => {
                 password: data.password,
             });
             setLoading(false);
+            console.log(response.data)
 
             dispatch(userActions.setState({ ...response.data }));
             navigate("/", { replace: true });

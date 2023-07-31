@@ -3,9 +3,12 @@ import Review from "../../models/Review";
 import Place from "../../models/Place";
 
 const addReview = async (req: Request, res: Response) => {
-    const { username, reviewBody, rating, place_id } = req.body
-
+    console.log(req.body);
+    const { username, reviewBody, rating, place_id, email } = req.body
+    console.log(req._id);
     const newReview = new Review({
+        userId: req._id,
+        email: email,
         username,
         reviewBody,
         rating
@@ -14,7 +17,7 @@ const addReview = async (req: Request, res: Response) => {
     try {
         await newReview.save()
     } catch (err) {
-        console.log("save review error")
+        console.log("save review error", err);
         return res
             .status(400)
             .json({ message: "Review not saved; Internal error!" })

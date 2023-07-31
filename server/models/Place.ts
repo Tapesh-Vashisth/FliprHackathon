@@ -24,10 +24,11 @@ const placeSchema = new Schema({
         type: String,
         required: false
     },
-    reviews: {
-        type: [mongoose.Schema.Types.ObjectId],
+    reviews: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review",
         required: false
-    }
+    }]
 })
 
 export default mongoose.model('Place', placeSchema)

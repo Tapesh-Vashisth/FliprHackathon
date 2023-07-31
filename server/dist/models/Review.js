@@ -6,9 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
 const reviewSchema = new Schema({
-    placeId: {
+    userId: {
         type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: "Place",
+        ref: "User",
+        unique: true
+    },
+    email: {
+        type: String,
         required: true
     },
     username: {
@@ -17,12 +21,12 @@ const reviewSchema = new Schema({
     },
     reviewBody: {
         type: String,
-        required: true
+        required: true,
+        default: ""
     },
     rating: {
         type: Number,
         required: true
     },
-}, { timestamps: true,
-    versionKey: false });
+}, { timestamps: true });
 exports.default = mongoose_1.default.model('Review', reviewSchema);
