@@ -133,7 +133,7 @@ function Itinarary() {
                                                 "Please add places to the itinarary"
                                             )}
                                         </div>
-                                        <SocialSharing url='http://localhost:4000/itn' type='itinarary' />
+                                        <SocialSharing url='https://golden-zabaione-725504.netlify.app/itn' type='itinarary'/>
                                     </div>
                                 );
                             })}
