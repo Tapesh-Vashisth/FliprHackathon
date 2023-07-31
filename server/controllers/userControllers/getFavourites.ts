@@ -1,6 +1,6 @@
 import User from "../../models/User";
 
-const getFavourites = async (req: any, res: Response) => {
+const getFavourites = async (req: any, res: any) => {
     let user = await User.findById(req._id).populate("favouritePlaces.place")
     console.log(user!.favouritePlaces)
 

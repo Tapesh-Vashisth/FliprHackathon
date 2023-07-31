@@ -7,7 +7,6 @@ import mongoose from "mongoose";
 import placeRouter from "./routes/placeRoutes";
 import userRouter from "./routes/userRoutes";
 import itinararyRouter from "./routes/itinararyRoutes";
-import addPlace from "./controllers/placesControllers/addPlace";
 
 dotenv.config();
 

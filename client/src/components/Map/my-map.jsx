@@ -14,6 +14,7 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import Search_filter from '../Search_filter';
 import PlaceSidebar from '../PlaceSidebar';
 import { userActions } from '../../features/userSlice';
+import { toast } from 'react-toastify';
 
 let DefaultIcon = L.icon({
 	iconUrl: icon,
@@ -41,19 +42,25 @@ const MyMap = () => {
 	const addtofav = async (place_id) => {
 		console.log(place_id)
 
-		if (!checkfav(place_id)) {
-			dispatch(userActions.addFav({id: place_id, description: ""}))
-			const req = await axiosInstance.put('/user/addfav', {
-				place_id: place_id
-			})
-			console.log(req.data)
-		}
-		else {
-			dispatch(userActions.removeFav(place_id))
-			const req = await axiosInstance.put('/user/deletefav', {
-				place_id: place_id
-			})
-			console.log(req.data)
+		try {
+			if (!checkfav(place_id)) {
+				dispatch(userActions.addFav({id: place_id, description: ""}))
+				const req = await axiosInstance.put('/user/addfav', {
+					place_id: place_id
+				})
+				console.log(req.data)
+			}
+			else {
+				dispatch(userActions.removeFav(place_id))
+				const req = await axiosInstance.put('/user/deletefav', {
+					place_id: place_id
+				})
+				console.log(req.data)
+			}
+		} catch (err) {
+			toast.error(err.response.data.message,{
+				position: 'top-right'
+			});
 		}
 	}
 
