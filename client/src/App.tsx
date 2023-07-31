@@ -20,7 +20,6 @@ function App() {
             setScreenLoad(false);
         } catch (err: any) {
             console.log(err);
-            navigate('/');
             setScreenLoad(false);
         }
     }

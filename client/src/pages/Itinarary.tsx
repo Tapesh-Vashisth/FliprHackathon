@@ -28,7 +28,6 @@ function Itinarary() {
                 iName: name,
                 description: desc,
             });
-            console.log(response);
             getMyItinararies();
             toast.success("Created Successfully!");
             showModal(false);
@@ -43,7 +42,6 @@ function Itinarary() {
     const getMyItinararies = async () => {
         try {
             const response = await axiosInstance.get("itinarary/myitinararies");
-            console.log("itit", response.data);
             setItanaries(response.data);
             showModal(false);
             setLoading(false);
@@ -133,7 +131,15 @@ function Itinarary() {
                                                 "Please add places to the itinarary"
                                             )}
                                         </div>
-                                        <SocialSharing url='https://golden-zabaione-725504.netlify.app/itn' type='itinarary'/>
+                                        <SocialSharing url={'https://golden-zabaione-725504.netlify.app' + `/map/itn?lat=${
+                                                            x.placesInfo[0].lat
+                                                        }&lon=${
+                                                            x.placesInfo[0].lon
+                                                        }&place_id=${
+                                                            x.placesInfo[0].place_id
+                                                        }&places=${JSON.stringify(
+                                                            x.placesInfo
+                                                        )}`} type='itinarary'/>
                                     </div>
                                 );
                             })}

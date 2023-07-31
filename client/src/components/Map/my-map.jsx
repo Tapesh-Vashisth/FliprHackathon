@@ -59,7 +59,6 @@ const MyMap = () => {
 			setShowAddFavorite(true);
 		} else {
 			try {
-				console.log("remove");
 				dispatch(userActions.removeFav(data.place_id))
 				const req = await axiosInstance.put('/user/deletefav', {
 					place_id: data.place_id
@@ -112,7 +111,13 @@ const MyMap = () => {
 								>
 									show more
 								</button>
-								<button style={{ padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer" }} onClick={() => handleFavorite({ ...m })}>{!checkfav(m.place_id) ? "Add to favorites" : "Added to favourites"}</button>
+								{
+									state.isLoggedIn
+									?
+									<button style={{ padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer" }} onClick={() => handleFavorite({ ...m })}>{!checkfav(m.place_id) ? "Add to favorites" : "Added to favourites"}</button>
+									:
+									null
+								}
 							</div>
 						</div>
 					</Popup>
