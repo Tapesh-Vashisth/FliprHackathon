@@ -79,6 +79,7 @@ function Itinarary() {
                             style={{ paddingBottom: "30px" }}
                         >
                             {itanaries.map((x: any, index) => {
+                                console.log(x);
                                 return (
                                     <div className="itinarary__favourites--itinarary--list--itenarary">
                                         <div className="itinarary__favourites--itinarary--list--itenarary-left">
