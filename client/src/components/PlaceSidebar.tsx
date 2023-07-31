@@ -33,6 +33,9 @@ function PlaceSidebar(props: any) {
     const [rating, setRating] = React.useState(2);
     const [review, setReview] = useState("");
     const [itenarires, setItenararies] = useState([]);
+    const [selectItn, SetSelecItn] = useState('');
+    const [date, setDate] = useState('');
+    const [desc, setDesc] = useState('');
 
     const getWeatherData = async () => {
         const response = await weatherApi(
@@ -132,10 +135,34 @@ function PlaceSidebar(props: any) {
         }
     };
 
+    const addtoItn = async (e: any) => {
+        try {
+            e.preventDefault();
+            console.log(props);
+            console.log(date, desc, selectItn);
+            const response = await axiosInstance.put(
+                `/itinarary/add/${selectItn}`,
+                {
+                    place_id: props.data.place_id,
+                    date: date,
+                    description: desc
+                }
+            );
+            toast.success('Added to Itinarary',{
+                position: 'top-left'
+            });
+        } catch (err) {
+            toast.error('some error occured',{
+                position: 'top-left'
+            })
+        }
+    }
+
     useEffect(() => {
         setLoading(true);
         getWeatherData();
         getReviews();
+        getItn();
     }, []);
 
     return (
@@ -176,9 +203,9 @@ function PlaceSidebar(props: any) {
                                 />
                             </div>
 
-                            <div style={{ padding: "1rem 2rem" }}>
-                                <Form.Select aria-label="Default select example">
-                                    <option>Add To Your Itenerary</option>
+                            <form onSubmit={addtoItn} className="placesidebar__select" style={{ padding: "1rem 2rem", textAlign: 'center' }}>
+                                <select value={selectItn} onChange={(e:any) => {console.log(e.target.value);SetSelecItn(e.target.value)}} aria-label="Default select example">
+                                    <option value='test' >Add To Your Itenerary</option>
                                     {itenarires.map((itenarary: any) => {
                                         return (
                                             <option value={itenarary._id}>
@@ -186,8 +213,13 @@ function PlaceSidebar(props: any) {
                                             </option>
                                         );
                                     })}
-                                </Form.Select>
-                            </div>
+                                </select>
+                                <input type="date" name="" id="date" value={date} onChange={(e)=> setDate(e.target.value)} />
+                                <input type="desc" name="" id="desc" value={desc} onChange={(e)=> setDesc(e.target.value)} 
+                                placeholder="description"/>
+                                <button type="submit">Add!</button>
+                            </form>
+
                             {weather.current_temp ? (
                                 <div className="placesidebar__weather">
                                     <h1>Weather Today </h1>

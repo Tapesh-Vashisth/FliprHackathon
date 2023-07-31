@@ -12,12 +12,25 @@ const getMyItinararies = async (req: any, res: Response) => {
             .json({ message: "User not found!" })
             
     const itinararyIds = user.itinarary
+    console.log("ids", itinararyIds)
 
     let userItinararies: any = []
     for (let i=0; i<itinararyIds.length; i++) {
-        let userItinarary = await Itinarary.findById(itinararyIds[i]).populate("places.place")
-        userItinararies.push(userItinarary)
+        let userItinarary = await Itinarary.findById(itinararyIds[i]).exec()
+        console.log("userit", userItinarary)
+        let arr = userItinarary!.places
+        let placesInfo = []
+        for (let i=0; i<arr.length; i++) {
+            let placeInfo = await Place.findOne({place_id: arr[i].place}).exec()
+            console.log(placeInfo)
+            placesInfo.push(placeInfo)
+        }
+        let hold: any = {...userItinarary}
+        hold.placesInfo = placesInfo
+        userItinararies.push(hold)
     }
+
+    console.log(userItinararies)
 
     return res
         .status(200)
