@@ -221,6 +221,7 @@ function PlaceSidebar(props: any) {
                                             flexDirection: "row",
                                             gap: "10px",
                                             marginTop: "10px",
+                                            flexWrap: "wrap"
                                         }}
                                     >
                                         {props.data.categories.map((x: any) => {

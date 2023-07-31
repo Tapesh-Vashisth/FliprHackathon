@@ -36,6 +36,7 @@ const MyMap = () => {
 	const checkfav = (place_id) => {
 		let favs = state.favs
 		for (let i=0; i<favs.length; i++) {
+			console.log("favs", favs[i]);
 			if (favs[i].place === place_id) return true
 		}
 		return false
