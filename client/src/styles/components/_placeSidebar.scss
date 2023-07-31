@@ -1,11 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;700;800;900&family=Roboto:wght@100;400;500;700;900&display=swap");
+.placesidebar::-webkit-scrollbar {
+    display: none;
+}
 .placesidebar {
     position: absolute;
-    z-index: 1001;
+    z-index: 100001;
     top: 0;
     right: 0;
     height: 100vh;
-    width: 40vw;
+    width: fit-content;
     overflow-y: scroll;
     background-color: white;
     display: flex;
@@ -78,9 +81,8 @@
         p {
             font-size: 20px;
             font-family: "Montserrat", sans-serif;
-            padding: 2rem;
+            padding: 1rem;
             border: 1px solid gray;
-            border-bottom: none;
         }
         textarea {
             width: 100%;
@@ -113,6 +115,7 @@
     &__select {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
         button {
             padding: 1rem 3rem;
             border: none;

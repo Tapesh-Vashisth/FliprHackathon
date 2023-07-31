@@ -33,9 +33,9 @@ function PlaceSidebar(props: any) {
     const [rating, setRating] = React.useState(2);
     const [review, setReview] = useState("");
     const [itenarires, setItenararies] = useState([]);
-    const [selectItn, SetSelecItn] = useState('');
-    const [date, setDate] = useState('');
-    const [desc, setDesc] = useState('');
+    const [selectItn, SetSelecItn] = useState("");
+    const [date, setDate] = useState("");
+    const [desc, setDesc] = useState("");
 
     const getWeatherData = async () => {
         const response = await weatherApi(
@@ -128,7 +128,7 @@ function PlaceSidebar(props: any) {
             const response = await axiosInstance.get(
                 "/itinarary/myitinararies"
             );
-            console.log(response.data);
+            console.log(response.data._doc.name);
             setItenararies(response.data);
         } catch (err: any) {
             console.log(err);
@@ -140,23 +140,23 @@ function PlaceSidebar(props: any) {
             e.preventDefault();
             console.log(props);
             console.log(date, desc, selectItn);
-            const response = await axiosInstance.post(
-                `/itinarary/add/:${selectItn}`,
+            const response = await axiosInstance.put(
+                `/itinarary/add/${selectItn}`,
                 {
                     place_id: props.data.place_id,
                     date: date,
-                    description: desc
+                    description: desc,
                 }
             );
-            toast.success('Added to Itinarary',{
-                position: 'top-left'
+            toast.success("Added to Itinarary", {
+                position: "top-left",
             });
         } catch (err) {
-            toast.error('some error occured',{
-                position: 'top-left'
-            })
+            toast.error("some error occured", {
+                position: "top-left",
+            });
         }
-    }
+    };
 
     useEffect(() => {
         setLoading(true);
@@ -203,19 +203,51 @@ function PlaceSidebar(props: any) {
                                 />
                             </div>
 
-                            <form onSubmit={addtoItn} className="placesidebar__select" style={{ padding: "1rem 2rem", textAlign: 'center' }}>
-                                <select value={selectItn} onChange={(e:any) => {console.log(e.target.value);SetSelecItn(e.target.value)}} aria-label="Default select example">
-                                    <option value='test' >Add To Your Itenerary</option>
-                                    {itenarires.map((itenarary: any) => {
+                            <form
+                                onSubmit={addtoItn}
+                                className="placesidebar__select"
+                                style={{
+                                    padding: "1rem 2rem",
+                                    textAlign: "center",
+                                }}
+                            >
+                                <select
+                                    value={selectItn}
+                                    onChange={(e: any) => {
+                                        console.log(e.target.value);
+                                        SetSelecItn(e.target.value);
+                                    }}
+                                    aria-label="Default select example"
+                                >
+                                    <option value="test">
+                                        Add To Your Itenerary
+                                    </option>
+                                    {itenarires.map((itenarary: any, index) => {
                                         return (
-                                            <option value={itenarary._id}>
-                                                {itenarary.name}
+                                            <option
+                                                value={itenarary._id}
+                                                key={index}
+                                            >
+                                                {itenarary._doc.name}
                                             </option>
                                         );
                                     })}
                                 </select>
-                                <input type="date" name="" id="date" value={date} onChange={(e)=> setDate(e.target.value)} />
-                                <input type="desc" name="" id="desc" value={desc} onChange={(e)=> setDesc(e.target.value)} />
+                                <input
+                                    type="date"
+                                    name=""
+                                    id="date"
+                                    value={date}
+                                    onChange={(e) => setDate(e.target.value)}
+                                />
+                                <input
+                                    type="desc"
+                                    name=""
+                                    id="desc"
+                                    value={desc}
+                                    onChange={(e) => setDesc(e.target.value)}
+                                    placeholder="description"
+                                />
                                 <button type="submit">Add!</button>
                             </form>
 
