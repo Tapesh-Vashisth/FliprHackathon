@@ -27,7 +27,6 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const MyMap = () => {
 	const [ query ] = useSearchParams();
-	console.log(query);
 
 	const state = useAppSelector((user) => user.user);
 	const dispatch = useAppDispatch();
@@ -37,7 +36,6 @@ const MyMap = () => {
 
 	const handleMarkers = async (places) => {
 		const p = JSON.parse(places);
-		console.log(p);
 		const arr = Array.from(p).map((place)=>{
 			return {name: (place.name || place.city), coordinates: [place.lat, place.lon], place_id: place.place_id, categories: []}
 		})
@@ -60,7 +58,6 @@ const MyMap = () => {
 	}
 
 	const addtofav = async (place_id) => {
-		console.log(place_id)
 
 		try {
 			if (!checkfav(place_id)) {
@@ -68,14 +65,12 @@ const MyMap = () => {
 				const req = await axiosInstance.put('/user/addfav', {
 					place_id: place_id
 				})
-				console.log(req.data)
 			}
 			else {
 				dispatch(userActions.removeFav(place_id))
 				const req = await axiosInstance.put('/user/deletefav', {
 					place_id: place_id
 				})
-				console.log(req.data)
 			}
 		} catch (err) {
 			toast.error(err.response.data.message, {
@@ -102,7 +97,6 @@ const MyMap = () => {
 	}
 
 	function MultipleMarkers() {
-		console.log(markers);
 		return markers.map((m) => {
 			return (
 				<Marker position={m.coordinates}>

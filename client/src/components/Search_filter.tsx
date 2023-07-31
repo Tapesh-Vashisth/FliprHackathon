@@ -73,15 +73,12 @@ const Search_filter = (props: any) => {
     const submitHandler = async (e: any) => {
         e.preventDefault();
         let searchCategories = categories.filter((x) => x.selected === true);
-        console.log(searchCategories, city);
         setLoading(true);
         try {
             const query = searchCategories.map((x) => x.value).join(",");
-            console.log(query);
             const response = await axiosInstance.get(
                 `/place/search?searchText=${city}&categories=${query}`
             );
-            console.log(response);
             setLoading(false);
             
             let markers: any = [];
@@ -114,7 +111,6 @@ const Search_filter = (props: any) => {
                     };
                 }),
             ];
-            console.log(markers);
             props.setmarkers(markers);
         } catch (err: any) {
             setLoading(false);
@@ -123,7 +119,6 @@ const Search_filter = (props: any) => {
     };
 
     const selectHandler = (index: number) => {
-        console.log(categories);
         setCategories((prev) => {
             const holdCategories = [...prev];
 

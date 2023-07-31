@@ -54,7 +54,6 @@ const SignUp = () => {
                 password: watch("password"),
                 otp: otp,
             });
-            console.log(res);
             setLoading(false);
             navigate("/auth/login", { replace: true });
             toast.success(
