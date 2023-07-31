@@ -143,7 +143,10 @@ function Itinarary() {
                                                         x.placesInfo[0].place_id
                                                     }&places=${JSON.stringify(
                                                         x.placesInfo
-                                                    )}`
+                                                    )}&place_name=${
+                                                        x.placeInfo[0].name ||
+                                                        x.placeInfo[0].city
+                                                    }`
                                                 }
                                                 type="itinarary"
                                             />

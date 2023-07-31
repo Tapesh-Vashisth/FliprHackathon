@@ -27,7 +27,6 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const MyMap = () => {
 	const [ query ] = useSearchParams();
-
 	const state = useAppSelector((user) => user.user);
 	const dispatch = useAppDispatch();
 	const [markers, setmarkers] = useState([{ name: query.get('place_name') || "London", coordinates: [query.get('lat') || 51.505, query.get('lon') || -0.09], categories: [], place_id: query.get('place_id') || "51887a0b35540555c0596a37555282904240f00101f9011ffe010000000000c00207" }]);
@@ -123,7 +122,13 @@ const MyMap = () => {
 								>
 									show more
 								</button>
-								<button style={{ padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer" }} onClick={async () => await addtofav(m.place_id)}>{!checkfav(m.place_id) ? "Add to favorites" : "Remove from favourites"}</button>
+								{
+									state.isLoggedIn
+									?
+									<button style={{ padding: "5px", borderRadius: "10px", outline: "none", cursor: "pointer" }} onClick={async () => await addtofav(m.place_id)}>{!checkfav(m.place_id) ? "Add to favorites" : "Remove from favourites"}</button>
+									:
+									null
+								}
 							</div>
 						</div>
 					</Popup>
