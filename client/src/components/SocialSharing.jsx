@@ -1,7 +1,7 @@
 import React from 'react'
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, WhatsappShareButton, WhatsappIcon } from "react-share"
 
-const SocialSharing = (url: string, type: string) => {
+const SocialSharing = (props) => {
   return (
     <div 
         style={{
@@ -12,25 +12,26 @@ const SocialSharing = (url: string, type: string) => {
             border: "1px solid green"
         }}
     >
+        <h4 style={{padding: '20px'}}>Share this!</h4>
         <FacebookShareButton
-            url={url}
-            quote={`Check out my ${type}!!`}
+            url={props.url}
+            quote={`Check out my ${props.type}!!`}
             hashtag="#parisisthebest"
         >
             <FacebookIcon size={32} round />
         </FacebookShareButton>
 
         <TwitterShareButton
-            url={url}
+            url={props.url}
             hashtags={["trip", "itinerary", "planningahead"]}
-            title={`Check out my ${type}!!`}
+            title={`Check out my ${props.type}!!`}
         >
             <TwitterIcon size={32} round />
         </TwitterShareButton>
 
         <WhatsappShareButton
-            url={url}
-            title={`Check out my ${type}`}
+            url={props.url}
+            title={`Check out my ${props.type}`}
             separator=' : '
         >
             <WhatsappIcon size={32} round />
