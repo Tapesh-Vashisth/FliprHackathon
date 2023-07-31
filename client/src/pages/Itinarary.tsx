@@ -64,20 +64,36 @@ function Itinarary() {
                             Create Itenarary
                         </button>
                     </div>
-                    <div className="itinarary__favourites--itinarary--list">
-                        <div className="itinarary__favourites--itinarary--list--itenarary">
-                            <div className="itinarary__favourites--itinarary--list--itenarary-left">
-                                <div className="itinarary__favourites--itinarary--list--itenarary-left-1">
-                                    <p>DateOfThis</p>
-                                </div>
-                                <div className="itinarary__favourites--itinarary--list--itenarary-left-2">
-                                    <p>description of itenerary</p>
-                                </div>
-                            </div>
-                            <div className="itinarary__favourites--itinarary--list--itenarary-right">
-                                <p>List of places to for this day</p>
-                            </div>
-                        </div>
+                    <div className="itinarary__favourites--itinarary--list" style = {{paddingBottom: "30px"}}>
+                        {
+                            itanaries.map((x: any, index) => {
+                               return (
+                                    <div className="itinarary__favourites--itinarary--list--itenarary">
+                                        <div className="itinarary__favourites--itinarary--list--itenarary-left">
+                                            <div className="itinarary__favourites--itinarary--list--itenarary-left-1">
+                                                <p>Itinarary : {x._doc.name}</p>
+                                            </div>
+                                            <div className="itinarary__favourites--itinarary--list--itenarary-left-2">
+                                                <p>Desc : {x._doc.description}</p>
+                                            </div>
+                                        </div>
+                                        <div className="itinarary__favourites--itinarary--list--itenarary-right">
+                                            <p>
+                                                {
+                                                    x.placesInfo.length > 0
+                                                    ?
+                                                    x.placesInfo.map((place: any, index: any) => {
+                                                        return place.name + (index !== x.placesInfo.length - 1 ? ", ": ""); 
+                                                    })
+                                                    :
+                                                    "Please add places to the itinarary"
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                               ) 
+                            }) 
+                        }
                     </div>
                 </div>
             )}

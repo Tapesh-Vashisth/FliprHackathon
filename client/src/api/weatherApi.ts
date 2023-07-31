@@ -3,6 +3,7 @@ import axios from "axios"
 
 const weatherApi = async (lat: Number, lon: Number) => {
     console.log(lat, lon);
+    console.log(config.WEATHER_API_KEY);
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${config.WEATHER_API_KEY}`
 
     try {
