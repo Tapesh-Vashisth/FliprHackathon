@@ -4,18 +4,18 @@ import {
 	MapContainer, TileLayer, Marker, Popup, useMap, useMapEvent
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
-import './my-map.css';
-import axiosInstance from "../../api/axiosInstance"
+import './Map/my-map.css';
+import axiosInstance from "../api/axiosInstance"
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-import config from "../../helper/config";
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import Search_filter from '../Search_filter';
-import PlaceSidebar from '../PlaceSidebar';
-import { userActions } from '../../features/userSlice';
+import { useAppSelector, useAppDispatch } from '../app/hooks';
+import Search_filter from './Search_filter';
+import PlaceSidebar from './PlaceSidebar';
+import Header from './Header/Header';
+import { userActions } from '../features/userSlice';
 import { toast } from 'react-toastify';
-import Header from '../Header/Header';
+import { useSearchParams } from 'react-router-dom';
 
 let DefaultIcon = L.icon({
 	iconUrl: icon,
@@ -24,10 +24,14 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
+
 const MyMap = () => {
+	const [ query ] = useSearchParams();
+	console.log(query);
+
 	const state = useAppSelector((user) => user.user);
 	const dispatch = useAppDispatch();
-	const [markers, setmarkers] = useState([{ name: "London", coordinates: [51.505, -0.09], categories: [], place_id: "51887a0b35540555c0596a37555282904240f00101f9011ffe010000000000c00207" }]);
+	const [markers, setmarkers] = useState([{ name: query.get('place_name') || "London", coordinates: [query.get('lat') || 51.505, query.get('lon') || -0.09], categories: [], place_id: query.get('place_id') || "51887a0b35540555c0596a37555282904240f00101f9011ffe010000000000c00207" }]);
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [data, setData] = useState({ place_name: null, place_id: null, coordinates: null, categories: [] });
 
@@ -81,7 +85,6 @@ const MyMap = () => {
 		setShowSidebar(true);
 	}
 
-
 	function MultipleMarkers() {
 		return markers.map((m) => {
 			return (
@@ -120,26 +123,25 @@ const MyMap = () => {
 
 	return (
 		<>
-			<Header />
-
-			<div style={{ position: "relative" }}>
-				{
-					showSidebar
-						?
-						<PlaceSidebar data={data} setShowSidebar={setShowSidebar} />
-						:
-						null
-				}
-				<Search_filter setmarkers={setmarkers} />
-				<MapContainer center={markers[0].coordinates} zoom={13} scrollWheelZoom={true}>
-					<TileLayer
-						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-						url='https://tile.openstreetmap.de/{z}/{x}/{y}.png'
-					/>
-					<ChangeMapView coords={markers[0].coordinates} />
-					<MultipleMarkers />
-				</MapContainer>
-			</div>
+		<Header />
+		
+		<div style={{ position: "relative" }}>
+			{
+				showSidebar
+					?
+					<PlaceSidebar data={data} setShowSidebar={setShowSidebar} />
+					:
+					null
+			}
+			<MapContainer center={markers[0].coordinates} zoom={13} scrollWheelZoom={true}>
+				<TileLayer
+					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+					url='https://tile.openstreetmap.de/{z}/{x}/{y}.png'
+				/>
+				<ChangeMapView coords={markers[0].coordinates} />
+				<MultipleMarkers />
+			</MapContainer>
+		</div>
 		</>
 	)
 }

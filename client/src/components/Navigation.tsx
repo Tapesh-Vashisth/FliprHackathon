@@ -6,6 +6,7 @@ import AuthProtected from "../components/AuthProtected";
 import PageLoader from "./Loaders/PageLoader";
 import { useAppSelector } from "../app/hooks";
 import MyMap from "./Map/my-map";
+import NewMap from './NewMap';
 const Error404 = React.lazy(() => import("../pages/Error404"));
 const Login = React.lazy(() => import("../pages/auth/Login"));
 const Signup = React.lazy(() => import("../pages/auth/SignUp"));
@@ -42,6 +43,7 @@ function Navigation() {
                 <Route path="/">
                     <Route path="" element={<Home />} />
                     <Route path="map" element={<MyMap />} />   
+                    <Route path="map/favourite" element={<NewMap />} />   
                 </Route>
 
                 <Route path="/" element={<Protected />}>
