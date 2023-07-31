@@ -13,7 +13,7 @@ const verifyJWT = (req: any, res: Response, next: NextFunction) => {
         token,
         String(process.env.JWT_SECRET_KEY),
         (err: any, decoded: any) => {
-            if (err) return res.status(401).send(); //invalid token
+            if (err) return res.status(401).json({message: "please login again"}); //invalid token
             req._id = decoded.id;
             next();
         }
