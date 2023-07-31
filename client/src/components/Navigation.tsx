@@ -5,7 +5,7 @@ import Protected from "../components/Protected";
 import AuthProtected from "../components/AuthProtected";
 import PageLoader from "./Loaders/PageLoader";
 import { useAppSelector } from "../app/hooks";
-import MyMap from "./Map/my-map";
+import MyMap from "./Map/My-map";
 const Error404 = React.lazy(() => import("../pages/Error404"));
 const Login = React.lazy(() => import("../pages/auth/Login"));
 const Signup = React.lazy(() => import("../pages/auth/SignUp"));
