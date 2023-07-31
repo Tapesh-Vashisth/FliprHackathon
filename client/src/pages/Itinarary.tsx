@@ -82,10 +82,10 @@ function Itinarary() {
                                             {
                                                 x.placesInfo.length > 0
                                                     ?
-                                                    <Link to={`/map/itn?lat=${x.placesInfo[0].lat}&lon=${x.placesInfo[0].lon}&place_id=${x.placesInfo[0].place_id}&places=${JSON.stringify(x.placesInfo)}`}>
+                                                    <Link to={`/map/itn?lat=${x.placesInfo[0].lat}&lon=${x.placesInfo[0].lon}&place_id=${x.placesInfo[0].place_id}&places=${JSON.stringify(x.placesInfo)}`} style={{textDecoration: 'none'}}>
                                                         <p>
                                                             {x.placesInfo.map((place: any, index: any) => {
-                                                                return place.name + (index !== x.placesInfo.length - 1 ? ", ": ""); 
+                                                                return (place.name || place.city) + (index !== x.placesInfo.length - 1 ? ", ": ""); 
                                                             })}
                                                         </p>
                                                     </Link>

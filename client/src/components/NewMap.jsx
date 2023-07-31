@@ -38,18 +38,15 @@ const MyMap = () => {
 	const handleMarkers = async (places) => {
 		const p = JSON.parse(places);
 		console.log(p);
-		Array.from(p).forEach((place)=>{
-			setmarkers((prev)=>{
-				return [...prev, {name: place.name, coordinates: [place.lat, place.lon], place_id: place.place_id, categories: []}]
-			})
+		const arr = Array.from(p).map((place)=>{
+			return {name: (place.name || place.city), coordinates: [place.lat, place.lon], place_id: place.place_id, categories: []}
 		})
+		setmarkers(arr);
 	}
 
 	useEffect(()=>{
 		if(query.get('places'))
 		{
-			console.log('inside');
-			console.log(query.get('places'))
 			handleMarkers(query.get('places'));
 		}
 	},[])
