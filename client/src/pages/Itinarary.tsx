@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import axiosInstance from "../api/axiosInstance";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Link } from "react-router-dom";
-
+import SocialSharing from "../components/SocialSharing";
 
 function Itinarary() {
     const [modal, showModal] = useState(false);
@@ -93,6 +93,7 @@ function Itinarary() {
                                                     "Please add places to the itinarary"
                                             }
                                         </div>
+                                        <SocialSharing url='http://localhost:4000/itn' type='itinarary' />
                                     </div>
                                 )
                             })
