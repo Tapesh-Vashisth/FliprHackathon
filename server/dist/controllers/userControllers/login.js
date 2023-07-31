@@ -44,10 +44,10 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
         expiresIn: "3h"
     });
     res.cookie('JWT_HTTPONLY_Cookie', token, {
-        path: '/',
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 3),
         httpOnly: true,
-        sameSite: 'lax'
+        sameSite: "none",
+        secure: true,
+        maxAge: 24 * 60 * 60 * 1000
     });
     let favs = existingUser.favouritePlaces;
     let newfavs = [];

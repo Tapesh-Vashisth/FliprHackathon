@@ -37,10 +37,10 @@ const login = async (req: any, res: Response, next: NextFunction) => {
     })
 
     res.cookie('JWT_HTTPONLY_Cookie', token, {
-        path: '/',
-        expires: new Date(Date.now() + 1000*60*60*3),
         httpOnly: true,
-        sameSite: 'lax'
+        sameSite: "none",
+        secure: true,
+        maxAge: 24 * 60 * 60 * 1000
     })
 
     let favs = existingUser.favouritePlaces
