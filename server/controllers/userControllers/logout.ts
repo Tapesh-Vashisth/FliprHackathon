@@ -6,9 +6,13 @@ const app = express()
 app.use(cookieParser())
 
 const logout = (req: any, res: Response, next: NextFunction) => {
-    res.clearCookie('JWT_HTTPONLY_Cookie')
-    req.id = ""
-    req.status = ""
+    console.log('logout')
+
+    const cookies = req.cookies;
+    if (!cookies?.jwt) return res.sendStatus(204);
+    
+
+    res.clearCookie("JWT_HTTPONLY_Cookie", {httpOnly: true, sameSite: "none", secure: true})
 
     return res
         .status(200)
